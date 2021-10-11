@@ -1,0 +1,18 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic I
+
+'1) Hello World
+TextWindow.WriteLine("Ahoj, světe!")
+TextWindow.Pause()
+
+'2) Hello World s proměnnými
+pozdrav = "Ahoj"
+koho = "světe"
+já = "Kryštof"
+
+TextWindow.WriteLine(pozdrav + ", " + koho + ", já jsem " + já + " a rád tě poznávám :)")
+TextWindow.Pause
+
+TextWindow.WriteLine("Anglicky se mi to nelíbí :(")
+TextWindow.WriteLine("Pro pokračování stiskni libovolnou klávesu...")
+TextWindow.PauseWithoutMessage()
+Program.End()

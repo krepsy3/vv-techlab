@@ -1,0 +1,39 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic II
+
+'2) Vylepšená Kalkulačka
+
+While pokracovat = ""
+  TextWindow.Clear()
+  TextWindow.WriteLine("Vítejte v kalkulačce")
+  TextWindow.WriteLine("====================")
+  TextWindow.WriteLine("")
+  TextWindow.Write("Zadejte prosím první číslo: ")
+  a = TextWindow.ReadNumber()
+  TextWindow.WriteLine(a)
+  TextWindow.Write("Zadejte prosím druhé číslo: ")
+  b = TextWindow.ReadNumber()
+  TextWindow.WriteLine(b)
+  TextWindow.Write("Zadejte prosím operaci (+, -, *, /): ")
+  op = TextWindow.Read()
+
+  TextWindow.WriteLine("")
+  TextWindow.Write(a + " " + op + " " + b + " = ")
+
+  If op = "+" Then
+    TextWindow.WriteLine(a + b)
+  ElseIf op = "-" Then
+    TextWindow.WriteLine(a - b)
+  ElseIf op = "*" Then
+    TextWindow.WriteLine(a * b)
+  ElseIf (op = "/") And (b <> 0) Then
+    TextWindow.WriteLine(a / b)
+  Else
+    TextWindow.WriteLine("nesmysl")
+  EndIf
+  
+  TextWindow.WriteLine("Pro prokračování stiskněte Enter naprázdno")
+  pokracovat = TextWindow.Read()
+EndWhile
+  
+TextWindow.WriteLine("")
+TextWindow.WriteLine("Děkuji za použití kalkulačky")

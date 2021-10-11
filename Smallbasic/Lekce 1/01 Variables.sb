@@ -1,0 +1,49 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic I
+
+'3) Proměnné
+věk = 22
+zpráva = "Jmenuju se Kryštof a je mi " + věk + " let."
+TextWindow.WriteLine(zpráva)
+
+jablek = 5
+hrušek = 6
+dohromady = jablek + hrušek
+
+zpráva2 = "Je tady " + jablek + " jablek"
+zpráva2 = zpráva2 + ", a taky " + hrušek + " hrušek"
+zpráva2 = zpráva2 + ". To je dohromady " + dohromady + " kusů ovoce."
+
+TextWindow.WriteLine(zpráva2)
+TextWindow.PauseWithoutMessage()
+
+'4) Parsování
+TextWindow.WriteLine(zpráva)
+TextWindow.WriteLine("A jak se jmenuješ ty?")
+jméno = TextWindow.Read()
+TextWindow.Clear()
+TextWindow.WriteLine("Ahoj, uživateli " + jméno + ", rád tě poznávám. A kolik ti je?")
+věk2 = TextWindow.ReadNumber()
+dohromady = věk + věk2
+TextWindow.WriteLine("Tak to nám je dohromady " + dohromady + " let :)")
+
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+
+'5) Papoušek
+TextWindow.WriteLine("Ahoj, jsem papoušek Žako, rád opakuji, co slyším. Povíš mi něco?")
+zpráva = TextWindow.Read()
+TextWindow.Write(zpráva)
+TextWindow.Write(" ")
+TextWindow.WriteLine(zpráva)
+
+'6) Odpočet
+TextWindow.PauseWithoutMessage()
+TextWindow.WriteLine("Tak já letím! Končíme za 3...")
+Program.Delay(1000)
+TextWindow.WriteLine("2...")
+Program.Delay(1000)
+TextWindow.WriteLine("1...")
+Program.Delay(1000)
+TextWindow.WriteLine("Teď!")
+Program.Delay(1000)
+Program.End()
