@@ -1,2 +1,2 @@
 # Veselá věda TechLab kroužek
-Postřehy z kroužů, zdrojové kódy 
+Postřehy z kroužků, zdrojové kódy, metodika
