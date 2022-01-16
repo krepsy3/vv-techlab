@@ -7,7 +7,9 @@ SpustHerniSmycku()
 Sub Inicializuj
   'Základní proměnné - zde můžete přenastavit parametry hry
   GraphicsWindow.Width = 800
+  minimalniSirkaOkna = 400
   GraphicsWindow.Height = 600
+  minimalniVyskaOkna = 400
   
   barvaText = "Tomato"  
   barvaOkna = "Ivory"
@@ -49,6 +51,10 @@ Sub Inicializuj
   skoreTXT = Shapes.AddText("")
   Shapes.Zoom(skoreTXT, 1.5, 1.5)
   Shapes.Move(skoreTXT, 10, 16 + velikostZivot)
+  
+  fpsTXT = Shapes.AddText("")
+  Shapes.Zoom(fpsTXT, 1.5, 1.5)
+  Shapes.Move(fpsTXT, 400, 6)
   
   'Kolečka ukazatele životů
   GraphicsWindow.PenColor = barvaZivot
@@ -97,6 +103,11 @@ Sub Inicializuj
   GraphicsWindow.MouseDown = ZpracujKlik
   Controls.ButtonClicked = ZpracujTlacitko
   Timer.Tick = ZpracujCasovac
+  
+  'Inicializace přehrávače
+  Sound.Stop(zvukOk)
+  Sound.Stop(zvukChyba)
+  Sound.Stop(zvukKonec)
 EndSub
 
 Sub PripravHru
@@ -111,6 +122,7 @@ Sub PripravHru
   'Ukaž tlačítko uprostřed
   Controls.Move(startBTN, (GraphicsWindow.Width - sirkaTlacitko) / 2, (GraphicsWindow.Height - vyskaTlacitko) / 2)
   Controls.ShowControl(startBTN)
+  GraphicsWindow.CanResize = "True"
   AktualizujRozhrani()
 EndSub
 
@@ -160,6 +172,12 @@ EndSub
 'Zpracuje kliknutí na Button - máme jen tlačítko nové hry
 Sub ZpracujTlacitko
   Controls.HideControl(startBTN)
+  Sound.PlayClick()
+  
+  GraphicsWindow.Width  = Math.Max(GraphicsWindow.Width,  minimalniSirkaOkna)
+  GraphicsWindow.Height = Math.Max(GraphicsWindow.Height, minimalniVyskaOkna)
+  GraphicsWindow.CanResize = "False"
+  
   stav = 2
 EndSub
 
@@ -177,7 +195,7 @@ Sub ZpracujCasovac
 EndSub
 
 
-'---HERNÍ SMYČKA
+'---HERNÍ SMYČKA---
 Sub SpustHerniSmycku
   'stav:
   '    0 - hra neběží
@@ -186,7 +204,18 @@ Sub SpustHerniSmycku
   '    3 - ukaž kruh a spusť časovač
   '    4 - dokonči tah
   
-  While 1=1
+  lastSecond = Math.Floor(Clock.ElapsedMilliseconds / 1000)
+  since = 0
+  While "True"    
+    second = Math.Floor(Clock.ElapsedMilliseconds / 1000)
+    If lastSecond = second Then
+      since = since + 1
+    Else
+      Shapes.SetText(fpsTXT, "FPS: " + since)
+      since = 0
+      lastSecond = second
+    EndIf
+    
     If stav = 2 Then
       VytvorTah()      
       stav = 1
@@ -251,8 +280,8 @@ Sub DokonciTah
     
     'sečteme rozdíly vynásobené samy sebou
     vzdalenost = x * x + y * y
-    'vynásobíme samu sebou i velikost kruhu
-    vzdalenostKruh = polomerKruhu * polomerKruhu
+    'vynásobíme samu sebou i velikost kruhu 
+    vzdalenostKruh = (polomerKruhu + 1) * (polomerKruhu + 1)
     
     'Je-li číslo od kruhu větší nebo rovno číslo od rozdílů, pak se hráč trefil
     If vzdalenost <= vzdalenostKruh Then
@@ -268,8 +297,6 @@ Sub DokonciTah
       
       'Nastavíme stav, aby další průchod vytvořil nový tah
       stav = 2
-      
-      'Do dočasné proměnné uložíme úspěch
       ok = 1
     EndIf
   EndIf
@@ -298,7 +325,6 @@ Sub DokonciTah
       'Zobrazíme hlášku o prohře
       GraphicsWindow.ShowMessage("Konec hry! Tvoje výsledné skóre je " + skore, "Konec")
       
-      'Připravíme aplikaci na další kolo
       PripravHru()
       
       'Nastavíme stav, že se nehraje
