@@ -1,0 +1,65 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic I
+
+'9) While smyčka
+TextWindow.WriteLine("Napiš heslo!")
+heslo = TextWindow.Read()
+While heslo <> "12345"
+  TextWindow.WriteLine("To není správné heslo! Zkus to znovu")
+  heslo = TextWindow.Read()
+EndWhile
+
+TextWindow.WriteLine("Výborně, to je správně!")
+TextWindow.Pause()
+
+
+vzdalenost = 140
+pauza = 12.5
+
+pocetpauz = 0
+zbyvaUjet = vzdalenost - pauza
+
+While zbyvaUjet > 0
+  zbyvaUjet = zbyvaUjet - pauza
+  pocetpauz = pocetpauz + 1
+EndWhile
+
+TextWindow.WriteLine("Vzdálenost " + vzdalenost + " km se dá ujet s přestávkami každých " + pauza + " km na " + pocetpauz + " přestávek")
+TextWindow.Pause()
+
+
+'10) For smyčka
+For i = 1 To 10
+  TextWindow.WriteLine("Ahoj")
+EndFor
+
+TextWindow.Pause()
+
+For i = 1 To 10
+  TextWindow.WriteLine(i)
+EndFor
+
+TextWindow.Pause()
+
+For i = 1 To 20 Step 2
+  TextWindow.WriteLine(i)
+EndFor
+
+TextWindow.Pause()
+
+For i = 10 To 1 Step -1
+  TextWindow.WriteLine(i)
+EndFor
+
+TextWindow.Pause()
+TextWindow.WriteLine("")
+TextWindow.WriteLine("Malá násobilka:")
+For i = 1 To 10
+  For j = 1 To 10
+    TextWindow.Write(i*j)
+    
+    'TextWindow.Write(Text.GetSubText(i*j + "  ", 1, 3))
+    TextWindow.Write(" ")
+  EndFor
+  
+  TextWindow.WriteLine("")
+EndFor
