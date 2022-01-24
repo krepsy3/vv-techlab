@@ -1,0 +1,173 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic I
+' Úkol na doma I
+'
+' ŘEŠENÍ
+
+
+'___________________________________________________________
+' ZADÁNÍ 1 - do proměnné uložte nějakou zprávu (například "Ahojda, "), uživatele
+' se zeptejte, jak se jmenuje on a jak se jmenuje jeho kamarád. Pak je oba pozdravte 
+' pozdravem z proměnné
+
+
+' ŘEŠENÍ:
+pozdrav = "Ahojda, "
+TextWindow.WriteLine("Jak se jmenuješ?")
+uzivatel = TextWindow.Read()
+TextWindow.WriteLine("A jak tvůj kamarád?")
+kamarad = TextWindow.Read()
+TextWindow.WriteLine(pozdrav + uzivatel)
+TextWindow.WriteLine(pozdrav + kamarad)
+
+
+'___________________________
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+'___________________________
+
+
+' S VYLEPŠENÍM:
+pozdrav = "Ahojda, "
+pozdravKonec = "!"
+TextWindow.WriteLine("Jak se jmenuješ?")
+uzivatel = TextWindow.Read()
+TextWindow.WriteLine("A jak tvůj kamarád?")
+kamarad = TextWindow.Read()
+TextWindow.WriteLine(pozdrav + uzivatel + pozdravKonec)
+TextWindow.WriteLine(pozdrav + kamarad + pozdravKonec)
+
+
+'___________________________
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+'___________________________
+
+
+'___________________________________________________________
+' ZADÁNÍ 2 - připravte si (vymyslete) tajnou zprávu a heslo, uživatele se zeptejte na heslo.
+' pokud napíše heslo správně, vypište mu tajnou zprávu.
+' pokud napíše heslo špatně, nějak kultivovaně ho pošlete do pryč :)
+
+
+
+' ŘEŠENÍ:
+heslo  = "heslokřeslo"
+odmitnuti = "Špatně! Radši zmiz, než tě vyhodím sám!"
+zprava = "Moje nejoblíbenější jídlo jsou jahodové knedlíky. Ale psssst, je to tajemství!"
+
+TextWindow.WriteLine("Zadej heslo:")
+pokus = TextWindow.Read()
+
+If pokus = heslo Then
+  TextWindow.WriteLine(zprava)
+Else
+  TextWindow.WriteLine(odmitnuti)
+EndIf
+
+
+'___________________________
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+'___________________________
+
+
+' S VYLEPŠENÍM:
+heslo1  = "heslokřeslo"
+heslo2 = "owo"
+odmitnuti = "Špatně! Radši zmiz, než tě vyhodím sám!"
+zprava1 = "Moje nejoblíbenější jídlo jsou jahodové knedlíky. Ale psssst, je to tajemství!"
+zprava2 = "Zadal jsi správné heslo, tak tu máš kočičku:  <|°w°|>"
+
+TextWindow.WriteLine("Zadej heslo:")
+pokus = TextWindow.Read()
+
+If pokus = heslo Then
+  TextWindow.WriteLine(zprava1)
+ElseIf pokus = heslo2 Then
+  TextWindow.WriteLine(zprava2)
+Else
+  TextWindow.WriteLine(odmitnuti)
+EndIf
+
+
+'___________________________
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+'___________________________
+
+
+' S JINÝM VYLEPŠENÍM:
+heslo  = "42"
+odmitnuti = "Špatně! Radši zmiz, než tě vyhodím sám!"
+zpravaRadek1 = "Ó, fretná chrochtobuznosti,"
+zpravaRadek2 = "tvé mikturace jsou mi,"
+zpravaRadek3 = "co zprudlé žvastopunksery na plzné včele."
+zpravaRadek4 = "Já zapřísahám tě svými frůnícími kvrdlovrzy,"
+zpravaRadek5 = "a krákorně zafras mě svými zcvrknuvšími patlocaráty,"
+zpravaRadek6 = "nebo tě roztrhám na fidloprčičky svým frkodrťákem,"
+zpravaRadek7 = "tak bacha na to!"
+
+TextWindow.WriteLine("Zadej heslo:")
+pokus = TextWindow.Read()
+
+If pokus = heslo Then
+  TextWindow.WriteLine(zpravaRadek1)
+  TextWindow.WriteLine(zpravaRadek2)
+  TextWindow.WriteLine(zpravaRadek3)
+  TextWindow.WriteLine(zpravaRadek4)
+  TextWindow.WriteLine(zpravaRadek5)
+  TextWindow.WriteLine(zpravaRadek6)
+  TextWindow.WriteLine(zpravaRadek7)
+Else
+  TextWindow.WriteLine(odmitnuti)
+EndIf
+
+
+'___________________________
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+'___________________________
+
+
+'___________________________________________________________
+' ZADÁNÍ 3 - nechte si od uživatele zadat číslo. To bude představovat velikost čtverce.
+' napište uživateli, jaký má takový čtverec obvod a obsah. Připomínáme, že obvod
+' je délka jedné strany krát čtyři (máme 4 strany kolem dokola), zatímco obsah je
+' strana krát strana.
+
+
+'ŘEŠENÍ:
+TextWindow.WriteLine("Jak velký je tvůj čtverec?")
+velikost = TextWindow.ReadNumber()
+If velikost < 0 Then
+  TextWindow.WriteLine("Tvůj čtverec má mínusovou velikost? To asi ne... :D")
+Else
+  obvod = velikost * 4
+  obsah = velikost * velikost
+  TextWindow.Write("Čtverec o délce strany " + velikost + " cm ")
+  TextWindow.Write("má obvod " + obvod + " cm ")
+  TextWindow.WriteLine("a obsah " + obsah + " cm čtverečních.")
+EndIf
+
+
+'___________________________
+TextWindow.PauseWithoutMessage()
+TextWindow.Clear()
+'___________________________
+
+
+'ŘEŠENÍ S VYLEPŠENÍM:
+TextWindow.WriteLine("Jak velký je tvůj obdélník? Zadej první stranu:")
+velikost1 = TextWindow.ReadNumber()
+TextWindow.WriteLine("A druhou stranu:")
+velikost2 = TextWindow.ReadNumber()
+
+If (velikost1 < 0) Or (velikost2 < 0) Then
+  TextWindow.WriteLine("Tvůj obdélník má mínusovou velikost? To asi ne... :D")
+Else
+  obvod = velikost1 * 2 + velikost2 * 2
+  obsah = velikost1 * velikost2
+  TextWindow.Write("Obdélník o délkách stran " + velikost1 + " a " + velikost2 + " cm ")
+  TextWindow.Write("má obvod " + obvod + " cm ")
+  TextWindow.WriteLine("a obsah " + obsah + " cm čtverečních.")
+EndIf
