@@ -1,0 +1,543 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic II
+' Úkol na doma II
+'
+' ŘEŠENÍ
+
+'___________________________________________________________
+' ZADÁNÍ 1 - procvičíme si smyčky. Zadání se dá udělat pomocí While i pomocí For,
+' takže si jednu z nich vyberte a naprogramujte to. Jako vylepšení můžete zkusit
+' naprogramovat to samé, a využít druhý typ smyčky.
+
+' Váš úkol je nechat si od uživatele zadat číslo. Pak si nějak napočítáte od jedničky
+' do uživatelova čísla, a napíšete mu, kolik je součet všech čísel, co jste cestou potkali.
+
+' Jak to myslíme? Uživatel zadá třeba 10 a váš úkol je spočítat, kolik je
+' 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10, což je 55 - a to napsat uživateli.
+' Nápověda - budete potřebovat proměnnou pro výsledek (třeba vysledek), ten je na
+' začátku nula a postupně do něj přidáte čísla ve smyčce
+
+vysledekForem = 0
+vysledekWhilem = 0
+TextWindow.Write("Zadej číslo, prosím: ")
+cislo = TextWindow.ReadNumber()
+For i = 1 To cislo
+  vysledekForem = vysledekForem + i
+EndFor
+
+pridavek = 1
+While pridavek <= cislo
+  vysledekWhilem = vysledekWhilem + pridavek
+  pridavek = pridavek + 1
+EndWhile
+
+TextWindow.WriteLine("Součet čísel od 1 do " + cislo + " je " + vysledekForem + " (spočteno smyčkou For)")
+TextWindow.WriteLine("Součet čísel od 1 do " + cislo + " je " + vysledekWhilem + " (spočteno smyčkou While)")
+
+'__________________________
+TextWindow.Pause()
+TextWindow.Hide()
+'__________________________
+
+
+'___________________________________________________________
+' ZADÁNÍ 2 - tady si budeme hrát s želvou. Vyberte si nějaké písmenko z abecedy,
+' třeba to, kterým začíná vaše jméno. A nakreslete ho želvou, pomocí Turtle.MoveTo
+' 
+' Jak na to? Představte si vaše písmenko, nebo si ho i nakreslete na kostičkový papír.
+' Pokud má nějaké kulaté části, udělejte z nich špičku. Pak se podívejte, kde jsou na
+' písmenku "rohy", "špičky" - to jsou body, na které želvu postupně pošlete.
+' Vymyslete si souřadnice těch rohů - začněte jedním z nich a řekněte si třeba,
+' "Tak, tenhle je nad ním, takže ypsilonovou souřadnici bude mít o 200 menší,
+' Tenhle je v půlce mezi nimi a maličko doprava, takže ixová souřadnice o 100 větší,
+' ypsilonová o 100 menší" a tak dále. Inspirovat se můžete mým řešením, které je na 
+' http://krepsy3.wz.cz/pismena.png
+
+GraphicsWindow.Width = 800
+GraphicsWindow.Height = 600
+Turtle.Speed = 9
+
+'A
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(300, 100)
+Turtle.MoveTo(500, 500)
+Turtle.PenUp()
+Turtle.MoveTo(200, 300)
+Turtle.PenDown()
+Turtle.MoveTo(400, 300)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' B
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 200)
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(300, 400)
+Turtle.MoveTo(100, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' C
+Turtle.PenUp()
+Turtle.MoveTo(300, 400)
+Turtle.PenDown()
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(200, 100)
+Turtle.MoveTo(300, 200)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' D
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 300)
+Turtle.MoveTo(100, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' E
+Turtle.PenUp()
+Turtle.MoveTo(300, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 500)
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 100)
+Turtle.PenUp()
+Turtle.MoveTo(200, 300)
+Turtle.PenDown()
+Turtle.MoveTo(100, 300)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' F
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 100)
+Turtle.PenUp()
+Turtle.MoveTo(200, 300)
+Turtle.PenDown()
+Turtle.MoveTo(100, 300)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' G
+Turtle.PenUp()
+Turtle.MoveTo(200, 400)
+Turtle.PenDown()
+Turtle.MoveTo(300, 400)
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(200, 100)
+Turtle.MoveTo(300, 200)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' H
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.PenUp()
+Turtle.MoveTo(100, 300)
+Turtle.PenDown()
+Turtle.MoveTo(300, 300)
+Turtle.PenUp()
+Turtle.MoveTo(300, 500)
+Turtle.PenDown()
+Turtle.MoveTo(300, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' I
+Turtle.PenUp()
+Turtle.MoveTo(125, 500)
+Turtle.PenDown()
+Turtle.MoveTo(275, 500)
+Turtle.PenUp()
+Turtle.MoveTo(200, 500)
+Turtle.PenDown()
+Turtle.MoveTo(200, 100)
+Turtle.PenUp()
+Turtle.MoveTo(125, 100)
+Turtle.PenDown()
+Turtle.MoveTo(275, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' J
+Turtle.PenUp()
+Turtle.MoveTo(100, 100)
+Turtle.PenDown()
+Turtle.MoveTo(300, 100)
+Turtle.MoveTo(300, 350)
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(100, 350)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' K
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.PenUp()
+Turtle.MoveTo(300, 100)
+Turtle.PenDown()
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(300, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' L
+Turtle.PenUp()
+Turtle.MoveTo(300, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 500)
+Turtle.MoveTo(100, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' M
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(250, 300)
+Turtle.MoveTo(400, 100)
+Turtle.MoveTo(400, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' N
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 500)
+Turtle.MoveTo(300, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' O
+Turtle.PenUp()
+Turtle.MoveTo(200, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(200, 100)
+Turtle.MoveTo(300, 300)
+Turtle.MoveTo(200, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' P
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 200)
+Turtle.MoveTo(100, 300)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' Q
+Turtle.PenUp()
+Turtle.MoveTo(200, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(200, 100)
+Turtle.MoveTo(300, 300)
+Turtle.MoveTo(200, 500)
+Turtle.PenUp()
+Turtle.MoveTo(200, 350)
+Turtle.PenDown()
+Turtle.MoveTo(275, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' R
+Turtle.PenUp()
+Turtle.MoveTo(100, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+Turtle.MoveTo(300, 200)
+Turtle.MoveTo(100, 300)
+Turtle.MoveTo(300, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' S
+Turtle.PenUp()
+Turtle.MoveTo(100, 400)
+Turtle.PenDown()
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(300, 400)
+Turtle.MoveTo(100, 200)
+Turtle.MoveTo(200, 100)
+Turtle.MoveTo(300, 200)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' T
+Turtle.PenUp()
+Turtle.MoveTo(200, 500)
+Turtle.PenDown()
+Turtle.MoveTo(200, 100)
+Turtle.PenUp()
+Turtle.MoveTo(100, 100)
+Turtle.PenDown()
+Turtle.MoveTo(300, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' U
+Turtle.PenUp()
+Turtle.MoveTo(300, 100)
+Turtle.PenDown()
+Turtle.MoveTo(300, 350)
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(100, 350)
+Turtle.MoveTo(100, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' V
+Turtle.PenUp()
+Turtle.MoveTo(300, 100)
+Turtle.PenDown()
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(100, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' W
+Turtle.PenUp()
+Turtle.MoveTo(500, 100)
+Turtle.PenDown()
+Turtle.MoveTo(400, 500)
+Turtle.MoveTo(300, 100)
+Turtle.MoveTo(200, 500)
+Turtle.MoveTo(100, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' X
+Turtle.PenUp()
+Turtle.MoveTo(300, 100)
+Turtle.PenDown()
+Turtle.MoveTo(100, 500)
+Turtle.PenUp()
+Turtle.MoveTo(300, 500)
+Turtle.PenDown()
+Turtle.MoveTo(100, 100)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' Y
+Turtle.PenUp()
+Turtle.MoveTo(300, 100)
+Turtle.PenDown()
+Turtle.MoveTo(200, 300)
+Turtle.MoveTo(100, 100)
+Turtle.PenUp()
+Turtle.MoveTo(200, 300)
+Turtle.PenDown()
+Turtle.MoveTo(200, 500)
+
+
+'____________________
+Turtle.Hide()
+Program.Delay(5000)
+GraphicsWindow.Clear()
+Turtle.Show()
+'____________________
+
+
+' Z
+Turtle.PenUp()
+Turtle.MoveTo(100, 100)
+Turtle.PenDown()
+Turtle.MoveTo(300, 100)
+Turtle.MoveTo(100, 500)
+Turtle.MoveTo(300, 500)
+
+
+'____________________
+Turtle.Hide()
+'____________________
