@@ -1,0 +1,29 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic X
+' 39)  Práce se Zvukem
+
+' 4 vestavěné zvuky
+Sound.PlayBellRingAndWait()
+Sound.PlayClickAndWait()
+Sound.PlayChimeAndWait()
+Sound.PlayChimesAndWait()
+
+' vlastní zvuk
+trombon = Program.Directory + "\Trombon.wav"
+Sound.PlayAndWait(trombon)
+
+' přehrání bez "AndWait" - příkaz okamžitě skončí a přehrává se mimo hlavní vlákno
+Sound.Play(trombon)
+' takže program zahájí přehrávání zvuku a ihned skočí na další příkaz - zde je to Delay(...)
+Program.Delay(1000)
+' zastavení přehrávání - nastane po 1 vteřině od přehrávání
+Sound.Stop(trombon)
+
+' přehrávání hudby je vždy "AndWait", jen se to do příkazu nepíše. Zde Twinkle Twinkle Little Star
+' z příkladu v nápovědě ke Small Basicu
+Sound.PlayMusic("O5 C8 C8 G8 G8 A8 A8 G4 F8 F8 E8 E8 D8 D8 C4")
+
+' přehrávání buď ani neuslyšíme, nebo jen tak škrvrknou reproduktory. Za příkazem program okamžitě
+' končí, takže se přehrání nestihne vykonat
+Sound.PlayChime()
+
+'Samozřejmě, pokud bychom měli otevřené Grafické okno, program by neskončil.

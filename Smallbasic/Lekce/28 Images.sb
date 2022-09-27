@@ -1,0 +1,138 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic X
+' 37)  Práce s Obrázky
+
+' cesta k souboru s obrázkem - obrázek je ve složce s Programem
+cesta = Program.Directory + "\mona lisa.png"
+' načtení souboru s obrázkem do objektu ImageList - seznamu obrázků
+obrazek = ImageList.LoadImage(cesta)
+
+GraphicsWindow.Width = 1200
+GraphicsWindow.Height = 720
+
+' nakreslení obrázku přesně v té velikosti v pixelech, v jaké je uložen
+GraphicsWindow.DrawImage(obrazek, 0, 0)
+
+
+'________________
+Program.Delay(5000)
+GraphicsWindow.Clear()
+'________________
+
+
+' nakreslení obrázku ve velikosti, jakou chci já
+GraphicsWindow.DrawResizedImage(obrazek, 0, 0, 500, 500)
+
+' nevýhoda - obrázek nám to zplácne či roztáhne, pokud nezdáme rozměry dle poměru stran
+
+
+'________________
+Program.Delay(5000)
+GraphicsWindow.Clear()
+'________________
+
+
+' výpočet - poměr stran (monitoru, obrázku, listu papíru, sešitu, ...) je vždy šířka dělená výškou
+pomerStran = ImageList.GetWidthOfImage(obrazek) / ImageList.GetHeightOfImage(obrazek)
+' pozor - dělíme číslem! Pokud se obrázek nenačetl, příkaz GetHeightOfImage(...) vrátí nulu a pokud se nulou pokusíme dělit, program spadne!
+
+'Chci mít výšku 400 pixelů
+cilovaVyska = 400
+GraphicsWindow.DrawResizedImage(obrazek, 0, 0, cilovaVyska * pomerStran, cilovaVyska)
+
+'Chci mít šířku 300 pixelů
+cilovaSirka = 300
+GraphicsWindow.DrawResizedImage(obrazek, 350, 0, cilovaSirka, cilovaSirka / pomerStran)
+
+
+'________________
+Program.Delay(5000)
+GraphicsWindow.Clear()
+'________________
+
+
+' Obrázek lze vložit i jako geometrický útvar objektu Shapes
+tvar = Shapes.AddImage(obrazek)
+Program.Delay(1000)
+
+' ...a pracovat s ním jako s každým tvarem. Změna velikosti bez rozplácnutí je tak jednoduchá, pouze zoomujeme
+Shapes.Zoom(tvar, 1/3, 1/3)
+Program.Delay(1000)
+Shapes.Move(tvar, -380, -650)
+Program.Delay(1000)
+Shapes.Rotate(tvar, 20)
+Program.Delay(1000)
+Shapes.SetOpacity(tvar, 70)
+Program.Delay(1000)
+Shapes.Zoom(tvar, 1/3, 1/6)
+
+
+'________________
+Program.Delay(10000)
+GraphicsWindow.Clear()
+'________________
+
+' 38) Práce s mnoha obrázky - proč používat ImageList
+
+' Pokud si soubory stáhnete z internetu do složky s programem, můžete
+' zrušit komentář řádků 80-82 a zakomentovat či smazat řádky 84-86
+
+
+'kamenSoubor = Program.Directory + "\stone.webp"
+'travaSoubor = Program.Directory + "\grass.webp"
+'hlinaSoubor = Program.Directory + "\dirt.webp"
+
+kamenSoubor = "http://krepsy3.wz.cz/stone.webp"
+travaSoubor = "http://krepsy3.wz.cz/grass.webp"
+hlinaSoubor = "http://krepsy3.wz.cz/dirt.webp"
+
+' Načtení obrázků do ImageListu
+kamen = ImageList.LoadImage(kamenSoubor)
+trava = ImageList.LoadImage(travaSoubor)
+hlina = ImageList.LoadImage(hlinaSoubor)
+
+' Nyní vydláždíme obrazovku větším množstvím obrázků - uvidíte, že z ImageListu je to rychlejší (a méně náročné pro počítač)
+velikost = 15
+pocetx = 100
+pocety = 30
+
+GraphicsWindow.Width = velikost * pocetx
+GraphicsWindow.Height = velikost * pocety * 2
+
+For y = 0 To pocety - 1
+  For x = 0 To pocetx - 1
+    If y = 0 Then
+      textura = trava
+    ElseIf y <= 3 Then
+      textura = hlina
+    Else
+      textura = kamen
+    EndIf
+    
+    'Dláždíme z Imagelistu (proměnné trava, hlina a kamen)
+    GraphicsWindow.DrawResizedImage(textura, x * velikost, y * velikost, velikost, velikost)
+  EndFor
+EndFor
+
+Program.Delay(1000)
+For y = pocety To pocety * 2 - 1
+  For x = 0 To pocetx - 1
+    If y = pocety Then
+      textura = travaSoubor
+    ElseIf y <= pocety + 3 Then
+      textura = hlinaSoubor
+    Else
+      textura = kamenSoubor
+    EndIf
+    
+    'Dláždíme přímo souborem (proměnné travaSoubor, hlinaSoubor a kamenSoubor)
+    GraphicsWindow.DrawResizedImage(textura, x * velikost, y * velikost, velikost, velikost)
+  EndFor
+EndFor
+
+' Pokud jsou travaSoubor, hlinaSoubor a kamenSoubor načítané ze složky s programem, není to o tolik pomalejší,
+' nicméně rozdíl tam vidět je a hlavně je to náročné pro počítač, protože kvůli každé dlaždici otevírá znovu a znovu
+' ty stejné soubory na disku.
+' Pokud jsou travaSoubor, hlinaSoubor a kamenSoubor načítané z internetu, je to katastroficky pomalé,
+' jelikož se soubor kvůli každé dlaždici stahuje znovu a znovu z internetu (rychlost se tímpádem odvíjí od rychlosti
+' vašeho připojení na internet a vytížení sítě. I způsob připojení hraje roli, můžete mít rychlý internet, ale pokud
+' je počítač připojen pouze přes Wi-Fi a ne kabelem, je to ještě výrazněji pomalejší)

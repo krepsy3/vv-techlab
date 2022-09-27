@@ -1,0 +1,1091 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+	body {
+		font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+		font-weight: normal;
+		color: #2A2A2A;
+	}
+
+	p {
+		max-width: 60rem;
+	}
+
+	h1 {
+		font-size: 1.4rem;
+		line-height: 1.25;
+	}
+	h2 {
+		font-size: 1.2rem;
+	}
+	th {
+		text-align: left;
+	}
+	td:nth-last-child(4), td:nth-last-child(8) {
+		width: 30px;
+	}
+	td:nth-last-child(3), td:nth-last-child(7) {
+		width: 180px;
+	}
+	td:nth-last-child(2), td:nth-last-child(6) {
+		width: 100px;
+	}
+	td:nth-last-child(1), td:nth-last-child(5) {
+		width: 230px;
+	}
+	
+	.collapsible {
+		background-color: #A0A0A0;
+		color: white;
+		cursor: pointer;
+		padding: 18px;
+		width: 100%;
+		max-width: calc(60rem + 2 * 18px);
+		border: none;
+		text-align: left;
+		outline: none;
+	}
+
+	.active, .collapsible:hover {
+		background-color: #555;
+	}
+
+	.collapsible:after {
+		content: '\002B';
+		color: white;
+		font-weight: bold;
+		float: left;
+		margin-left: 5px;
+	}
+
+	.active:after {
+		content: "\2212";
+	}
+
+	.collapsible-content {
+		max-width: 60rem;
+		padding: 0 18px;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+		background-color: #f1f1f1;
+	}
+</style>
+
+<title>
+	Small Basic - Pojmenované barvy
+</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<h1>Small Basic - Pojmenované barvy</h1>
+<p>
+	<em>(ukradeno z <a href="https://social.technet.microsoft.com/wiki/contents/articles/23237.small-basic-getting-started-guide-appendix-b-colors.aspx">
+https://social.technet.microsoft.com/wiki/</a>, přeložil Kryštof Žucha)</em><br />
+	Tyto barvy používáme v grafickém okně pro nastavení barvy pozadí, pera a štětce. Namísto skutečného kódu, který je ve druhém sloupečku,
+	můžeme použít pojmenování, které je v prvním sloupečku. Ve třetím sloupečku máte, pro zajímavost, uveden překlad názvu.
+</p>
+<h2>Barvy pro Textové okno</h2>
+<p>
+	Hned první tabulka je ovšem výjimka, tyto barvy používáme v textovém okně pro nastavení barvy pozadí a barvy písma. 
+	Barvu můžeme nastavit jak přes jméno z druhého sloupce, tak přes číslo z prvního sloupce. Třetí a čtvrtý sloupec
+	jsou uvedeny pro zajímavost. 
+</p>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th colspan=2>Pořadové číslo a název</th>
+<th>Kód</th>
+<th>Překlad</th>
+<th colspan=2>Pořadové číslo a název</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr>
+<td style="color:white;background-color:black;">0</td>
+<td style="color:white;background-color:black;">Black</td>
+<td style="color:white;background-color:black;">#000000</td>
+<td style="color:white;background-color:black;">Černá</td>
+<td style="color:white;background-color:#808080;">8</td>
+<td style="color:white;background-color:#808080;">DarkGray</td>
+<td style="color:white;background-color:#808080;">#808080</td>
+<td style="color:white;background-color:#808080;">Tmavě šedá</td>
+</tr>
+<tr>
+<td style="color:white;background-color:#000080;">1</td>
+<td style="color:white;background-color:#000080;">DarkBlue</td>
+<td style="color:white;background-color:#000080;">#000080</td>
+<td style="color:white;background-color:#000080;">Tmavě modrá</td>
+<td style="color:white;background-color:blue;">9</td>
+<td style="color:white;background-color:blue;">Blue</td>
+<td style="color:white;background-color:blue;">#0000FF</td>
+<td style="color:white;background-color:blue;">Modrá</td>
+</tr>
+<tr>
+<td style="color:white;background-color:green;">2</td>
+<td style="color:white;background-color:green;">DarkGreen</td>
+<td style="color:white;background-color:green;">#008000</td>
+<td style="color:white;background-color:green;">Tmavě zelená</td>
+<td style="color:black;background-color:#00ff00;">10</td>
+<td style="color:black;background-color:#00ff00;">Green</td>
+<td style="color:black;background-color:#00ff00;">#00FF00</td>
+<td style="color:black;background-color:#00ff00;">Zelená</td>
+</tr>
+<tr>
+<td style="color:white;background-color:#008080;">3</td>
+<td style="color:white;background-color:#008080;">DarkCyan</td>
+<td style="color:white;background-color:#008080;">#008080</td>
+<td style="color:white;background-color:#008080;">Tmavě Azurová</td>
+<td style="color:black;background-color:cyan;">11</td>
+<td style="color:black;background-color:cyan;">Cyan</td>
+<td style="color:black;background-color:cyan;">#00FFFF</td>
+<td style="color:black;background-color:cyan;">Azurová</td>
+</tr>
+<tr>
+<td style="color:white;background-color:#800000;">4</td>
+<td style="color:white;background-color:#800000;">DarkRed</td>
+<td style="color:white;background-color:#800000;">#800000</td>
+<td style="color:white;background-color:#800000;">Tmavě červená</td>
+<td style="color:white;background-color:red;">12</td>
+<td style="color:white;background-color:red;">Red</td>
+<td style="color:white;background-color:red;">#FF0000</td>
+<td style="color:white;background-color:red;">Červená</td>
+</tr>
+<tr>
+<td style="color:white;background-color:#800080;">5</td>
+<td style="color:white;background-color:#800080;">DarkMagenta</td>
+<td style="color:white;background-color:#800080;">#800080</td>
+<td style="color:white;background-color:#800080;">Tmavě purpurová</td>
+<td style="color:white;background-color:magenta;">13</td>
+<td style="color:white;background-color:magenta;">Magenta</td>
+<td style="color:white;background-color:magenta;">#FF00FF</td>
+<td style="color:white;background-color:magenta;">Purpurová</td>
+</tr>
+<tr>
+<td style="color:white;background-color:#808000;">6</td>
+<td style="color:white;background-color:#808000;">DarkYellow</td>
+<td style="color:white;background-color:#808000;">#808000</td>
+<td style="color:white;background-color:#808000;">Tmavě žlutá</td>
+<td style="color:black;background-color:yellow;">14</td>
+<td style="color:black;background-color:yellow;">Yellow</td>
+<td style="color:black;background-color:yellow;">#FFFF00</td>
+<td style="color:black;background-color:yellow;">Žlutá</td>
+</tr>
+<tr>
+<td style="color:black;background-color:#c0c0c0;">7</td>
+<td style="color:black;background-color:#c0c0c0;">Gray</td>
+<td style="color:black;background-color:#c0c0c0;">#C0C0C0</td>
+<td style="color:black;background-color:#c0c0c0;">Šedá</td>
+<td style="color:black;background-color:white;">15</td>
+<td style="color:black;background-color:white;">White</td>
+<td style="color:black;background-color:white;">#FFFFFF</td>
+<td style="color:black;background-color:white;">Bílá</td>
+</tr>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Speciální</h2>
+<p>
+	Tato tabulka je označena jako speciální. Barvy z ní můžeme samozřejmě používat jako všechny ostatní,
+	ale jsou tu vyjmenované barvy se zvláštním významem. Pro plné pochopení si na hlavní stránce přečtěte
+	doplňující texty o barvách.
+</p>
+<button class="collapsible">Zajímavosti</button>
+<div class="collapsible-content">
+<p>
+	Všimněte si například, že čistá zelená #00FF00 je pojmenována jako "Lime",
+	tedy limetková. A "Green", tedy zelená, je jméno pro barvu #008000 - tedy "poloviční" zelenou. Je to 
+	tak proto, že "Red" i "Blue", tj. (čistá) červená a (čistá) modrá působí jako vcelku tmavé barvy,
+	tak je "Green" - (poloviční) zelená - zvolena tak, aby k nim pocitově seděla. Je tomu tak proto, že
+	jasnost výsledné barvy po namíchání z červené, zelené a modré složky je dána jen asi 1 podílem modré,
+	3 podíly červené a 6 podíly zelené - na tom, jak je barva jasná, se složky nepodílejí spravedlivě!
+	A protože ta čistá zelená má takhle vysoký podíl, jeví se nám jako daleko zářivější, svítivější,
+	jasnější, světlejší - nežli čistá červená a modrá. Poloviční zelená pak přispěje 6 díly, ale jen
+	polovinou za každý, dostane se pocitově na 3 díly a září stejně, jako čistá červená.
+</p>
+</div>
+<br />
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Pojmenování</th>
+</tr>
+<tr style="color:black;background-color:white;">
+<td>Transparent</td>
+<td>#00000000</td>
+<td>Průhledná</td>
+</tr>
+<tr style="color:white;background-color:red;">
+<td>Red</td>
+<td>#FF0000</td>
+<td>Červená (čistá)</td>
+</tr>
+<tr style="color:black;background-color:#00ff00;">
+<td>Lime</td>
+<td>#00FF00</td>
+<td>Zelená (čistá)</td>
+</tr>
+<tr style="color:white;background-color:blue;">
+<td>Blue</td>
+<td>#0000FF</td>
+<td>Modrá (čistá)</td>
+</tr>
+<tr style="color:black;background-color:cyan;">
+<td>Cyan</td>
+<td>#00FFFF</td>
+<td>Azurová (čistá)</td>
+</tr>
+<tr style="color:white;background-color:magenta;">
+<td>Magenta</td>
+<td>#FF00FF</td>
+<td>Purpurová (čistá)</td>
+</tr>
+<tr style="color:black;background-color:yellow;">
+<td>Yellow</td>
+<td>#FFFF00</td>
+<td>Žlutá (čistá)</td>
+</tr>
+</tbody>
+</table>
+<br />
+<br />
+<h2>Červené</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:white;background-color:#cd5c5c;">
+<td>IndianRed</td>
+<td>#CD5C5C</td>
+<td>Indická Červená</td>
+</tr>
+<tr style="color:black;background-color:#f08080;">
+<td>LightCoral</td>
+<td>#F08080</td>
+<td>Světle korálová</td>
+</tr>
+<tr style="color:black;background-color:#fa8072;">
+<td>Salmon</td>
+<td>#FA8072</td>
+<td>Lososová</td>
+</tr>
+<tr style="color:black;background-color:#e9967a;">
+<td>DarkSalmon</td>
+<td>#E9967A</td>
+<td>Tmavě lososová</td>
+</tr>
+<tr style="color:black;background-color:#ffa07a;">
+<td>LightSalmon</td>
+<td>#FFA07A</td>
+<td>Světle lososová</td>
+</tr>
+<tr style="color:white;background-color:#dc143c;">
+<td>Crimson</td>
+<td>#DC143C</td>
+<td>Karmínová</td>
+</tr>
+<tr style="color:white;background-color:red;">
+<td>Red</td>
+<td>#FF0000</td>
+<td>Červená</td>
+</tr>
+<tr style="color:white;background-color:#b22222;">
+<td>FireBrick</td>
+<td>#B22222</td>
+<td>Cihlově červená</td>
+</tr>
+<tr style="color:white;background-color:#8b0000;">
+<td>DarkRed</td>
+<td>#8B0000</td>
+<td>Tmavě červená</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Růžové</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#ffc0cb;">
+<td>Pink</td>
+<td>#FFC0CB</td>
+<td>Růžová</td>
+</tr>
+<tr style="color:black;background-color:#ffb6c1;">
+<td>LightPink</td>
+<td>#FFB6C1</td>
+<td>Světle růžová</td>
+</tr>
+<tr style="color:white;background-color:#ff69b4;">
+<td>HotPink</td>
+<td>#FF69B4</td>
+<td>Zarděná</td>
+</tr>
+<tr style="color:white;background-color:#ff1493;">
+<td>DeepPink</td>
+<td>#FF1493</td>
+<td>Sytě růžová</td>
+</tr>
+<tr style="color:white;background-color:#c71585;">
+<td>MediumVioletRed</td>
+<td>#C71585</td>
+<td>Purpurovočervená</td>
+</tr>
+<tr style="color:white;background-color:#db7093;">
+<td>PaleVioletRed</td>
+<td>#DB7093</td>
+<td>Bledě purpurovočervená</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Oranžové</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#ffa07a;">
+<td>LightSalmon</td>
+<td>#FFA07A</td>
+<td>Světle lososová</td>
+</tr>
+<tr style="color:white;background-color:#ff7f50;">
+<td>Coral</td>
+<td>#FF7F50</td>
+<td>Korálová</td>
+</tr>
+<tr style="color:white;background-color:#ff6347;">
+<td>Tomato</td>
+<td>#FF6347</td>
+<td>Rajčatová</td>
+</tr>
+<tr style="color:white;background-color:#ff4500;">
+<td>OrangeRed</td>
+<td>#FF4500</td>
+<td>Červenooranžová</td>
+</tr>
+<tr style="color:white;background-color:#ff8c00;">
+<td>DarkOrange</td>
+<td>#FF8C00</td>
+<td>Tmavě oranžová</td>
+</tr>
+<tr style="color:white;background-color:orange;">
+<td>Orange</td>
+<td>#FFA500</td>
+<td>Oranžová</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Žluté</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#ffd700;">
+<td>Gold</td>
+<td>#FFD700</td>
+<td>Zlatá</td>
+</tr>
+<tr style="color:black;background-color:yellow;">
+<td>Yellow</td>
+<td>#FFFF00</td>
+<td>Žlutá</td>
+</tr>
+<tr style="color:black;background-color:#ffffe0;">
+<td>LightYellow</td>
+<td>#FFFFE0</td>
+<td>Světle žlutá</td>
+</tr>
+<tr style="color:black;background-color:#fffacd;">
+<td>LemonChiffon</td>
+<td>#FFFACD</td>
+<td>Barva citronového šifonu</td>
+</tr>
+<tr style="color:black;background-color:#fafad2;">
+<td>LightGoldenrodYellow</td>
+<td>#FAFAD2</td>
+<td>Světlá zlatožlutá</td>
+</tr>
+<tr style="color:black;background-color:#ffefd5;">
+<td>PapayaWhip</td>
+<td>#FFEFD5</td>
+<td>Papájová</td>
+</tr>
+<tr style="color:black;background-color:#ffe4b5;">
+<td>Moccasin</td>
+<td>#FFE4B5</td>
+<td>Mokasínová</td>
+</tr>
+<tr style="color:black;background-color:#ffdab9;">
+<td>PeachPuff</td>
+<td>#FFDAB9</td>
+<td>Broskvová</td>
+</tr>
+<tr style="color:black;background-color:#eee8aa;">
+<td>PaleGoldenrod</td>
+<td>#EEE8AA</td>
+<td>Bledě zlatá</td>
+</tr>
+<tr style="color:black;background-color:#f0e68c;">
+<td>Khaki</td>
+<td>#F0E68C</td>
+<td>Khaki</td>
+</tr>
+<tr style="color:white;background-color:#bdb76b;">
+<td>DarkKhaki</td>
+<td>#BDB76B</td>
+<td>Tmavě khaki</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Fialové</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#e6e6fa;">
+<td>Lavender</td>
+<td>#E6E6FA</td>
+<td>Levandulová</td>
+</tr>
+<tr style="color:white;background-color:#d8bfd8;">
+<td>Thistle</td>
+<td>#D8BFD8</td>
+<td>Bodláková</td>
+</tr>
+<tr style="color:white;background-color:#dda0dd;">
+<td>Plum</td>
+<td>#DDA0DD</td>
+<td>Švestková</td>
+</tr>
+<tr style="color:white;background-color:#ee82ee;">
+<td>Violet</td>
+<td>#EE82EE</td>
+<td>Fialková</td>
+</tr>
+<tr style="color:white;background-color:#da70d6;">
+<td>Orchid</td>
+<td>#DA70D6</td>
+<td>Světle orchideová</td>
+</tr>
+<tr style="color:white;background-color:fuchsia;">
+<td>Fuchsia</td>
+<td>#FF00FF</td>
+<td>Fuchsiová</td>
+</tr>
+<tr style="color:white;background-color:#ff00ff;">
+<td>Magenta</td>
+<td>#FF00FF</td>
+<td>Purpurová</td>
+</tr>
+<tr style="color:white;background-color:#ba55d3;">
+<td>MediumOrchid</td>
+<td>#BA55D3</td>
+<td>Orchideová</td>
+</tr>
+<tr style="color:white;background-color:#9370db;">
+<td>MediumPurple</td>
+<td>#9370DB</td>
+<td>Světle fialová</td>
+</tr>
+<tr style="color:white;background-color:#8a2be2;">
+<td>BlueViolet</td>
+<td>#8A2BE2</td>
+<td>Modrofialková</td>
+</tr>
+<tr style="color:white;background-color:#9400d3;">
+<td>DarkViolet</td>
+<td>#9400D3</td>
+<td>Tmavě fialková</td>
+</tr>
+<tr style="color:white;background-color:#9932cc;">
+<td>DarkOrchid</td>
+<td>#9932CC</td>
+<td>Tmavě orchideová</td>
+</tr>
+<tr style="color:white;background-color:#8b008b;">
+<td>DarkMagenta</td>
+<td>#8B008B</td>
+<td>Tmavě purpurová</td>
+</tr>
+<tr style="color:white;background-color:purple;">
+<td>Purple</td>
+<td>#800080</td>
+<td>Fialová</td>
+</tr>
+<tr style="color:white;background-color:#4b0082;">
+<td>Indigo</td>
+<td>#4B0082</td>
+<td>Indigová</td>
+</tr>
+<tr style="color:white;background-color:#6a5acd;">
+<td>SlateBlue</td>
+<td>#6A5ACD</td>
+<td>Břidlicově modrá</td>
+</tr>
+<tr style="color:white;background-color:#483d8b;">
+<td>DarkSlateBlue</td>
+<td>#483D8B</td>
+<td>Tmavě břidlicově modrá</td>
+</tr>
+<tr style="color:white;background-color:#7b68ee;">
+<td>MediumSlateBlue</td>
+<td>#7B68EE</td>
+<td>Světle břidlicově modrá</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Zelené</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#adff2f;">
+<td>GreenYellow</td>
+<td>#ADFF2F</td>
+<td>Zeleno žlutá</td>
+</tr>
+<tr style="color:black;background-color:#7fff00;">
+<td>Chartreuse</td>
+<td>#7FFF00</td>
+<td>Barva bylinkového likéru</td>
+</tr>
+<tr style="color:black;background-color:#7cfc00;">
+<td>LawnGreen</td>
+<td>#7CFC00</td>
+<td>Trávníková zelená</td>
+</tr>
+<tr style="color:black;background-color:lime;">
+<td>Lime</td>
+<td>#00FF00</td>
+<td>Limetková</td>
+</tr>
+<tr style="color:black;background-color:#32cd32;">
+<td>LimeGreen</td>
+<td>#32CD32</td>
+<td>Limetkovo zelená</td>
+</tr>
+<tr style="color:black;background-color:#98fb98;">
+<td>PaleGreen</td>
+<td>#98FB98</td>
+<td>Bledě zelená</td>
+</tr>
+<tr style="color:black;background-color:#90ee90;">
+<td>LightGreen</td>
+<td>#90EE90</td>
+<td>Světle zelená</td>
+</tr>
+<tr style="color:black;background-color:#00fa9a;">
+<td>MediumSpringGreen</td>
+<td>#00FA9A</td>
+<td>Světle řeřichová</td>
+</tr>
+<tr style="color:black;background-color:#00ff7f;">
+<td>SpringGreen</td>
+<td>#00FF7F</td>
+<td>Řeřichová</td>
+</tr>
+<tr style="color:white;background-color:#3cb371;">
+<td>MediumSeaGreen</td>
+<td>#3CB371</td>
+<td>Světle mořská zelená</td>
+</tr>
+<tr style="color:white;background-color:#2e8b57;">
+<td>SeaGreen</td>
+<td>#2E8B57</td>
+<td>Mořská zelená</td>
+</tr>
+<tr style="color:white;background-color:#228b22;">
+<td>ForestGreen</td>
+<td>#228B22</td>
+<td>Lesní zelená</td>
+</tr>
+<tr style="color:white;background-color:green;">
+<td>Green</td>
+<td>#008000</td>
+<td>Zelená</td>
+</tr>
+<tr style="color:white;background-color:#006400;">
+<td>DarkGreen</td>
+<td>#006400</td>
+<td>Tmavě zelená</td>
+</tr>
+<tr style="color:white;background-color:#9acd32;">
+<td>YellowGreen</td>
+<td>#9ACD32</td>
+<td>Žlutozelená</td>
+</tr>
+<tr style="color:white;background-color:#6b8e23;">
+<td>OliveDrab</td>
+<td>#6B8E23</td>
+<td>Nezralá olivová</td>
+</tr>
+<tr style="color:white;background-color:olive;">
+<td>Olive</td>
+<td>#808000</td>
+<td>Olivová</td>
+</tr>
+<tr style="color:white;background-color:#556b2f;">
+<td>DarkOliveGreen</td>
+<td>#556B2F</td>
+<td>Tmavě olivová</td>
+</tr>
+<tr style="color:black;background-color:#66cdaa;">
+<td>MediumAquamarine</td>
+<td>#66CDAA</td>
+<td>Světlá aquamarína</td>
+</tr>
+<tr style="color:white;background-color:#8fbc8f;">
+<td>DarkSeaGreen</td>
+<td>#8FBC8F</td>
+<td>Tmavě mořská zelená</td>
+</tr>
+<tr style="color:white;background-color:#20b2aa;">
+<td>LightSeaGreen</td>
+<td>#20B2AA</td>
+<td>Bledě mořská zelená</td>
+</tr>
+<tr style="color:white;background-color:#008b8b;">
+<td>DarkCyan</td>
+<td>#008B8B</td>
+<td>Tmavě azurová</td>
+</tr>
+<tr style="color:white;background-color:teal;">
+<td>Teal</td>
+<td>#008080</td>
+<td>Šedozelená</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Modré</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:aqua;">
+<td>Aqua</td>
+<td>#00FFFF</td>
+<td>Aqua</td>
+</tr>
+<tr style="color:black;background-color:#00ffff;">
+<td>Cyan</td>
+<td>#00FFFF</td>
+<td>Azurová</td>
+</tr>
+<tr style="color:black;background-color:#e0ffff;">
+<td>LightCyan</td>
+<td>#E0FFFF</td>
+<td>Světle azurová</td>
+</tr>
+<tr style="color:black;background-color:#afeeee;">
+<td>PaleTurquoise</td>
+<td>#AFEEEE</td>
+<td>Bledě tyrkysová</td>
+</tr>
+<tr style="color:black;background-color:#7fffd4;">
+<td>Aquamarine</td>
+<td>#7FFFD4</td>
+<td>Akvamarína</td>
+</tr>
+<tr style="color:black;background-color:#40e0d0;">
+<td>Turquoise</td>
+<td>#40E0D0</td>
+<td>Tyrkysová</td>
+</tr>
+<tr style="color:white;background-color:#48d1cc;">
+<td>MediumTurquoise</td>
+<td>#48D1CC</td>
+<td>Světle tyrkysová</td>
+</tr>
+<tr style="color:white;background-color:#00ced1;">
+<td>DarkTurquoise</td>
+<td>#00CED1</td>
+<td>Tmavě tyrkysová</td>
+</tr>
+<tr style="color:white;background-color:#5f9ea0;">
+<td>CadetBlue</td>
+<td>#5F9EA0</td>
+<td>Kadetská modrá</td>
+</tr>
+<tr style="color:white;background-color:#4682b4;">
+<td>SteelBlue</td>
+<td>#4682B4</td>
+<td>Ocelově modrá</td>
+</tr>
+<tr style="color:black;background-color:#b0c4de;">
+<td>LightSteelBlue</td>
+<td>#B0C4DE</td>
+<td>Světle ocelově modrá</td>
+</tr>
+<tr style="color:black;background-color:#b0e0e6;">
+<td>PowderBlue</td>
+<td>#B0E0E6</td>
+<td>Střelnoprachová modrá</td>
+</tr>
+<tr style="color:black;background-color:#add8e6;">
+<td>LightBlue</td>
+<td>#ADD8E6</td>
+<td>Světle modrá</td>
+</tr>
+<tr style="color:black;background-color:#87ceeb;">
+<td>SkyBlue</td>
+<td>#87CEEB</td>
+<td>Nebeská</td>
+</tr>
+<tr style="color:black;background-color:#87cefa;">
+<td>LightSkyBlue</td>
+<td>#87CEFA</td>
+<td>Světle nebeská</td>
+</tr>
+<tr style="color:white;background-color:#00bfff;">
+<td>DeepSkyBlue</td>
+<td>#00BFFF</td>
+<td>Sytě nebeská</td>
+</tr>
+<tr style="color:white;background-color:#1e90ff;">
+<td>DodgerBlue</td>
+<td>#1E90FF</td>
+<td>Modrá Losangelských Dodgers</td>
+</tr>
+<tr style="color:white;background-color:#6495ed;">
+<td>CornflowerBlue</td>
+<td>#6495ED</td>
+<td>Chrpová</td>
+</tr>
+<tr style="color:white;background-color:#7b68ee;">
+<td>MediumSlateBlue</td>
+<td>#7B68EE</td>
+<td>Světle břidlicově modrá</td>
+</tr>
+<tr style="color:white;background-color:#4169e1;">
+<td>RoyalBlue</td>
+<td>#4169E1</td>
+<td>Královská modrá</td>
+</tr>
+<tr style="color:white;background-color:blue;">
+<td>Blue</td>
+<td>#0000FF</td>
+<td>Modrá</td>
+</tr>
+<tr style="color:white;background-color:#0000cd;">
+<td>MediumBlue</td>
+<td>#0000CD</td>
+<td>Tmavší modrá</td>
+</tr>
+<tr style="color:white;background-color:#00008b;">
+<td>DarkBlue</td>
+<td>00008B</td>
+<td>Tmavě modrá</td>
+</tr>
+<tr style="color:white;background-color:navy;">
+<td>Navy</td>
+<td>#000080</td>
+<td>Námořnická modrá</td>
+</tr>
+<tr style="color:white;background-color:#191970;">
+<td>MidnightBlue</td>
+<td>#191970</td>
+<td>Půlnoční modrá</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Hnědé</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#fff8dc;">
+<td>Cornsilk</td>
+<td>#FFF8DC</td>
+<td>Hedvábná</td>
+</tr>
+<tr style="color:black;background-color:#ffebcd;">
+<td>BlanchedAlmond</td>
+<td>#FFEBCD</td>
+<td>Mandlová</td>
+</tr>
+<tr style="color:black;background-color:#ffe4c4;">
+<td>Bisque</td>
+<td>#FFE4C4</td>
+<td>Krevetová</td>
+</tr>
+<tr style="color:black;background-color:#ffdead;">
+<td>NavajoWhite</td>
+<td>#FFDEAD</td>
+<td>Navažská</td>
+</tr>
+<tr style="color:black;background-color:#f5deb3;">
+<td>Wheat</td>
+<td>#F5DEB3</td>
+<td>Pšenicová</td>
+</tr>
+<tr style="color:white;background-color:#deb887;">
+<td>BurlyWood</td>
+<td>#DEB887</td>
+<td>Barva jarního dřeva</td>
+</tr>
+<tr style="color:white;background-color:#d2b48c;">
+<td>Tan</td>
+<td>#D2B48C</td>
+<td>Opalovací</td>
+</tr>
+<tr style="color:white;background-color:#bc8f8f;">
+<td>RosyBrown</td>
+<td>#BC8F8F</td>
+<td>Růžovohnědá</td>
+</tr>
+<tr style="color:white;background-color:#f4a460;">
+<td>SandyBrown</td>
+<td>#F4A460</td>
+<td>Pískově hnědá</td>
+</tr>
+<tr style="color:white;background-color:#daa520;">
+<td>Goldenrod</td>
+<td>#DAA520</td>
+<td>Zlatožlutá</td>
+</tr>
+<tr style="color:white;background-color:#b8860b;">
+<td>DarkGoldenrod</td>
+<td>#B8860B</td>
+<td>Tmavě zlatá</td>
+</tr>
+<tr style="color:white;background-color:#cd853f;">
+<td>Peru</td>
+<td>#CD853F</td>
+<td>Peruánská</td>
+</tr>
+<tr style="color:white;background-color:#d2691e;">
+<td>Chocolate</td>
+<td>#D2691E</td>
+<td>Čokoládová</td>
+</tr>
+<tr style="color:white;background-color:#8b4513;">
+<td>SaddleBrown</td>
+<td>#8B4513</td>
+<td>Sedlová</td>
+</tr>
+<tr style="color:white;background-color:#a0522d;">
+<td>Sienna</td>
+<td>#A0522D</td>
+<td>Siena pálená</td>
+</tr>
+<tr style="color:white;background-color:#a52a2a;">
+<td>Brown</td>
+<td>#A52A2A</td>
+<td>Hnědá</td>
+</tr>
+<tr style="color:white;background-color:maroon;">
+<td>Maroon</td>
+<td>#800000</td>
+<td>Kaštanová</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Světlé</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:white;">
+<td>White</td>
+<td>#FFFFFF</td>
+<td>Bílá</td>
+</tr>
+<tr style="color:black;background-color:#fffafa;">
+<td>Snow</td>
+<td>#FFFAFA</td>
+<td>Sněhobílá</td>
+</tr>
+<tr style="color:black;background-color:#f0fff0;">
+<td>Honeydew</td>
+<td>#F0FFF0</td>
+<td>Barva mateří kašičky</td>
+</tr>
+<tr style="color:black;background-color:#f5fffa;">
+<td>MintCream</td>
+<td>#F5FFFA</td>
+<td>Mátová</td>
+</tr>
+<tr style="color:black;background-color:#f0ffff;">
+<td>Azure</td>
+<td>#F0FFFF</td>
+<td>Bledě azurová</td>
+</tr>
+<tr style="color:black;background-color:#f0f8ff;">
+<td>AliceBlue</td>
+<td>#F0F8FF</td>
+<td>Rooseveltové modrá</td>
+</tr>
+<tr style="color:black;background-color:#f8f8ff;">
+<td>GhostWhite</td>
+<td>#F8F8FF</td>
+<td>Duchová bílá</td>
+</tr>
+<tr style="color:black;background-color:#f5f5f5;">
+<td>WhiteSmoke</td>
+<td>#F5F5F5</td>
+<td>Kouřová</td>
+</tr>
+<tr style="color:black;background-color:#fff5ee;">
+<td>Seashell</td>
+<td>#FFF5EE</td>
+<td>Mušlová</td>
+</tr>
+<tr style="color:black;background-color:#f5f5dc;">
+<td>Beige</td>
+<td>#F5F5DC</td>
+<td>Béžová</td>
+</tr>
+<tr style="color:black;background-color:#fdf5e6;">
+<td>OldLace</td>
+<td>#FDF5E6</td>
+<td>Krajková</td>
+</tr>
+<tr style="color:black;background-color:#fffaf0;">
+<td>FloralWhite</td>
+<td>#FFFAF0</td>
+<td>Floristická bílá</td>
+</tr>
+<tr style="color:black;background-color:#fffff0;">
+<td>Ivory</td>
+<td>#FFFFF0</td>
+<td>Slonovinová</td>
+</tr>
+<tr style="color:black;background-color:#faebd7;">
+<td>AntiqueWhite</td>
+<td>#FAEBD7</td>
+<td>Zašlá bílá</td>
+</tr>
+<tr style="color:black;background-color:#faf0e6;">
+<td>Linen</td>
+<td>#FAF0E6</td>
+<td>Prostěradlová</td>
+</tr>
+<tr style="color:black;background-color:#fff0f5;">
+<td>LavenderBlush</td>
+<td>#FFF0F5</td>
+<td>Bílá s nádechem levandulové</td>
+</tr>
+<tr style="color:black;background-color:#ffe4e1;">
+<td>MistyRose</td>
+<td>#FFE4E1</td>
+<td>Mlhavě růžová</td>
+</tr>
+</tbody>
+</table>
+<br />
+<h2>Šedé</h2>
+<table style="background-color:#d3d3d3;">
+<tbody>
+<tr>
+<th>Název ve Small Basicu</th>
+<th>Kód</th>
+<th>Překlad</th>
+</tr>
+<tr style="color:black;background-color:#dcdcdc;">
+<td>Gainsboro</td>
+<td>#DCDCDC</td>
+<td>Barva gainsboro</td>
+</tr>
+<tr style="color:black;background-color:#d3d3d3;">
+<td>LightGray</td>
+<td>#D3D3D3</td>
+<td>Světle šedá</td>
+</tr>
+<tr style="color:black;background-color:silver;">
+<td>Silver</td>
+<td>#C0C0C0</td>
+<td>Stříbrná</td>
+</tr>
+<tr style="color:black;background-color:#a9a9a9;">
+<td>DarkGray</td>
+<td>#A9A9A9</td>
+<td>Tmavě šedá</td>
+</tr>
+<tr style="color:white;background-color:gray;">
+<td>Gray</td>
+<td>#808080</td>
+<td>Šedá</td>
+</tr>
+<tr style="color:white;background-color:#696969;">
+<td>DimGray</td>
+<td>#696969</td>
+<td>Zastřená šedá</td>
+</tr>
+<tr style="color:white;background-color:#778899;">
+<td>LightSlateGray</td>
+<td>#778899</td>
+<td>Světle břidlicově šedá</td>
+</tr>
+<tr style="color:white;background-color:#708090;">
+<td>SlateGray</td>
+<td>#708090</td>
+<td>Břidlicově šedá</td>
+</tr>
+<tr style="color:white;background-color:#2f4f4f;">
+<td>DarkSlateGray</td>
+<td>#2F4F4F</td>
+<td>Tmavě břidlicově šedá</td>
+</tr>
+<tr style="color:white;background-color:black;">
+<td>Black</td>
+<td>#000000</td>
+<td>Černá</td>
+</tr>
+</tbody>
+</table>
+
+<script>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+	
+	for (i = 0; i < coll.length; i++) {
+	  coll[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var content = this.nextElementSibling;
+		if (content.style.maxHeight){
+		  content.style.maxHeight = null;
+		} else {
+		  content.style.maxHeight = content.scrollHeight + "px";
+		} 
+	  });
+	}
+</script>
+</body></html>

@@ -1,0 +1,336 @@
+'---VSTUPNÍ BOD PROGRAMU---
+Inicializuj()
+SpustHerniSmycku()
+
+
+
+
+'---INICIALIZACE---
+Sub Inicializuj
+  'Základní proměnné - zde můžete přenastavit parametry hry
+  GraphicsWindow.Width = 800
+  minimalniSirkaOkna = 400
+  GraphicsWindow.Height = 600
+  minimalniVyskaOkna = 400
+  
+  barvaText = "Tomato"  
+  barvaOkna = "Ivory"
+  barvaZivot = "YellowGreen"
+  barvaPraznyZivot = "DarkGreen"
+  okrajZivot = 2
+  velikostZivot = 20
+  
+  barvaKruh = "PaleGreen"
+  barvaOkrajKruh = "SteelBlue"
+  okrajKruhu = 2  
+  polomerKruhu = 35
+  
+  zakladniCas = 1500
+  snizovacCasu = 1.05
+  zakladniZivoty = 3
+  
+  mezicasMin = 500
+  mezicasMax = 4000
+  
+  zvukOk = Program.Directory + "\Dobre1.wav"
+  zvukChyba = Program.Directory + "\Chyba1.wav"
+  zvukKonec = Program.Directory + "\Prohra1a.wav"
+  'Tady končí sekce základních proměnných
+  
+  'Příprava okna
+  GraphicsWindow.Left = (Desktop.Width  - GraphicsWindow.Width)  / 2
+  GraphicsWindow.Top  = (Desktop.Height - GraphicsWindow.Height) / 2
+  GraphicsWindow.BackgroundColor = barvaOkna
+  GraphicsWindow.Title = "Hra Chyť Kolečko"
+  
+  'Texty uživatelského rozhraní
+  GraphicsWindow.BrushColor = barvaText
+  zivotyTXT = Shapes.AddText("")
+  Shapes.Zoom(zivotyTXT, 1.5, 1.5)
+  Shapes.SetText(zivotyTXT, "Zbylé životy:")
+  Shapes.Move(zivotyTXT, 10, 6)
+  
+  skoreTXT = Shapes.AddText("")
+  Shapes.Zoom(skoreTXT, 1.5, 1.5)
+  Shapes.Move(skoreTXT, 10, 16 + velikostZivot)
+  
+  fpsTXT = Shapes.AddText("")
+  Shapes.Zoom(fpsTXT, 1.5, 1.5)
+  Shapes.Move(fpsTXT, 400, 6)
+  
+  'Kolečka ukazatele životů
+  GraphicsWindow.PenColor = barvaZivot
+  GraphicsWindow.PenWidth = okrajZivot
+  GraphicsWindow.BrushColor = barvaPraznyZivot
+  For i = 1 To zakladniZivoty
+    ukazatelPrazdnyZivot[i] = Shapes.AddEllipse(velikostZivot, velikostZivot)
+    Shapes.Move(ukazatelPrazdnyZivot[i], 110 + i * (velikostZivot + 5), 5)
+  EndFor
+  
+  GraphicsWindow.BrushColor = barvaZivot
+  For i = 1 To zakladniZivoty
+    ukazatelZivot[i] = Shapes.AddEllipse(velikostZivot, velikostZivot)
+    Shapes.Move(ukazatelZivot[i], 110 + i * (velikostZivot + 5), 5)
+  EndFor
+  
+  'Tlačítko nová hra
+  GraphicsWindow.BrushColor = barvaText
+  startBTN = Controls.AddButton("Nová Hra", 0, 0)
+  sirkaTlacitko = 100
+  vyskaTlacitko = 35
+  Controls.SetSize(startBTN, sirkaTlacitko, vyskaTlacitko)
+  
+  'Kruh k chytání
+  GraphicsWindow.PenColor = barvaOkrajKruh
+  GraphicsWindow.PenWidth = okrajKruhu
+  GraphicsWindow.BrushColor = barvaKruh
+  kruh = Shapes.AddEllipse(polomerKruhu * 2, polomerKruhu * 2)
+  Shapes.HideShape(kruh)
+  
+  'Posuvník na kruhu
+  GraphicsWindow.PenWidth = 0
+  GraphicsWindow.BrushColor = barvaOkrajKruh
+  posuvnik = Shapes.AddRectangle(polomerKruhu * 2 - okrajKruhu * 2, 2*okrajKruhu)
+  Shapes.HideShape(posuvnik)
+  
+  'Zakrývač posuvníku
+  GraphicsWindow.BrushColor = GraphicsWindow.BackgroundColor
+  posuvnikZakryvac = Shapes.AddRectangle(polomerKruhu * 2 - okrajKruhu * 2, 2*okrajKruhu)
+  Shapes.HideShape(posuvnikZakryvac)
+  
+  'Inicializace obecných proměnných a rozhraní
+  PripravHru()
+  
+  'Svázání událostí
+  GraphicsWindow.MouseDown = ZpracujKlik
+  Controls.ButtonClicked = ZpracujTlacitko
+  Timer.Tick = ZpracujCasovac
+  
+  'Inicializace přehrávače
+  Sound.Stop(zvukOk)
+  Sound.Stop(zvukChyba)
+  Sound.Stop(zvukKonec)
+EndSub
+
+Sub PripravHru
+  'Základní proměnné
+  skore = 0
+  zivoty = zakladniZivoty
+  cas = zakladniCas
+  stav = 0
+  
+  SkryjKruh()
+  
+  'Ukaž tlačítko uprostřed
+  Controls.Move(startBTN, (GraphicsWindow.Width - sirkaTlacitko) / 2, (GraphicsWindow.Height - vyskaTlacitko) / 2)
+  Controls.ShowControl(startBTN)
+  GraphicsWindow.CanResize = "True"
+  AktualizujRozhrani()
+EndSub
+
+
+'---ROZHRANÍ---
+Sub AktualizujRozhrani
+  Shapes.SetText(skoreTXT, "Skóre: " + skore)
+  For i = 1 To zivoty
+    Shapes.ShowShape(ukazatelZivot[i])
+  EndFor
+  For i = zivoty + 1 To zakladniZivoty
+    Shapes.HideShape(ukazatelZivot[i])
+  EndFor
+EndSub
+
+Sub UkazKruh
+  kruhViditelny = 1 
+  Shapes.ShowShape(kruh)
+  Shapes.ShowShape(posuvnikZakryvac)
+  Shapes.ShowShape(posuvnik)
+  Shapes.Animate(posuvnik, kruhX - polomerKruhu * 3 + 2 * okrajKruhu, kruhY - okrajKruhu, cas)
+EndSub
+
+Sub SkryjKruh
+  kruhViditelny = 0
+  Shapes.HideShape(kruh)
+  Shapes.HideShape(posuvnik)
+  Shapes.HideShape(posuvnikZakryvac)
+EndSub
+
+'---UDÁLOSTI---
+'Zpracuje kliknutí myší do herního pole
+Sub ZpracujKlik
+  If stav = 1 Then 
+    Timer.Pause()
+    
+    'Je-li kruh viditelný, chceme si zapamatovat kliknutí, neboť nastalo v úspěšný moment 
+    If kruhViditelny = 1 Then
+      klikX = GraphicsWindow.MouseX
+      klikY = GraphicsWindow.MouseY
+    EndIf
+    
+    stav = 4
+  EndIf
+EndSub
+
+'Zpracuje kliknutí na Button - máme jen tlačítko nové hry
+Sub ZpracujTlacitko
+  Controls.HideControl(startBTN)
+  Sound.PlayClick()
+  
+  GraphicsWindow.Width  = Math.Max(GraphicsWindow.Width,  minimalniSirkaOkna)
+  GraphicsWindow.Height = Math.Max(GraphicsWindow.Height, minimalniVyskaOkna)
+  GraphicsWindow.CanResize = "False"
+  
+  stav = 2
+EndSub
+
+'Zpracuje tiknutí časovače - dle viditelnosti kruhu to značí buď požadavek na odkrytí, nebo na prohru, protože hráč nestihl kliknout
+Sub ZpracujCasovac
+  If stav = 1 Then
+    Timer.Pause()
+    
+    If kruhViditelny = 1 Then
+      stav = 4
+    Else
+      stav = 3
+    EndIf
+  EndIf  
+EndSub
+
+
+'---HERNÍ SMYČKA---
+Sub SpustHerniSmycku
+  'stav:
+  '    0 - hra neběží
+  '    1 - nic nedělej
+  '    2 - vytvoř tah a spusť časovač
+  '    3 - ukaž kruh a spusť časovač
+  '    4 - dokonči tah
+  
+  lastSecond = Math.Floor(Clock.ElapsedMilliseconds / 1000)
+  since = 0
+  While "True"    
+    second = Math.Floor(Clock.ElapsedMilliseconds / 1000)
+    If lastSecond = second Then
+      since = since + 1
+    Else
+      Shapes.SetText(fpsTXT, "FPS: " + since)
+      since = 0
+      lastSecond = second
+    EndIf
+    
+    If stav = 2 Then
+      VytvorTah()      
+      stav = 1
+      
+    ElseIf stav = 3 Then
+      UdelejTah()
+      stav = 1
+      
+    ElseIf stav = 4 Then
+      DokonciTah()
+      
+    EndIf
+  EndWhile  
+EndSub
+
+'Připraví a nastartuje nový tah
+Sub VytvorTah
+  'Resetujeme klik hráče na výchozí hodnoty
+  klikX = -1
+  klikY = -1
+  
+  SkryjKruh()
+  
+  'získáme nové souřadnice rohu kruhu a posuneme
+  kruhX = Math.GetRandomNumber(GraphicsWindow.Width - polomerKruhu * 2) - 1
+  kruhY = Math.GetRandomNumber(GraphicsWindow.Height - polomerKruhu * 2) - 1
+  Shapes.Move(kruh, kruhX, kruhY)
+  
+  'do souřadnicové proměnné uložíme střed kruhu
+  kruhX = kruhX + polomerKruhu
+  kruhY = kruhY + polomerKruhu
+  
+  'posuvník posuneme na kruh, zakrývač nalevo od kruhu
+  Shapes.Move(posuvnik, kruhX - polomerKruhu + okrajKruhu, kruhY - okrajKruhu)
+  Shapes.Move(posuvnikZakryvac, kruhX - 3 * polomerKruhu + 2 * okrajKruhu, kruhY - okrajKruhu)
+  
+  AktualizujRozhrani()
+  
+  'Přečasujeme - náhodný výběr z mezičasu
+  Timer.Interval = Math.GetRandomNumber(mezicasMax - mezicasMin) + mezicasMin
+  Timer.Resume()
+EndSub
+
+'Provede zobrazení kruhu pro kliknutí
+Sub UdelejTah 
+  UkazKruh()
+  
+  'Přečasujeme - čas na kliknutí
+  Timer.Interval = cas
+  Timer.Resume()
+EndSub
+
+'Zpracuje proběhlý tah
+Sub DokonciTah
+  ok = 0  ' Dočasná proměnná ok nám poví, zdali jsme došli k tomu, že hráč zahrál úspěšný tah
+  
+  'Pokud hráč kliknul
+  If (klikX > 0) And (klikY > 0) Then
+    'rozdíl středu kruhu a hráčova kliku
+    x = kruhX - klikX
+    y = kruhY - klikY
+    
+    'sečteme rozdíly vynásobené samy sebou
+    vzdalenost = x * x + y * y
+    'vynásobíme samu sebou i velikost kruhu 
+    vzdalenostKruh = (polomerKruhu + 1) * (polomerKruhu + 1)
+    
+    'Je-li číslo od kruhu větší nebo rovno číslo od rozdílů, pak se hráč trefil
+    If vzdalenost <= vzdalenostKruh Then
+      'Přehrajeme zvuk
+      Sound.Stop(zvukOk)
+      Sound.Play(zvukOk)
+      
+      'Přičteme bodík
+      skore = skore + 1
+      
+      'Snížíme čas na kliknutí
+      cas = cas / snizovacCasu
+      
+      'Nastavíme stav, aby další průchod vytvořil nový tah
+      stav = 2
+      ok = 1
+    EndIf
+  EndIf
+  
+  'Nenastal-li úspěch
+  If ok = 0 Then
+    
+    'Ubereme život
+    zivoty = zivoty - 1
+    
+    'Dokud zbývá nula a více životů, stále hráč neprohrál
+    If zivoty >= 0 Then
+      'Přehrajeme zvuk
+      Sound.Stop(zvukChyba)
+      Sound.Play(zvukChyba)
+      
+      'Nastavíme stav, aby další průchod vytvořil nový tah
+      stav = 2
+      
+    'Jinak už hráč prohrál
+    Else
+      'Přehrajeme zvuk
+      Sound.Stop(zvukKonec)
+      Sound.Play(zvukKonec)
+      
+      'Zobrazíme hlášku o prohře
+      GraphicsWindow.ShowMessage("Konec hry! Tvoje výsledné skóre je " + skore, "Konec")
+      
+      PripravHru()
+      
+      'Nastavíme stav, že se nehraje
+      stav = 0
+    EndIf
+  EndIf
+EndSub

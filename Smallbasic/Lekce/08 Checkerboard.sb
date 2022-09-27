@@ -1,0 +1,21 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IV
+' 14) Kreslení šachovnice do textového okna
+
+vypis = "# "
+opak  = " #"
+
+velikost = 8
+
+For i = 1 To velikost
+  For j = 1 To velikost / 2
+    TextWindow.Write(vypis)
+  EndFor
+  TextWindow.WriteLine("")
+  
+  'Pro další řádek prohodíme zapisovací proměnnou
+  temp = vypis
+  vypis = opak
+  opak = temp
+  
+  'Po prohození máme v opaku opět "opak výpisu"
+EndFor

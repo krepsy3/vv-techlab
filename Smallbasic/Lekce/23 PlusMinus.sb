@@ -1,0 +1,25 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VIII
+' 32)  Tlačítka + a -
+
+'Barva štětce volí barvu písma použitého v kontrolce
+GraphicsWindow.BrushColor = "Red"
+
+minus = Controls.AddButton("-", 20, 20)
+pole  = Controls.AddTextBox(40, 20)
+plus  = Controls.AddButton("+", 130, 20)
+
+Controls.SetSize(pole, 80, 26)
+Controls.ButtonClicked = ZpracujTlacitko
+
+hodnota = 10
+Controls.SetTextBoxText(pole, hodnota)
+
+Sub ZpracujTlacitko
+  If Controls.LastClickedButton = plus Then
+    hodnota = hodnota + 1
+  ElseIf Controls.LastClickedButton = minus Then
+    hodnota = hodnota - 1
+  EndIf
+  
+  Controls.SetTextBoxText(pole, hodnota)
+EndSub

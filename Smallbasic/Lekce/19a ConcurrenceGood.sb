@@ -1,0 +1,53 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VII
+' 27)  Správně napsané kreslení želvou z hlediska konkurence
+
+' Inicializace 
+Turtle.Show()
+Turtle.Speed = 9
+velikost = 20
+GraphicsWindow.MouseDown = HandleMouseDown
+GraphicsWindow.MouseUp   = HandleMouseup
+
+' proměnná pokyn slouží k předání informace, že uživatel chce učinit přesun želvy
+' pokyn = 0 -> nic nedělej
+' pokyn = 1 -> na lastx a lasty pošli želvu, předtím ji nastav ocásek dle lastButton
+pokyn = 0
+
+' herní smyčka
+While "True"
+  ' dostaneme-li pokyn něco děláme
+  If pokyn = 1 Then
+    ' jako první musíme opsat společné proměnné, na které může obslužná subrutina 
+    ' kdykoli znovu sáhnout, pokud uživatel klikne jinam
+    basex = lastx
+    basey = lasty
+    button = lastButton
+    
+    'provedeme přesun
+    If button = "l" Then
+      Turtle.PenDown()
+    Else
+      Turtle.PenUp()
+    EndIf
+    
+    Turtle.MoveTo(basex, basey)
+    
+    'na závěr obsluhy pokynu nastavíme pokyn opět na 0. v příští iteraci se tak nepokusíme
+    'znovu kreslit, ale vyčkáme, až se opět objeví pokyn = 1
+    pokyn = 0
+  EndIf
+EndWhile
+
+Sub HandleMouseDown
+  If Mouse.IsLeftButtonDown Then
+    lastButton = "l"
+  ElseIf Mouse.IsRightButtonDown Then
+    lastButton = "r"
+  EndIf
+EndSub
+
+Sub HandleMouseUp
+  pokyn = 1
+  lastx = GraphicsWindow.MouseX
+  lasty = GraphicsWindow.MouseY
+EndSub

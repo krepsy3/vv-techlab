@@ -1,0 +1,134 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IX
+' 33)  Práce s Textem v GraphicsWindow
+
+' Příprava Grafického okna
+GraphicsWindow.Height = 750
+GraphicsWindow.Width = 400
+
+' Základní práce - vykreslení textu grafickým oknem
+dlouhazprava = "Tohle je hodně dlouhá zpráva, která se do šířky okna rozhodně nebude vejít, ale ve Small Basicu na to máme jednoduché řešení. Jo, a Matěj má rád Zemlbábu."
+
+' Nadpis nahoře
+GraphicsWindow.DrawText(50, 10, "TESTOVÁNÍ PRÁCE S TEXTEM NA GRAFICKÉM OKNĚ")
+Program.Delay(1000)
+
+' Vykreslení dlouhé zprávy
+GraphicsWindow.DrawText(10, 30, dlouhazprava)
+Program.Delay(1000)
+
+' Vykreslení dlouhé zprávy se zalomením - text nepřesáhne danou šířku
+' Zleva a zprava chceme mít mezeru 10 pixelů, x-ová souřadnice je tedy 10
+' a maximální šířka textu je Šířka okna mínus 20 (mínus deset zleva a mínus 10 zprava)
+GraphicsWindow.DrawBoundText(10, 60, GraphicsWindow.Width - 20, dlouhazprava)
+Program.Delay(1000)
+
+' Zprávu samozřejmě můžeme uzavřít, na jakou šířku chceme
+GraphicsWindow.DrawBoundText(15, 120, 250, dlouhazprava)
+
+' A třeba kolem ní nakreslit i boxík
+GraphicsWindow.DrawRectangle(10, 115, 260, 70)
+
+' Nevýhoda je, že samozřejmě nevíme, na kolik řádků se text rozleze, čili y-ové souřadnice a výšky musíme
+' "vykoukat" či odhadnout metodou pokus-omyl
+
+
+'-------------------------
+Program.Delay(3000)
+GraphicsWindow.DrawLine(0, 200, GraphicsWindow.Width, 200)
+'-------------------------
+
+
+' Přidání textového tvaru objektem Shapes
+textik = Shapes.AddText("Text jako útvar objektu Shapes")
+Program.Delay(1000)
+
+' Samozřejmě s textem lze dělat totéž, co s ostatními tvary
+Shapes.Animate(textik, 50, 220, 300)
+Program.Delay(1000)
+Shapes.Zoom(textik, 1.5, 1)
+Program.Delay(1000)
+Shapes.Zoom(textik, 0.8, 1.2)
+Program.Delay(1000)
+Shapes.Rotate(textik, 10)
+Program.Delay(1000)
+
+' Tvar text je na půl cesty mezi Útvary (Shapes) a Ovládacími prvky (Controls). Uživatel s ním nemůže 
+' interagovat, ale text textového objektu lze programátorsky měnit
+Shapes.SetText(textik, "Hahaha, zemlbába je hnusná!")
+Program.Delay(1000)
+
+' Tímpádem lze i Animovat
+znak = "="
+
+'Bohužel nemáme Shapes.GetText(...), takže text si musíme uchovávat ve zvláštní proměnné
+textAnimovanehoTextu = znak
+animovanyText = Shapes.AddText(znak)
+Shapes.Move(animovanyText, 10, 260)
+
+pridavej = "True"
+For i = 1 To 234
+  If pridavej Then
+    textAnimovanehoTextu = textAnimovanehoTextu + znak   'přidáme další znak
+    Shapes.SetText(animovanyText, textAnimovanehoTextu)
+    
+    If Text.GetLength(textAnimovanehoTextu) = 40 Then   'pokud je text už dost dlouhý, budeme od příště odebírat
+      pridavej = "False"
+    EndIf
+  Else
+    textAnimovanehoTextu = Text.GetSubTextToEnd(textAnimovanehoTextu, 2)   'odebereme první znak
+    Shapes.SetText(animovanyText, textAnimovanehoTextu)
+    
+    If Text.GetLength(textAnimovanehoTextu) = 1 Then   'pokud je text už moc krátký, budeme od příště zase přidávat
+      pridavej = "True"
+    EndIf
+  EndIf
+  
+  Program.Delay(5)
+EndFor
+
+
+'-------------------------
+Program.Delay(3000)
+GraphicsWindow.DrawLine(0, 300, GraphicsWindow.Width, 300)
+'-------------------------
+
+
+
+' Poslední možností jsou nám už známé TextBoxy objektu Controls
+GraphicsWindow.DrawText(10, 320, "Normální textové pole. Nejde odentrovat na další řádek:")
+textovePole = Controls.AddTextBox(10, 340)
+Controls.SetSize(textovePole, GraphicsWindow.Width - 20, 28)
+Controls.SetTextBoxText(textovePole, dlouhazprava)
+
+Program.Delay(1000)
+
+GraphicsWindow.DrawText(10, 380, "Víceřádkové textové pole. Při přetečení zobrazí posuvníky:")
+viceradkovePole = Controls.AddMultiLineTextBox(10, 400)
+Controls.SetSize(viceradkovePole, GraphicsWindow.Width - 20, 80)
+Controls.SetTextBoxText(viceradkovePole, dlouhazprava)
+
+
+'-------------------------
+Program.Delay(3000)
+GraphicsWindow.DrawLine(0, 500, GraphicsWindow.Width, 500)
+'-------------------------
+
+
+
+' Na ukázku ještě propojení víceřádkového textboxu a útvaru text, pomocí události psaní do textového pole
+GraphicsWindow.DrawBoundText(10, 510, GraphicsWindow.Width - 20, "Ukázka propojení TextBoxu s Textovým útvarem - zrcadlení")
+vstupniPole = Controls.AddMultiLineTextBox(10, 530)
+Controls.SetSize(vstupniPole, GraphicsWindow.Width - 20, 80)
+Controls.SetTextBoxText(vstupniPole, "Ahoj")
+
+vystupniText = Shapes.AddText("Ahoj")
+Shapes.Move(vystupniText, 10, 640)
+
+Controls.TextTyped = ZpracujPsaniDoPole
+
+
+Sub ZpracujPsaniDoPole
+  If Controls.LastTypedTextBox = vstupniPole Then
+    Shapes.SetText(vystupniText, Controls.GetTextBoxText(vstupniPole))
+  EndIf
+EndSub

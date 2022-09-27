@@ -1,0 +1,72 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VIII
+' 30)  Objekt Controls - základní seznámení
+
+'Přidání tlačítka
+tlacitko = Controls.AddButton("Toto je tlačítko", 20, 20)
+
+'Přidání textového pole
+textovePole = Controls.AddTextBox(20, 60)
+
+'Přidání víceřádkového textového pole, které umožňuje používat
+'Enter k odřádkování, a pokud se text nevejde, ukáže uživateli posuvník
+viceradkovePole = Controls.AddMultiLineTextBox(20, 90)
+
+'Nastavení velikosti
+Controls.SetSize(tlacitko, 120, 30)
+
+'Nastavení velikosti se zpožděním, abychom to viděli
+Program.Delay(2000)
+Controls.SetSize(viceradkovePole, 250, 150)
+
+'Přesun na nové místo
+Program.Delay(2000)
+Controls.Move(textovePole, 80, 60)
+
+'Skrytí a odkrytí
+Program.Delay(2000)
+Controls.HideControl(tlacitko)
+Program.Delay(2000)
+Controls.ShowControl(tlacitko)
+
+'Nastavení textu v textovém poli
+Program.Delay(2000)
+dlouhazprava = "Tohle je pořádně dlouhá zpráva která nám ukáže, že MultiLineTextBox je chytrý a při dlouhém textu se na něm ukáže posuvník"
+Controls.SetTextBoxText(viceradkovePole, dlouhazprava)
+
+Program.Delay(2000)
+kratsizprava = "Tahle zpráva je kratší, přesto se do našho obyč TextBoxu nevejde celá"
+Controls.SetTextBoxText(textovePole, kratsizprava)
+
+'Nastavení textu na tlačítku
+Program.Delay(2000)
+Controls.SetButtonCaption(tlacitko, "Klikni na mě!")
+
+'Ukázka zpracování kliknutí na tlačítko
+Program.Delay(2000)
+
+zpravaTB = Controls.AddMultiLineTextBox(20, 250)  'zpravaTB - TextBox na zprávu - typický způsob pojmenování
+Controls.SetSize(zpravaTB, 300, 100)
+okBtn = Controls.AddButton("Potvrdit", 330, 250)  'okBtn - Button s nápisem ok (nebo v tomto případě "Potvrdit") - typický způsob pojmenování
+
+  'Přidáme obslužnou subrutinu pro událost "bylo kliknuto na tlačítko" - ta je společná pro všechna tlačítka na formuláři
+Controls.ButtonClicked = ZpracujTlacitko
+
+  'Upozorníme uživatele na to, co se právě děje
+GraphicsWindow.ShowMessage("Nyní je zavedena obsluha tlačítek. Kliknutím na 'Potvrdit' dostanete zprávu jako je tato, ve které bude napsáno to, co je zadáno do textového pole vedle. Kliknutím na 'Klikni na mě' se to tlačítko vymaže, pro ukázku příkazu Remove.", "Informace")
+
+Sub ZpracujTlacitko
+  
+  'Obsluha tlačítek je jedna společná, proto se musíme zeptat na to, které tlačítko bylo stisknuto vlastnosti LastClickedButton
+  
+  If Controls.LastClickedButton = tlacitko Then
+    
+    'Smazání kontrolky
+    Controls.Remove(tlacitko)
+    
+  ElseIf Controls.LastClickedButton = okBtn Then
+    
+    'Získání textu z textového pole
+    zprava = Controls.GetTextBoxText(zpravaTB)
+    GraphicsWindow.ShowMessage(zprava, "Napsal jsi:")
+  EndIf
+EndSub

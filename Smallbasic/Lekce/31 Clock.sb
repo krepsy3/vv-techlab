@@ -1,0 +1,52 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic X
+' 43)  Objekt Clock
+
+' Objekt Clock reprezentuje hodiny, umí nám zjistit, kolik je hodin a jaké je datum, podle vnitřních hodin počítače
+' A dále se dá použít k odměřování času, jako stopky. Objekt Clock má jen samé vlastnosti
+TextWindow.WriteLine("Základní vlastnost - kolik je hodin: " + Clock.Time)
+TextWindow.WriteLine("    To je hodin:  " + Clock.Hour)
+TextWindow.WriteLine("    To je minut:  " + Clock.Minute)
+TextWindow.WriteLine("    To je sekund: " + Clock.Second)
+TextWindow.WriteLine("To je milisekund: " + Clock.Millisecond)
+TextWindow.WriteLine("")
+TextWindow.WriteLine("Další vlastnost - jaké je datum: " + Clock.Date)
+TextWindow.WriteLine("To je rok:   " + Clock.Year)
+TextWindow.WriteLine("To je měsíc: " + Clock.Month)
+TextWindow.WriteLine("To je den:   " + Clock.Day)
+TextWindow.WriteLine("A den v týdnu je: " + Clock.WeekDay)
+
+'________________
+TextWindow.Pause()
+TextWindow.Clear()
+'________________
+
+' Poslední vlastností objektu je "ElapsedMilliseconds". To nám vrací počet milisekund, který uplynul od 1. ledna 1900 půlnoci,
+' tedy je to hodně vysoké číslo. Samo o sobě není moc užitečné. Nicméně můžeme chvíli sledovat, jak roste:
+nyni = Clock.ElapsedMilliseconds  'uložíme, kolik času uběhlo "nyní"
+While Clock.ElapsedMilliseconds < (nyni + 5000)  'dokud uplynulý čas není "nyní + pět vtěřin", vypisujeme.
+  TextWindow.CursorLeft = 1
+  TextWindow.Write(Clock.ElapsedMilliseconds)
+  Program.Delay(5)
+EndWhile
+
+' Nyní k čemu to je. Už čekání 5 vteřin výše naznačuje, že pomocí toho můžeme vytvořit stopky. Když si totiž čas opíšeme,
+' a za chvíli znova, můžeme údaje odečíst a zjistíme tak, kolik uplynulo času (v milisekundách) 
+TextWindow.WriteLine("")
+TextWindow.WriteLine("Pro start stopek zmáčkněte nějakou klávesu.")
+TextWindow.PauseWithoutMessage()
+start = Clock.ElapsedMilliseconds
+
+TextWindow.WriteLine("Pro zastavení stopek zmáčkněte nějakou klávesu.")
+TextWindow.PauseWithoutMessage()
+cil = Clock.ElapsedMilliseconds
+
+' odečtení času
+zmerenyCas = cil - start
+
+' časové údaje získáme dělením. Vydělené číslo bude mít desetinná místa, která zaokrouhlíme dolů
+sekund = Math.Floor(zmerenyCas /    1000)  ' vteřiny jsou 1000x menší, než milisekundy
+minut  = Math.Floor(zmerenyCas /   60000)  ' minuty jsou 60*1000x menší, než milisekundy
+hodin  = Math.Floor(zmerenyCas / 3600000)  ' hodiny jsou 60*60*1000x menší, než milisekundy
+milisekund = zmerenyCas - sekund           ' milisekundy za desetinnou čárkou jsou kompletní milisekundy mínus celé sekundy
+
+TextWindow.WriteLine("Změřený čas: " + hodin + ":" + minut + ":" + sekund + "." + milisekund)

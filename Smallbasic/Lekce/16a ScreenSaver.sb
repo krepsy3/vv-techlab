@@ -1,0 +1,60 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' 23a) Odrážení čtverce
+' stejný kód, jako v souboru 16b, jen s drobnou odlišností
+' u měnění pozic, a jednoduše dosáhneme jinačí animace
+
+'Nastavení okna a barev
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 800
+GraphicsWindow.Title = "Odrážení tvarů"
+GraphicsWindow.PenColor = "Blue"
+GraphicsWindow.BrushColor = "Green"
+
+'Nastavení proměnných
+delka = 50
+vyska = 50
+x = 0
+y = 0
+
+pohybovyObjekt = Shapes.AddRectangle(delka, vyska)
+
+xBounce = "false"
+yBounce = "false"
+
+'Animační nekonečná smyčka
+While "true"
+  
+  If x > GraphicsWindow.Width - delka Then
+    xBounce = "true"    
+  EndIf
+  
+  If x < 0 Then
+    xBounce = "false"
+  EndIf
+    
+  If y > GraphicsWindow.Height - vyska Then
+    yBounce = "true"    
+  EndIf
+  
+  If y < 0 Then
+    yBounce = "false"
+  EndIf
+  
+  
+  If xBounce = "true" Then
+    x = x - 4
+  Else
+    x = x + 4
+  EndIf
+  
+  If yBounce = "true" Then
+    y = y - 4
+  Else
+    y = y + 4
+  EndIf
+  
+  
+  Shapes.Move(pohybovyObjekt, x, y)
+  
+  Program.Delay(10)
+EndWhile

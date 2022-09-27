@@ -1,0 +1,36 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' 23b) Nekonečný pohyb čtverce
+' stejný kód, jako v souboru 16a, jen s drobnou odlišností
+' u měnění pozic, a jednoduše dosáhneme jinačí animace
+
+'Nastavení okna a barev
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 800
+GraphicsWindow.Title = "Nekonečný pohyb tvarů"
+GraphicsWindow.PenColor = "Blue"
+GraphicsWindow.BrushColor = "Green"
+
+'Nastavení proměnných
+delka = 50
+vyska = 50
+x = 0
+y = 0
+
+pohybovyObjekt = Shapes.AddRectangle(delka, vyska)
+
+'Animační nekonečná smyčka
+While "true"
+  x = x + 4
+  y = y + 4
+  
+  If x > GraphicsWindow.Width Then
+    x = -delka
+  EndIf
+  
+  If y > GraphicsWindow.Height Then
+    y = -delka
+  EndIf
+  
+  Shapes.Move(pohybovyObjekt, x, y)
+  Program.Delay(15)
+EndWhile

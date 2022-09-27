@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+	body {
+		font-family: 'Segoe UI','Lucida Grande',Verdana,Arial,Helvetica,sans-serif;
+		font-weight: normal;
+		color: #2A2A2A;
+		max-width: 80rem;
+	}
+	h2 {
+		font-size: 1.6rem;
+		line-height: 1.25;
+	}
+	h3 {
+		font-size: 1.2rem;
+	}
+	h1:target, h2:target, h3:target {
+		animation: target-bgrhighlight 2s ease-in;
+	}
+	@keyframes target-bgrhighlight {
+		from { background-color: rgb(250, 213, 48); }
+		to { background-color: transparent; }
+	}
+	code, pre {
+		font-size: 1.05rem;
+	}
+	th {
+		text-align: left;
+	}
+	kbd {
+		background-color: #eee;
+		border-radius: 3px;
+		border: 1px solid #b4b4b4;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+		color: #333;
+		display: inline-block;
+		font-size: .85em;
+		font-weight: 700;
+		line-height: 1;
+		padding: 2px 4px;
+		white-space: nowrap;
+    }
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 12px;
+	}
+	table, p {
+		margin: 10px 0px;
+	}
+	.sb-object {
+		color: #006060;
+	}	
+	.sb-funcProp {
+		color: #8a2020;
+	}
+	.sb-value {
+		color: #cc6633;
+	}
+	.sb-var {
+		color: #000000;
+	}
+	.sb-comment {
+		color: #008020;
+		font-style: italic;
+	}
+	.sb-keyword {
+		color: #7678ff;
+		font-weight: bold;
+	}
+	.collapsible {
+		background-color: #A0A0A0;
+		color: white;
+		cursor: pointer;
+		padding: 18px;
+		width: 100%;
+		border: 15px solid transparent;
+		text-align: left;
+		outline: none;
+	}
+	.collapsible:target {
+		animation: target-borderhighlight 2s ease-in;
+	}
+	@keyframes target-borderhighlight {
+		from { border: 15px solid red; }
+		to { border: 15px solid transparent; }
+	}
+	.active, .collapsible:hover {
+		background-color: #555;
+	}
+	.collapsible:after {
+		content: '\002B';
+		color: white;
+		font-weight: bold;
+		float: left;
+		margin-left: 5px;
+	}
+	.active:after {
+		content: "\2212";
+	}
+	.collapsible-content {
+		padding: 0 18px;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+		background-color: #f1f1f1;
+	}
+	.green-box {
+		padding: 20px 10px;
+		width: 100% - 40px;
+		background-color: #28e916;
+	}
+</style>
+
+<title>
+	Kroužek Techlab - Small Basic - Magenta Experience Centre
+</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<h1>Techlab Magenta Experience Centre - Small Basic</h1>
+<p>
+	Rychlá navigace:
+	<ul>
+		<li><a href="#lessons">Z Lekcí</a></li>
+		<li><a href="#documentation">Dokumentace probraných témat</a></li>
+		<li><a href="#extras">Doplňkové poznatky navíc</a></li>
+	</ul>
+</p>
+<p class="green-box">
+	Stránka byla naposled aktualizována ve středu 6. dubna 2022 navečer.<br />
+</p>
+<button class="collapsible" id="changelog">Seznam změn</button>
+<div class="collapsible-content">
+	<ul>
+		<li>6. 4. navečer - vylepšený ukázkový kód 30, 31<br/>
+			&Tab;- přidána navigace na web</li>
+		<li>6. 4. dopoledne - kódy a témata z <a href="#lesson10about">lekce 10</a><br />
+			&Tab;- dokumentace <a href="#arrays">pole</a> a částečně <a href="#sound">Sound objektu</a><br />
+			&Tab;- bonusový program na tvorbu a stahování hudby příkazu <code class="sb-funcProp"><span class="sb-object">Sound</span>.PlayMusic(...)</code></li>
+		<li>31. 3. odpoledne - kódy a témata z <a href="#lesson9about">lekce 9</a><br/>
+			&Tab;- sekce jak funguje náš vytvořený program<br/>
+			&Tab;- sekce psaní speciálních znaků na klávesnici</li>
+		<li>23. 3. odpoledne - ukázkový kód 21 a 23</li>
+		<li>23. 3. ráno - kódy a témata z <a href="#lesson8about">lekce 8</a></li>
+	</ul>
+</div>
+
+<br />
+
+<h2 id="info">O co jde?</h2>
+<p>
+	Na některých lekcích kroužku budeme, jako jedno z témat, děti učit programovat v jazyce Small Basic. Příkazy se píšou 
+	anglicky, ale veškerá nápověda je přeložena do češtiny, a jedná se o programovací jazyk pro děti.
+	Heslo jazyka je "Every kid can code!", tedy "Každé dítě zvládne programovat!" a my tomu rozhodně věříme.
+	Na této stránce najdete ke každé lekci naše zdrojové kódy ke stažení. Ty zahrnují celý obsah lekce, kterou
+	jsme s dětmi absolvovali. Následuje pak popis jednotlivých témat, které byly obsahem lekce. 
+</p>
+
+<button class="collapsible" id="about">Jak pracovat s obsahem na této stránce</button>
+<div class="collapsible-content">
+<p>
+	Nemá smysl číst kódy zvlášť nebo popis na této stránce zvlášť. Ideální je stáhnout si Small Basic, v něm si 
+	naše kódy otevřít, otevřít si nový prázdný program a zkoušet si programovat k tomu. Čili číst náš kód,
+	zkoušet si napsat něco podobného, a pro popis kódu se dívat na tuto stránku. Kód si je vhodné spustit,
+	aby šlo vidět, co ten kód dělá, a až pak se podívat, jakými příkazy toho bylo docíleno.
+</p>
+<p>
+	Popisy funkcionalit na stránce píšeme jako souvislý text, aby sloužil jako dovysvětlení/připomenutí problematiky
+	pro ty, kdo na kroužku něco nestihli, nepochytili či na krožku vůbec nebyli. Přehled příkazů a vlastností na
+	jednotlivých objektech zobrazí nápovědní panel přímo ve Small Basicu, takže rychlý přehled by nemělo smysl tu
+	mít. 
+</p>
+<p>
+	Po každé lekci navíc publikujeme "úkol na doma". Je tam vždy několik zadání, které si můžete zkusit naprogramovat.
+	Pokud se zadaří, pošlete nám řešení na email, nebo jej přineste na další kroužek. Máme nachystané odměny, pro 
+	lepší motivaci :)
+</p>
+</div>
+
+<button class="collapsible" id="chars">Psaní speciálních znaků na české QWERTZ klávesnici</button>
+<div class="collapsible-content">
+<p>
+	AltGr = pravý Alt
+</p>
+<table>
+<tbody>
+	<tr>
+		<th>Znak</th>
+		<th>Poznámka</th>
+		<th>Klávesová zkratka</th>
+	</tr>
+	<tr>
+		<td>"</td>
+		<td>(Dvojité) uvozovky - textová hodnota</td>
+		<td><kbd>Shift</kbd> + <kbd>ů</kbd></td>
+	</tr>
+	<tr>
+		<td>&lt; a &gt;</td>
+		<td>Většítko a menšítko, jinak také špičaté závorky</td>
+		<td><kbd>AltGr</kbd> + <kbd>,</kbd> a <kbd>AltGr</kbd> + <kbd>.</kbd></td>
+	</tr>
+	<tr>
+		<td>[ a ]</td>
+		<td>hranaté závorky - přístup do pole</td>
+		<td><kbd>AltGr</kbd> + <kbd>F</kbd> a <kbd>AltGr</kbd> + <kbd>G</kbd></td>
+	</tr>
+	<tr><td colspan="3">Pokud nemáte numerickou klávesnici, hodí se také:</td></tr>
+	<tr>
+		<td>*</td>
+		<td>hvězdička, asterisk (neplést s Asterixem ;)) - násobení</td>
+		<td><kbd>AltGr</kbd> + <kbd>-</kbd></td>
+	</tr>
+	<tr>
+		<td>/</td>
+		<td>(dopředné) lomítko, lomeno - dělení</td>
+		<td><kbd>Shift</kbd> + <kbd>ú</kbd></td>
+	</tr>
+	<tr>
+		<td>\</td>
+		<td>zpětné lomítko, backslash - oddělovač složek u cest k souborům</td>
+		<td><kbd>AltGr</kbd> + <kbd>q</kbd></td>
+	</tr>
+	<tr><td colspan="3">Pár "užitečných" znaků, co se můžou hodit:</td></tr>
+	<tr>
+		<td>@</td>
+		<td>zavináč</td>
+		<td><kbd>AltGr</kbd> + <kbd>V</kbd></td>
+	</tr>
+	<tr>
+		<td>#</td>
+		<td>křížek, hash kříž, hashtag</td>
+		<td><kbd>AltGr</kbd> + <kbd>X</kbd></td>
+	</tr>
+	<tr>
+		<td>&amp;</td>
+		<td>ampersand, and, anglické a</td>
+		<td><kbd>AltGr</kbd> + <kbd>C</kbd></td>
+	</tr>
+</tbody>
+</table>
+</div>
+
+<button class="collapsible" id="compiled">Jak funguje náš vytvořený program</button>
+<div class="collapsible-content">
+	<p>
+		Když programujeme, vytváříme "Zdrojový kód", což je obyčejný textový soubor, který má příponu ".sb". Ten se dá
+		otevřít kdekoli, nejen v softwaru Small Basicu, ale třeba i v poznámkovém bloku a tak podobně - je to jen text.
+		Small Basic nám ho ale vykreslí hezky obarvený, aby se nám přehledně programovalo, ale také nám umí program spustit.
+	</p>
+	<p>
+		Když program spustíme, Small Basic software nejprve udělá tzv. překlad, neboli kompilaci, našeho zdrojového kódu.
+		Procesor počítače totiž nerozumí přímo Small Basicovému kódu, takže ho software vezme a přechroustá tak, aby mu 
+		procesor rozumněl. Tím nám ve složce, ve které je náš zdrojový kód (soubor ".sb"), vzniknou nějaké další soubory.
+	</p>
+	<p>
+		Řekněme, že jsme vytvořili zdrojový kód "kalkulacka.sb". Když jej spustíme, ve složce nám přibudou následující soubory:
+		<ul>
+			<li>kalkulacka.pdb</li>
+			<li>kalkulacka.exe</li>
+			<li>SmallBasicLibrary.dll</li>
+		</ul>
+		Soubor ".pdb" můžeme vesele ignorovat, nebo i smazat, k ničemu nám není. Proč vzniká je zbytečné vysvětlovat, nicméně
+		není samozřejmě jakkoli závadový. Soubor ".exe" je náš spustitelný program - když na něj dvakrát poklepeme levým
+		myšítkem, spustí se nám i mimo Small Basic software!<br />
+		K tomu, aby se náš program úspěšně pustil, musí být ve stejné složce i soubor <code>SmallBasicLibrary.dll</code>. Ten se nám
+		při spuštění ze softwaru ve složce vždy objeví, takže program běží. Pokud tam soubor nebude, náš program se vůbec nespustí!
+		Bohužel se nezobrazí ani žádná chybová hláška. 
+	</p>
+	<p>
+		Pokud tedy budete chtít dát váš program třeba kamarádovi nebo tak, a nechcete mu dávat váš zdrojový kód (aby vám program neukradl
+		nebo proto, že vůbec neumí programovat, Small Basic nemá naistalovaný a tímpádem by mu byl k ničemu), můžete mu dát váš ".exe" soubor,
+		ale vždy i <code>SmallBasicLibrary.dll</code>, jinak si program nebude moci spustit! 
+	</p>
+	<p>
+		Programy takto vytvořené běží pouze ve Windows s nainstalovaným .NET Framework 4.5.
+	</p>
+</div>
+
+<br />
+
+<h3>Co dělat mimo kroužek</h3>
+<p>
+	Zkoušejte si určitě programovat, i proto publikujeme úkoly na doma.
+</p>
+<button class="collapsible" id="instalation">Instalace</button>
+<div class="collapsible-content">
+	<p>
+		Instalace Small Basicu - ideálně z oficiální webové stránky <a href="https://smallbasic-publicwebsite.azurewebsites.net/" target="_blank">www.smallbasic.com</a>
+		stáhněte instalátor přes tlačítko Download. Během instalace pak zvolte češtinu. Jedná se o verzi <code class="sb-var">1.2</code>,
+		na Microsoft Store je sice k dispozici verze <code class="sb-var">1.3</code>, ovšem to je pouze port, který ještě nepodporuje
+		všechno, co verze <code class="sb-var">1.2</code> - proč je to značené takhle blbě je nám také záhadou :D
+	</p>
+	<p>
+		Je potřeba počítač s Windows a s nainstalovaným .NET FrameWork 4.5, ten by měla instalačka zvládnout stáhnout a poprosit
+		vás o případnou doinstalaci. Je to běžná součást Windows, a dost pravděpodobně ji již budete mít. <br />
+		Pokud nemáte Windows, je možné programovat i přímo z prohlížeče. Na stránce z odkazu výše jen místo Download zvolíte
+		Start coding online a po delším načítání se otevře webový editor. Nevýhoda je, že Není tak pohodlný, nefungují
+		některé klávesové zkratky a je pouze anglicky.	
+	</p>
+</div>
+
+<button class="collapsible" id="resources">Mrkněte se i jinam</button>
+<div class="collapsible-content">
+	<p>
+		Na internetu existuje k programování velká spousta věcí. Jasně, většina z nich je pro profesionální programátory,
+		která třeba není ani zábavná a nebudete jí rozumnět, ale nezoufejte, když na něco dobrého narazíme, určitě vám
+		o tom řekneme a dáme odkaz.
+	</p>
+	<p>
+		Za shlédnutí jistě stojí seriál České Televize <a href="https://decko.ceskatelevize.cz/datova-lhota" target="_blank">DATOVÁ LHOTA</a>,
+		na kterém mimochodem spolupracovali výborní programátoři a pedagogové informatiky Pavel Ježek a Cyril Brom z Matematicko Fyzikální Fakulty
+		na Karlově Univerzitě v Praze, kde také studují lektoři tohoto kroužku ;)<br />
+		Seriál (včetně bonusů a bonusové počítačové hry) krásně představuje, jak zhruba (v představě) funguje uvnitř počítač.
+		To se nám bude hodit pro pochopení toho, jaktože se věci v našem programovacím jazyce chovají tak, jak se chovají. Seriál doporučujeme
+		zkouknout, je to i výborná zábava :)
+	</p>
+</div>
+
+<hr />
+
+
+<h2 id="lessons">Co bylo na lekcích</h2>
+<h3>Všechny zdrojové kódy na jednom místě a další užitečné odkazy</h3>
+<button class="collapsible" id="src">Ukázkové kódy</button>
+<div class="collapsible-content">
+	<p>
+		Zde jsou všechny kódy, jak postupně vznikají. Některé vznikly přímo na lekcích, jiné jsme připravili mimo kroužek
+		jako další zdroj vědomostí.
+	</p>
+	<p>Ukázky:
+		<ul>
+			<li><a href="sbzdrojaky/01 Hello World.sb">01 Ahoj světe</a></li>
+			<li><a href="sbzdrojaky/02 Variables.sb">02 Proměnné</a></li>
+			<li><a href="sbzdrojaky/03 Conditions.sb">03 Podmínky</a></li>
+			<li><a href="sbzdrojaky/04 Calculator.sb">04 Kalkulačka</a></li>
+			<li><a href="sbzdrojaky/05 Loops.sb">05 Smyčky</a></li>
+			<li><a href="sbzdrojaky/06 Calculator.sb">06 Lepší Kalkulačka</a></li>
+			<li><a href="sbzdrojaky/07 Turtle.sb">07 Želva</a></li>
+			<li><a href="sbzdrojaky/08 Checkerboard.sb">08 Šachovnice</a></li>
+			<li><a href="sbzdrojaky/09 SubroutinesEvents.sb">09 Subrutiny a události</a></li>
+			<li><a href="sbzdrojaky/10 Paint.sb">10 Malování I</a></li>
+			<li><a href="sbzdrojaky/11 Paint.sb">11 Malování II</a></li>
+			<li><a href="sbzdrojaky/12 Paint.sb">12 Malování III</a></li>
+			<li><a href="sbzdrojaky/13 Mouse.sb">13 Myš</a></li>
+			<li><a href="sbzdrojaky/14 Shapes.sb">14 Tvary</a></li>
+			<li><a href="sbzdrojaky/15 Clouds.sb">15 Mraky</a></li>
+			<li><a href="sbzdrojaky/16a ScreenSaver.sb">16a Animovaný tvar</a></li>
+			<li><a href="sbzdrojaky/16b ScreenSaver.sb">16b Animovaný tvar</a></li>
+			<li><a href="sbzdrojaky/17 Paddlegame.sb">17 Hra odrážení míčku</a></li>
+			<li><a href="sbzdrojaky/18a ConcurrenceBad.sb">18a kreslení želvou špatné konkurenčně</a></li>
+			<li><a href="sbzdrojaky/18b ConcurrenceBad.sb">18b šrafování želvou špatné konkurenčně</a></li>
+			<li><a href="sbzdrojaky/19a ConcurrenceGood.sb">19a kreslení želvou funční</a></li>
+			<li><a href="sbzdrojaky/19b ConcurrenceGood.sb">19b šrafování želvou funkční</a></li>
+			<li><a href="sbzdrojaky/20 Text.sb">20 Text</a></li>
+			<li><a href="sbzdrojaky/21 Controls.sb">21 Controls</a></li>
+			<li><a href="sbzdrojaky/22 Calculator.sb">22 Kalkulačka pomocí Controls</a></li>
+			<li><a href="sbzdrojaky/23 PlusMinus.sb">23 Tlačítko + a -</a></li>
+			<li><a href="sbzdrojaky/24 TextGraphics.sb">24 Práce s textem na Grafickém okně</a></li>
+			<li><a href="sbzdrojaky/25 TextStyles.sb">25 Stylování textu</a></li>
+			<li><a href="sbzdrojaky/26 ControlStyles.sb">26 Stylování ovládacích prvků</a></li>
+			<li><a href="sbzdrojaky/27 Array.sb">27 Pole - úvod</a></li>
+			<li><a href="sbzdrojaky/28 Images.sb">28 Práce s obrázky na Grafickém okně</a><br />
+			<a href="mona lisa.png">Obrázek mona lisa.png - stáhněte a vložte do složky s příkladem 28, jinak nefunguje</a><br />
+			<a href="grass.webp">grass.webp</a>, <a href="dirt.webp">dirt.webp</a> a <a href="stone.webp">stone.webp</a> - můžete si také stáhnout (viz sekce 39)</li>
+			<li><a href="sbzdrojaky/29 Sound.sb">29 Objekt Sound</a><br />
+			<a href="Trombon.wav">Zvuk Trombon.wav - stáhněte a vložte do složky s příkladem 29, jinak nefunguje</a></li>
+			<li><a href="sbzdrojaky/30 Array.sb">30 Pole - praktická ukázka</a></li>
+			<li><a href="sbzdrojaky/31 Clock.sb">31 Objekt Clock</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="homework">Úkoly na doma</button>
+<div class="collapsible-content">
+	<p>Úkoly na doma včetně řešení:
+		<ul>
+			<li><a href="sbzdrojaky/NaDoma01.sb">Úkol na doma číslo 1</a></li>
+			<li><a href="sbzdrojaky/NaDoma01 solution.sb">Úkol na doma číslo 1 - naše řešení</a></li>
+			<li><a href="sbzdrojaky/NaDoma02.sb">Úkol na doma číslo 2</a></li>
+			<li><a href="sbzdrojaky/NaDoma02 solution.sb">Úkol na doma číslo 2 - naše řešení</a></li>
+			<li><a href="sbzdrojaky/NaDoma03.sb">Úkol na doma číslo 3</a></li>
+			<li><a href="sbzdrojaky/NaDoma03 solution.sb">Úkol na doma číslo 3 - naše řešení</a></li>
+			<li><a href="sbzdrojaky/NaDoma04.sb">Úkol na doma číslo 4</a></li>
+			<li><a href="sbzdrojaky/NaDoma05.sb">Úkol na doma číslo 5</a></li>
+			<li><a href="sbzdrojaky/NaDoma06.sb">Úkol na doma číslo 6 - zcela bonusový :)</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="srcplus">Bonusové kódy</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="sbzdrojaky/PlayMusicTester.sb">Testovací program na PlayMusic</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="links">Další odkazy</button>
+<div class="collapsible-content">
+	<p>
+		Přehled <a href="SBBarvy.html">pojmenovaných Barev</a>, které je možno používat v objektu <code class="sb-object">GraphicsWindow</code>.<br />
+		Dále <a href="https://smallbasic-publicwebsite.azurewebsites.net/" target="_blank">oficiální stránka</a> jazyka Small Basic s instalátorem, online
+		prostředím a tutoriály v anglickém jazyce,<br />
+		a také <a href="https://social.technet.microsoft.com/wiki/contents/articles/23583.small-basic-reference-documentation.aspx" target="_blank"> oficiální dokumentace</a>
+		jazyka Small Basic - také v anglickém jazyce.
+	</p>
+	<p>
+		Seriál ČT :D  <a href="https://decko.ceskatelevize.cz/datova-lhota" target="_blank">Datová Lhota</a>.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 1 - 17. ledna</h3>
+<button class="collapsible" id="lesson1src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/01 Hello World.sb">01 Ahoj světe</a></li>
+			<li><a href="sbzdrojaky/02 Variables.sb">02 Proměnné</a></li>
+			<li><a href="sbzdrojaky/03 Conditions.sb">03 Podmínky</a></li>
+			<li><a href="sbzdrojaky/04 Calculator.sb">04 Kalkulačka</a></li>
+			<li><a href="sbzdrojaky/05 Loops.sb">05 Smyčky</a></li>
+			<li><a href="sbzdrojaky/NaDoma01.sb">Úkol na doma číslo 1</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson2about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#basics">Proměnné - text a čísla</a></li>
+			<li><a href="#basics">Komentáře a Intellisense</a></li>
+			<li><a href="#basics">Výrazy - kombinování hodnot a proměnných</a></li>
+			<li><a href="#textwindow">Textové okno</a></li>
+			<li><a href="#if">Řídicí stuktura <code class="sb-keyword">If <span class="sb-funcProp">...</span> Then - ElseIf <span class="sb-funcProp">...</span> Then - Else - EndIf</code></a></li>
+		</ul>
+	</p>
+	<p>
+		Prošli jsme úplný úvod k programování. Jak se zachází s IDE a co kde najít na klávesnici. 
+		Hello world, co dělá kód a základy práce s textovým oknem - objekt <code class="sb-object">TextWindow</code>. Počítání s čísly a 
+		"sčítání textu" - tedy lepení textu za sebe. Nakousli jsme podmínky a ukázali jsme si kalkulačku.
+	</p>
+	<p>
+		Naučili jsme se, co je to komentář a k čemu slouží v kódu. Naučili jsme se, co je to proměnná, jak ji pojmenovat a použít jako součást výrazů.
+		Viděli jsme poprvé Small Basicový objekt a zavolali na něm nějaké příkazy.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 2 - 24. ledna</h3>
+<button class="collapsible" id="lesson2src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/05 Loops.sb">05 Smyčky</a></li>
+			<li><a href="sbzdrojaky/06 Calculator.sb">06 Lepší Kalkulačka</a></li>
+			<li><a href="sbzdrojaky/07 Turtle.sb">07 Želva</a></li>
+			<li><a href="sbzdrojaky/NaDoma02.sb">Úkol na doma číslo 2</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson2about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#while">Řídicí stuktura <code class="sb-keyword">While <span class="sb-funcProp">...</span> - EndWhile</code></a></li>
+			<li><a href="#for">Řídicí stuktura <code class="sb-keyword">For <span class="sb-funcProp">...</span> To <span class="sb-funcProp">...</span> Step - EndFor</code></a></li>
+			<li><a href="#graphicswindow">Grafické okno</a></li>
+			<li><a href="#turtle">Želva</a></li>
+		</ul>
+	</p>
+	<p>
+		Prošli jsme smyčky, a díky smyčce jsme vylepšili kalkulačku, která teď umí počítat dokola. Také jsme nakousli grafické okno a kreslení želví grafiky do něj.
+		Poprvé jsme viděli koncept vlastnosti, tedy speciální proměnné na objektu značené v nápovědě paletou místo pastelky.
+	</p>	
+</div>
+
+<br />
+
+<h3>Lekce 3 - 31. ledna</h3>
+<button class="collapsible" id="lesson3about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#turtle">Želva - dokončení</a></li>
+		</ul>
+	</p>
+	<p>
+		Dokončili jsme želvu. Probrali jsme přímé pohybování přes <code class="sb-funcProp">Move()</code> a <code class="sb-funcProp">Turn()</code>,
+		ukázali si spirálu a tím procvičili smyčky. Jelikož je konec pololetí, nové téma jsme nezačali, ani jsme nedávali další úkol na doma.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 4 - 14. února</h3>
+<button class="collapsible" id="lesson4src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/08 Checkerboard.sb">08 Šachovnice</a></li>
+			<li><a href="sbzdrojaky/09 SubroutinesEvents.sb">09 Subrutiny a události</a></li>
+			<li><a href="sbzdrojaky/10 Paint.sb">10 Malování</a></li>
+			<li><a href="sbzdrojaky/NaDoma03.sb">Úkol na doma číslo 3</a></li>
+			<li><a href="sbzdrojaky/NaDoma03 solution.sb">Úkol na doma číslo 3 - naše řešení</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson4about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#sub">Řídicí stuktura <code class="sb-keyword">Sub - EndSub</code></a></li>
+			<li><a href="#graphicsdrawing">Grafické okno - kreslení úseček</a></li>
+			<li><a href="#events">Události</a></li>
+		</ul>
+	</p>
+	<p>
+		Na začátku lekce jsme trénovali programátorské dovednosti na příkladu se šachovnicí. V podobném duchu se točí
+		úkol na doma - a je, myslíme, jednodušší, než samotná šachovnice.<br />
+		Dále jsme se začali věnovat kreslení úseček přímo pomocí objektu grafického okna, a začali si psát vlastní malování.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 5 - 21. února</h3>
+<button class="collapsible" id="lesson5src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/11 Paint.sb">11 Malování</a></li>
+			<li><a href="sbzdrojaky/12 Paint.sb">12 Malování (a jakýsi úkol na doma!)</a></li>
+			<li><a href="sbzdrojaky/13 Paint.sb">13 Myš</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson5about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#mouse">Objekt <code class="sb-object">Mouse</code></a></li>
+			<li><a href="#graphicswindow">Grafické okno - Myšové události</a></li>
+			<li><a href="#graphicsdrawing">Barvy v grafickém okně</a></li>
+		</ul>
+	</p>
+	<p>
+		Domluvili jsme se, že do příště zkusíte ještě mrknout na úkol na doma č.3, viz minulá lekce. Úkol na příště je podívat se na poslední verzi Malování a pochopit, jak
+		se do ní dodělalo gumování pomocí pravého tlačítka myši.
+	</p>
+	<p>
+		Probrali jsme si Malování, myšové události Grafického okna a samotný objekt Mouse reprezentující Myš. Sám o sobě toho moc neumí, protože nejdůležitější je myš při
+		ovládání aplikace s Grafickým oknem, které nám poskytne souřadnice myši vůči sobě, a také myšové události. Objekt myš nám ale poví stav tlačítek, to je to hlavní.
+		Naučili jsme se práci s barvami, je to celkem jednoduché. <a href="SBBarvy.html">TADY JE PŘEHLED VŠECH BAREV</a> - s překladem, jinak je to seznam z oficiální 
+		webové stránky Microsoftu. <br />
+		Barvu nastavujeme pozadí a peru, příště si ukážeme ještě štetec.
+	</p>
+	<p>
+		A znovu jsme se mrkli na komentáře, k čemu v kódu slouží a jak je psát.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 6 - 28. února</h3>
+<button class="collapsible" id="lesson6src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/14 Shapes.sb">14 Tvary</a></li>
+			<li><a href="sbzdrojaky/15 Clouds.sb">15 Mraky</a></li>
+			<li><a href="sbzdrojaky/16a ScreenSaver.sb">16a Animovaný tvar</a></li>
+			<li><a href="sbzdrojaky/16b ScreenSaver.sb">16b Animovaný tvar</a></li>
+			<li><a href="sbzdrojaky/17 Paddlegame.sb">17 Hra odrážení míčku</a></li>
+			<li><a href="sbzdrojaky/NaDoma04.sb">Úkol na doma číslo 4</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson6about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#graphicsdrawing">Grafické okno - kreslení a vybarvování tvarů</a></li>
+			<li><a href="#shapes">Objekt Shapes</a></li>
+		</ul>
+	</p>
+	<p>
+		Podívali jsme se na kreslení geometrických útvarů. Zopakovali jsme barvy a souřadný systém. Zkoušeli jsme tvary animovat.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 7 - 14. března</h3>
+<button class="collapsible" id="lesson7src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/18a ConcurrenceBad.sb">18a kreslení želvou špatné konkurenčně</a></li>
+			<li><a href="sbzdrojaky/18b ConcurrenceBad.sb">18b šrafování želvou špatné konkurenčně</a></li>
+			<li><a href="sbzdrojaky/19a ConcurrenceGood.sb">19a kreslení želvou funční</a></li>
+			<li><a href="sbzdrojaky/19b ConcurrenceGood.sb">19b šrafování želvou funkční</a></li>
+			<li><a href="sbzdrojaky/NaDoma04.sb">Úkol na doma číslo 4</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson7about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li>Konkurence</li>
+			<li><a href="#gameloop">Herní smyčka</a></li>
+			<li><a href="#shapes">Objekt <code class="sb-object">Shapes</code> - další funkce</a></li>
+		</ul>
+	</p>
+	<p>
+		Na začátku jsme diskutovali o významu slova konkurence, a hlavně jaký význam má ve světě programování. V reálném programátorství má dalekosáhlý
+		význam, protože provází celé odvětví tzv. asynchonního programování. Toho se zlehka dotýká i programování ve Small Basicu díky událostem.
+		Shrnutí našich poznatků na téma konkurence je u událostí uvedeno.
+	</p>
+	<p>
+		Probrali jsme téma - herní smyčka. To nám zabralo většinu kroužku, ve zbytku lekce jsme se ještě mrkli na objekt <code class="sb-object">Shapes</code>, konkrétně
+		na příkazy <code class="sb-funcProp">HideShape(...)</code> a <code class="sb-funcProp">ShowShape(...)</code>, <code class="sb-funcProp">Rotate(...)</code>,
+		<code class="sb-funcProp">Zoom(...)</code> a <code class="sb-funcProp">SetOpacity(...)</code>. A také jsme si řekli o speciální barvě
+		<code class="sb-value">"Transparent"</code>, která nám umí udělat průhledný štětec či pero, abychom měli útvary objektu <code class="sb-object">Shapes</code>
+		jen rámeček či jen výplň.
+	</p>
+	<p>
+		To vše by se vám mohlo hodit na řešení úkolu č. 4, chceme po vás jen, ať si "pohrajete s tvary" a vyrobíte nějaký obrázek. Víc toho není a vyzkoušíte si důležitou věc.
+		Vzhledem k tomu, že úkol na dnešek nikdo nedonesl, dáme vám na něj ještě týden.
+	</p>
+	<p>
+		Co se týče tématu herní smyčky, ještě se k němu určitě vrátíme. Představená hra je možná (programátorsky) složitá, takže třeba ještě na závěrečný program vymyslíme
+		nějakou jednodušší, to se však ještě dohodneme.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 8 - 21. března</h3>
+<button class="collapsible" id="lesson8src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/20 Text.sb">20 Text</a></li>
+			<li><a href="sbzdrojaky/21 Controls.sb">21 Controls</a></li>
+			<li><a href="sbzdrojaky/22 Calculator.sb">22 Kalkulačka pomocí Controls - a úkol na doma</a></li>
+			<li><a href="sbzdrojaky/23 PlusMinus.sb">23 Tlačítko + a -</a></li>
+			<li><a href="sbzdrojaky/NaDoma04.sb">Úkol na doma číslo 4 - naposledy!</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson8about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#text">Práce s textem pomocí objektu <code class="sb-object">Text</code></a></li>
+			<li><a href="#controls">Objekt <code class="sb-object">Controls</code></a></li>
+		</ul>
+	</p>
+	<p>
+		Probrali jsme, jak je v počítači uložen text (jednotlivé znaky - písmena, číslice, tečky, čárky apod. jsou uloženy za sebou v paměti).
+		S textem pak umíme pracovat, máme k tomu příkazy na objektu <code class="sb-object">Text</code>, které nám v tom pomohou. Vždycky 
+		musíme pracovat po jednotlivých znacích (písmenkách).<br />
+		K tomu jsme se na chvíli pobavili, jak pracuje počítač a srovnání s člověkem, a to, jak dělá chyby člověk a jak počítač. A jak počítač
+		vnímá text a proč je práce s ním taková podivná a "matematická".
+	</p>
+	<p>
+		Dále jsme probrali objekt <code class="sb-object">Controls</code>. Pracuje se s ním podobně, jako se <code class="sb-object">Shapes</code>,
+		jen nám nereprezentuje geometrické útvary, ale tzv. "kontrolky", neboli interaktivní prvky, se kterými může uživatel interagovat. Jedná se
+		o tlačítka (Buttony) a textová pole (TextBoxy). Tlačítka mohou mít na sobě text a uživatel je může mačkat levým tlačítkem myši, textová pole
+		text obsahují, může jej do nich napsat uživatel pomocí klávesnice, a můžeme jej do nich vkládat i programátorsky.
+	</p>
+	<p>
+		Samozřejmě jsme pracovali s grafickým oknem, připomněli jsme příkaz <code class="sb-funcProp">ShowMessage(...)</code>, který uživateli ukáže
+		informační okénko se zprávou, které musí napřed odkliknout, než může dál pracovat s hlavním oknem.
+	</p>
+	<p>
+		Na závěr jsme se domluvili, že vám opět dáme ještě týden na to donést nějaký ten obrázek v rámci úkolu na doma číslo 4. Zároveň zadáváme 
+		úkol č. 5 - ten je určitě na příště. Publikovali jsme kód kalkulačky pomocí <code class="sb-object">Controls</code>, a vaším úkolem je si jej
+		stáhnout a pochopit, jak pracuje. Měly by k tomu stačit znalosti z dnešního kroužku. Ideální by samozřejmě bylo, abyste si kalkulačku 
+		(nebo podobnou aplikaci) vytvořili samostatně, ale nechceme to dávat za úkol. Kdo by se do toho pustil, odměna ho nemine :)
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 9 - 28. března</h3>
+<button class="collapsible" id="lesson9src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/24 TextGraphics.sb">24 Práce s textem na Grafickém okně</a></li>
+			<li><a href="sbzdrojaky/25 TextStyles.sb">25 Stylování textu</a></li>
+			<li><a href="sbzdrojaky/26 ControlStyles.sb">26 Stylování ovládacích prvků</a></li>
+			<li><a href="sbzdrojaky/27 Array.sb">27 Pole - úvod</a></li>
+			<li><a href="sbzdrojaky/NaDoma05.sb">Úkol na doma číslo 5</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson9about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#graphicswindow">Práce s textem v Grafickém okně</a></li>
+			<li><a href="#shapes">Práce s textem jako tvar</a></li>
+			<li><a href="#controls">Práce s textem v ovládacích prvcích</a></li>
+			<li><a href="#arrays">Pole - úvod</a></li>
+		</ul>
+	</p>
+	<p>
+		Kompletně jsme ukázali práci s textem v grafickém okně. Text může vykreslovat Grafické okno a máme také 
+		tvar text, kterému můžeme nastavovat text i po vytvoření, takže je programátorsky interaktivní, a stojí tak
+		na pomezí mezi útvarem a ovládacím prvkem. Jinak se dá samozřejmě ovládat stejně, jako všechny ostatní útvary
+		objektu <code class="sb-object">Shapes</code>. Dále máme k dispozici text v TextBoxech objektu 
+		<code class="sb-object">Controls</code>, který nám může měnit i uživatel.
+	</p>
+	<p>
+		Druhá část práce s textem je ostylovat ho. Probrali jsme, že styl textu nám řídí vlastnosti grafického okna,
+		je možné nastavit barvu, jakým písmem je text napsán (tzv. řez písma), jak je text velký, a jestli má být text
+		tučný či našikmený (tzv. kurzíva neboli italika). Tyto styly se aplikují na text vykreslované oknem, na textový
+		útvar, TextBoxy a také tlačítka objektu <code class="sb-object">Controls</code>!
+	</p>
+	<p>
+		Na konci hodiny jsme začali práci s polem, podrobněji příště.
+	</p>
+	<p>
+		Byl zadán také pátý úkol na doma, a je trochu podobný tomu čtvrtému, s využitím znalostí o kreslení textu z dneška,
+		takže věříme, že se vám bude dařit!
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 10 - 4. dubna</h3>
+<button class="collapsible" id="lesson10src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/28 Images.sb">28 Práce s obrázky na Grafickém okně</a><br />
+			<a href="mona lisa.png">Obrázek mona lisa.png - stáhněte a vložte do složky s příkladem 28, jinak nefunguje</a><br />
+			<a href="grass.webp">grass.webp</a>, <a href="dirt.webp">dirt.webp</a> a <a href="stone.webp">stone.webp</a> - můžete si také stáhnout (viz sekce 39)</li>
+			<li><a href="sbzdrojaky/29 Sound.sb">29 Objekt Sound</a><br />
+			<a href="Trombon.wav">Zvuk Trombon.wav - stáhněte a vložte do složky s příkladem 29, jinak nefunguje</a></li>
+			<li><a href="sbzdrojaky/30 Array.sb">30 Pole - praktická ukázka</a></li>
+			<li><a href="sbzdrojaky/31 Clock.sb">31 Objekt Clock - a úkol na doma - důležitý!</a></li>
+			<li><a href="sbzdrojaky/NaDoma05.sb">Úkol na doma číslo 5</a></li>
+			<li><a href="sbzdrojaky/NaDoma06.sb">Úkol na doma číslo 6 - zcela bonusový :)</a></li>
+		</ul>
+	</p>
+</div>
+<button class="collapsible" id="lesson10about">Probraná témata</button>
+<div class="collapsible-content">
+	<p>
+		<ul>
+			<li><a href="#images">Práce s obrázky na <code class="sb-object">GraphicsWindow</code></a> + <a href="#shapes">jako tvar objektu <code class="sb-object">Shapes</code></a></li>
+			<li><a href="#sound">Přehrávání zvuků - objekt <code class="sb-object">Sound</code></a></li>
+			<li><a href="#arrays">Pole - ukázky použití - v našem řešení úkolu 5 a počítání průměru známek</a></li>
+		</ul>
+	</p>
+	<p>
+		Úkol na doma č.5 jsem minule zapomněl nahrát na internet, takže na něj máte ještě týden.<br />Dalším úkolem je
+		podívat se na objekt <code class="sb-object">Clock</code> a práci s časem, posloužit by k tomu měl ukázkový kód 31.
+		Tak na to, prosím, nezapomeňte :) Zadáváme i úkol č. 6, který je ale zcela navíc - jedná se o úkol na procvičení polí.
+	</p>
+	<p>
+		Kompletně jsme ukázali práci s obrázky v grafickém okně. Obrázky lze vykreslovat přímo Grafickým oknem,
+		nebo jako útvar objektu <code class="sb-object">Shapes</code>. Práce je trochu rozdílná, u grafického okna buď vykreslíme přímo,
+		nebo obrázku dáme jinou velikost. Pokud přitom nechceme, aby se obrázek zplácnul či roztáhl, použijeme výpočet poměru stran,
+		a rozměry dopočítáme (chceme-li mít danou šířku, vydělíme ji poměrem a máme výšku. Chceme-li mít danou výšku, vynásobíme ji 
+		poměrem a máme šířku). Pokud vykreslovaný obrázek použijeme více, než jednou, nejprve ho načteme do objektu <code class="sb-object">ImageList</code>.
+	</p>
+	<p>
+		Dále jsme si ukazovali objekt <code class="sb-object">Sound</code>, který umožňuje přehrávat zvuky. Zvuky přehráváme jako "Play", pak příkaz okamžitě
+		končí (podobně, jako <code class="sb-funcProp"><span class="sb-object">Shapes</span>.Animate(...)</code>) a můžeme dělat další kód, zatímco zvuk hraje.
+		Nebo lze použít variantu "PlayAndWait", pak se na příkazu čeká, než zvuk dohraje. Pomocí <code class="sb-funcProp">PlayMusic(...)</code> lze přehrávat
+		piánové skladby jedním prstem zapsané v textovém formátu. Podívejte se do dokumentace níže, je to tam popsáno a hlavně tam najdete ukázkový program.
+	</p>
+	<p>
+		Na konci hodiny jsme ukázali podrobněji práci s polem. Ne všechno jsme stíhali, pole toho umí daleko více, než jsme ukazovali, takže se určitě podívejte
+		na ukázkový zdrojový kód 30, kde je vše vidět. Také je to popsáno v dokumentaci, plus připravíme dolů do sekce doplňujících poznatků povídání o objektu
+		<code class="sb-object">Array</code>, který umožňuje dělat s polem ještě daleko pokročilejší věci. 
+	</p>
+	<p>
+		DOKUMENTACE ZA TUTO A MINULÉ DVĚ LEKCE NENÍ BOHUŽEL JEŠTĚ DOPLNĚNA, ALE VŠE BY SNAD MĚLO JÍT POCHOPIT Z UKÁZKOVÝCH ZDROJOVÝCH
+		KÓDŮ. OMLOUVÁM SE ZA NEPŘÍJEMNOSTI, ALE MÁM BOHUŽEL NÁROČNÝ TÝDEN A NESTÍHÁM. -Kryštof <br /> 
+		Doplněno - Pole, Objekt Program, Částečně objekt Sound<br/>
+		Bude doplněno - Objekt Controls, Vykreslování textu, Objekt Text, Vykreslování obrázků a Objekt ImageList, Zbytek Objektu sound, Objekt Clock, pokročilejší
+		práce s objektem Text do sekce doplňujcích poznatků.
+	</p>
+</div>
+
+<br />
+
+<h3>Lekce 11 - 11. dubna</h3>
+<button class="collapsible" id="lesson10src">Zdrojové kódy</button>
+<div class="collapsible-content">
+	<p>Soubory se zdrojovým kódem ke stažení:
+		<ul>
+			<li><a href="sbzdrojaky/zaver.zip">ZADÁNÍ FINÁLE</a><br />
+		</ul>
+	</p>
+</div>
+
+
+<hr />
+
+
+<h2 id="documentation">Probraná témata - Miniaturní dokumentace</h2>
+<h3>Jak se programuje ve Small Basicu</h3>
+<button class="collapsible" id="basics">Základní principy</button>
+<div class="collapsible-content">
+	<p>
+		<p>
+			Komentář v kódu napíšeme za znak apostrof: <code class="sb-var">a <span class="sb-funcProp">=</span> <span class="sb-value">1</span><span class="sb-comment">'zápis 1 do proměnné a</span></code><br />
+			Objekty, jejich příkazy, řídicí struktury a jména proměnných nám program napovídá (tomu se říká Intellisense) - vyvoláme
+			jej stiskem <kbd>Ctrl</kbd> + <kbd>Mezerník</kbd>. Listovat v něm můžeme šipkami, vložení nalistovaného kódu provedeme pomocí <kbd>Enter</kbd>. Také nám vyskakuje, když něco píšeme,
+			a napovídá podle toho, co jsme již napsali. Nemusíme tedy písmenko po písmenku vypisovat příkaz celý, ale napovídané části si nechat doplnit. Velmi to šetří čas strávený psaním kódu, 
+			tak si na to zkuste zvyknout.
+		</p>
+		<p>
+			Proměnná je jakýsi šuplíček, který nám uchovává hodnotu - číslo nebo text. Šuplíček má své jméno, díky kterému do něj můžeme kdykoli nakouknout (čtení hodnoty proměnné)
+			nebo do něj vložit nový obsah (přiřazení hodnoty do proměnné). Pokud do nějakého výrazu (viz dále<br />
+			Text zapíšeme mezi uvozovky - <code class="sb-value">"textová hodnota"</code>. Pokud bychom na to zapomněli, Small Basic by za naším textem hledal názvy proměnných.
+			Desetinná čísla nepíšeme s čárkou, ale s tečkou! Tedy <code class="sb-var">jednaPolovina = </code><code class="sb-value">0.5</code><br />
+			Domluvili jsme se, že pro přehlednost budeme proměnné pojmenovávat s malým písmenkem na začátku. Název může být český, ale neměl by nikdy
+			obsahovat diakritiku! (háčky a čárky)<br />
+			Spávná jména jsou tedy <code class="sb-var">promenna</code>, <code class="sb-var">a</code>, <code class="sb-var">cislo1</code>, <code class="sb-var">pocetKilometru</code>
+		</p>
+		<p>
+			Kód v jazyce SmallBasic se vykonává řádek po řádku. Přeskakují se prázdné řádky a Komentáře - ty nám editor
+			vykresluje <span class="sb-comment">zeleně a kurzívou</span>. Vše ostatní je kód.<br />
+			Kód na daném řádku má několik podob:
+			<ul>
+				<li>
+					Uložení do proměnné - že se do nějaké proměnné uloží hodnota.
+					Proměnné nám editor vykresluje <span class="sb-var">černě</span>, hodnoty <span class="sb-value">oranžově</span>. Uložení hodnoty se dělá pomocí
+					<code class="sb-funcProp">=</code> rovná se. V nápovědním panelu je proměnná značena symbolem pastelky. Jedná-li se o proměnnou, která patří nějakému
+					objektu, mluvíme o ní jako o "Vlastnosti" daného objektu, jinak se s ní ale pracuje stejně. V nápovědním panelu má symbol malířské palety.<br />
+					Za rovná se přijde nějaký "výraz". Buďto zavolání příkazu na objektu (viz další bod), které nám vrátí nějakou hodnotu,
+					nebo nějaký výpočet (viz poslední odstavec). Výsledek volání příkazu či výpočtu se pak uloží do proměnné.
+				</li>
+				<li>
+					Zavolání příkazu na objektu. Objektem je kupříkladu první potkaný <code class="sb-object">TextWindow</code>. Název objektu nám editor
+					vykresluje <span class="sb-object">tmavě tyrkysově</span>, v nápovědnám panelu je značen symbolem oranžové krabice. <br />
+					Příkaz pak napíšeme za název objektu odděleném tečkou, následují kulaté závorky.
+					Příkaz včetně závorek editor vykresluje <span class="sb-funcProp">tmavě červenou</span>. V nápovědě má příkaz symbol ozubeného kolečka.<br />
+					Některé příkazy potřebují napsat do závorek takzvaný parametr - ten můžeme napsat buď jako hodnotu nebo název proměnné, jejíž obsah se v příkazu
+					použije. Kupříkladu vypsání textu do textového okna jsme provedli pomocí řádku
+					<code class="sb-object">TextWindow<span class="sb-funcProp">.WriteLine(<span class="sb-value">"Ahoj, světě!"</span>)</span></code>.
+					Tedy jsme napsali <span class="sb-object">název_objektu</span> tečka <span class="sb-funcProp">název_příkazu</span>
+					otevírací_kulatá_závorka <span class="sb-value">hodnota_parametru</span> zavírací_kulatá_závorka. <br />
+					I když příkaz žádnou hodnotu nepotřebuje, pořád k němu musíme napsat prázdné závorky! 
+				</li>
+				<li>
+					Použití řídicí struktury. Příkladem je podmínka <code class="sb-keyword">If</code>. Editor nám klíčová slova, která strukturu
+					tvoří, vykresluje <span class="sb-keyword">tučně fialově</span>. 
+					Všechny struktury mají ukončovací klíčové slovo, které začíná <code class="sb-keyword">End</code>, například <code class="sb-keyword">EndIf</code>.<br />
+					A protože se jedná o slova "klíčová", v nápovědním panelu mají symbol svazku klíčů.
+				</li>
+				<li>
+					Zavolání vlastního příkazu - podprogramu. Podprogram, neboli subrutinu, kterou si vytvoříme použitím řídicí struktury <code class="sb-keyword">Sub</code> zavoláme
+					úplně stejně, jako příkaz objektu - pomocí názvu a kulatých závorek. Naše podprogramy nemají žádné parametry, takže závorky zůstanou vždy prázdné. Navíc název
+					podprogramu zůstane vykreslen černou barvou.
+				</li>
+				<li>
+					Uložení obsluhy do události. Událost se chová jako speciální proměnná na objektu, který ji poskytuje. Přes <code class="sb-funcProp">=</code> rovná se do ní můžeme
+					vložit hodnotu, ale touto hodnotou je název subrutiny, jež má sloužit jako obsluha události. Pozor - název nepíšeme do <code class="sb-value">""</code> uvozovek,
+					ani za něj nepíšeme závorky - není to totiž ani textová hodnota, ani se podprogram nesnažíme volat. 
+				</li>
+			</ul>
+		</p>
+		<p>
+			Ještě jednou se podíváme na místa, kde do kódu vstupuje hodnota (text či číslo) nebo proměnná/vlastnost. Ta místa jsou přiřazení do proměnné/vlastnosti nebo parametr příkazu.
+			Kromě toho, že tam dáme přímo jednu hodnotu nebo jedno jméno proměnné, můžeme jich tam dát více, a spojit pomocí operátorů. 
+			To znamená, že do té proměnné nebo parametru doputuje výsledek, který ten operátor spočítá. <br />
+			Když máme text, zajímá nás operátor plus <code class="sb-funcProp">+</code>. Ten jednoduše spojí texty k sobě, přilepí je za sebe. Tomu se někdy říká konkatenace.<br />
+			Když máme čísla, máme k dispozici plus, mínus, krát a děleno <code class="sb-funcProp">+, -, *, /</code>, a ty prostě počítají s čísly, jsou to běžné početní operace.<br />
+			<em>Složitější početní operace jsou k dispozici jako příkazy objektu <code class="sb-object">Math</code> ("matematika").</em>			
+		</p>
+	</p>
+</div>
+<button class="collapsible" id="arrays">Pole - speciální typ proměnné</button>
+<div class="collapsible-content">
+	<p>
+		Kromě klasických proměnných lze použít také pole. Jako jsme proměnné přirovnali k šuplíku, který je pojmenovaný, a lze do něj něco uložit, tak pole
+		je pojmenovaná Skříň s takovýmito šuplíky. A těch šuplíků v ní může být, kolik chce. Pokud máme nějakou prázdnou proměnnou (obsahuje hodnotu
+		<code class="sb-value">""</code>), je to vlastně zároveň pole, které neobsahuje žádné věci.
+	</p>
+	<p>
+		Jak tedy "do skříně" (do pole) přistupujeme? Dělá se to přes hranaté závorky, do kterých napíšeme tzv. "index", což je hodnota, obvykle tedy číslo,
+		pod kterým si v rámci pole pamatujeme hodnotu.
+		Například <code class="sb-funcProp"><span class="sb-var">poleCisel[<span class="sb-value">1</span>]</span> = <span class="sb-value">23</span></code>
+		je uložení čísla 23 na pozici "1" do pole jménem "poleCisel". 
+	</p>
+	<p>
+		K čemu je to dobré? Najednou nepotřebujeme hromadu proměnných na to, abychom si pamatovali větší množství dat. Navíc, všechny proměnné jsou napevno
+		zadrátovány ve zdrojovém kódu, a není možné "programátorsky" jejich počet změnit. Pole máme jen jedno, a jeho velikost přizpůsobíme podle toho,
+		na jaké indexy ("do jakých hodnot") něco uložíme. Typicky se to dělá tak, že si ve druhé proměnné pamatujeme počet prvků pole. Dokud tam žádné prvky nejsou,
+		má proměnná hodnotu <code class="sb-value">0</code>. Pokud potřebujeme přidat prvek, zvýšíme proměnnou o 1 a na index, který má hodnotu této proměnné,
+		zapíšeme přidávaný prvek. Tímpádem nám proměnná zároveň ukazuje, jaký je nejvyšší index, kde něco najdeme. 
+	</p>
+	<p>
+		Pole se například velmi jednoduše snoubí se smyčkou <code class="sb-keyword">For</code>. Můžeme snadno projet všechny prvky jako
+		<code class="sb-funcProp"><span class="sb-keyword">For</span> <span class="sb-var">i</span> = <span class="sb-value">1</span>
+		<span class="sb-keyword">To</span> <span class="sb-var">pocetPrvku</span>   ...<span class="sb-var">pole[i]</span>...</code><br/>
+		Případně můžeme podobným způsobem pole naplnit prvky.
+	</p>
+	<br/>
+	<p>
+		Indexovat nemusíme jen čísli. Dá se to dělat i textovou hodnotou. Můžeme tak vytvořit třeba pole barev, které chceme v programu na něco používat,
+		a indexovat je kupříkladu hodnotami <code class="sb-var">[<span class="sb-value">"barvaPozadi"</span>]</code>,
+		<code class="sb-var">[<span class="sb-value">"barvaTextu"</span>]</code>, <code class="sb-var">[<span class="sb-value">"zvyraznovaciBarva"</span>]</code> atd. 
+	</p>
+	<p>
+		Další možnost, jak to využít, je uchovávat si v poli nějaké údaje, která souvisí. Například o uživateli, a indexovat pole hodnotami
+		<code class="sb-var">[<span class="sb-value">"jmeno"</span>]</code>, <code class="sb-var">[<span class="sb-value">"prijmeni"</span>]</code>,
+		<code class="sb-var">[<span class="sb-value">"heslo"</span>]</code>, <code class="sb-var">[<span class="sb-value">"datumNarozeni"</span>]</code>,
+		<code class="sb-var">[<span class="sb-value">"telefon"</span>]</code>, <code class="sb-var">[<span class="sb-value">"email"</span>]</code> atd.
+	</p>
+	<p>
+		A poslední možnost je vyrobit tímto způsobem nějaké "mapování", kupříkladu písmena abecedy na písmena v Morseovce:<br />
+		<code class="sb-var">morseovka[<span class="sb-value">"a"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">".-"</span></code><br />
+		<code class="sb-var">morseovka[<span class="sb-value">"b"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"-..."</span></code><br />
+		<code class="sb-var">morseovka[<span class="sb-value">"c"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"-.-."</span></code><br />
+		a tak dále.
+	</p>
+	<br/>
+	<p>
+		A pak je hodně užitečná ještě jedna věc - nemusí to zůstat jen u skříně se šuplíky. Můžeme totiž dělat tzv. vícerozměrná pole. Normální pole, o kterém jsme
+		mluvili doteď, je "jednorozměrné", má jedny hranaté závorky a je to skříň se šuplíky. Ovšem i skříň můžeme vložit do pole, a uděláme tak sklad s více 
+		skříněmi. Takové pole má hranaté závorky dvoje (prvními vyberu skříň, druhými šuplík ve skříni), takže je "dvojrozměrné". Dále jde udělat pole 
+		"trojrozměrné", to je skladiště, které má více skladů, které mají skříně, které mají šuplíky. Čtyřrozměrné pole je průmyslová zóna, která má vícero
+		skladišť, které mají sklady, které mají skříně, které mají šuplíky. Těch rozměrů si můžeme vymyslet libovolné množství. 
+	</p>
+	<p>
+		Jednoduše si tak můžeme vytvořit například seznam více uživatelů: <em>(ty jména a maily jsme si vymysleli)</em>
+		<code class="sb-var">uzivatele[<span class="sb-value">"karel"</span>][<span class="sb-value">"jmeno"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"Karel"</span></code><br />
+		<code class="sb-var">uzivatele[<span class="sb-value">"karel"</span>][<span class="sb-value">"prijmeni"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"Novotný"</span></code><br />
+		<code class="sb-var">uzivatele[<span class="sb-value">"karel"</span>][<span class="sb-value">"email"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"novotny.kaja@seznam.cz"</span></code><br />
+		<code class="sb-var">uzivatele[<span class="sb-value">"pepa"</span>][<span class="sb-value">"jmeno"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"Josef"</span></code><br />
+		<code class="sb-var">uzivatele[<span class="sb-value">"pepa"</span>][<span class="sb-value">"prijmeni"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"Král"</span></code><br />
+		<code class="sb-var">uzivatele[<span class="sb-value">"pepa"</span>][<span class="sb-value">"email"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"kraljosef@gmail.com"</span></code><br />
+		<br />
+		a nebo už třeba nějakého uživatele máme<br />
+		<code class="sb-var">eliska[<span class="sb-value">"jmeno"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"Eliška"</span></code><br />
+		<code class="sb-var">eliska[<span class="sb-value">"prijmeni"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"Spurná"</span></code><br />
+		<code class="sb-var">eliska[<span class="sb-value">"email"</span>] <span class="sb-funcProp">=</span> <span class="sb-value">"elis.spurna@seznam.cz"</span></code><br />
+		<br />
+		tak ho můžeme rovnou zařadit do seznamu<br />
+		<code class="sb-var">uzivatele[<span class="sb-value">"eliška"</span>] <span class="sb-funcProp">=</span> eliska</code><br />
+	</p>
+	<p>
+		Další využití je, že například můžeme reprezentovat nějakou tabulku, která má řádky a sloupce, což je přirozeně dvourozměrné pole. Jednu takovou "tabulku" dobře známe,
+		je to grafické okno. To je v podstatě (můžete si ho tak představit) dvourozměrné pole, indexované pozicemi x a y, obsahující barvy pro jednotlivé pixely. Pokud bychom
+		třeba dělali nějakou hru s bludištěm, také bychom si bludiště ukládali do takové dvourozměrné tabulky.
+	</p>
+</div>
+
+<br />
+
+<h3>Řídicí struktury</h3>
+<button class="collapsible" id="blocks"></button>
+<div class="collapsible-content">
+	<p>
+		Řídicí struktury nám narušují to, co jinak platí - že kód se čte řádek po řádku a vykonává se přesně v pořadí, jak je napsán.
+		Je to také to, co nám odlišuje kalkulačku od počítače - Kalkulačka jen počítá, jak ji přikazujeme. Počítač je mocnější,
+		někdy se může rozhodnout vykonat nějaký kus kódu mimo hlavní pořadí.
+	</p>
+	<p>
+		Struktura tedy vždy obaluje nějaký kus kódu (několik "výkonných" řádků), a ten se pak vykoná podle toho, jak to daná struktura určí.
+		Říkáme tak, že struktura "obsahuje" nějaký kód, a jeho vykonání se řídí strukturou, ve které je obsažen.
+		Proto jsou ty struktury "řídicí" - řídí nám tok programu z hlediska kódu, který obsahují.
+	</p>
+	<p>
+		Každá struktura má tedy svůj začátek a konec. Začátek nám značí "otevírací klíčové slovo", což je název struktury. Konec je značen
+		"zavíracím klíčovým slovem", což je "End" plus název struktury.
+	</p>
+	<p>
+		Mezi řádky s těmito klíčovými slovy pak píšeme samotný kód, který struktura obsahuje. Je vhodné oddělit tento kód mezerami od levého 
+		okraje, aby byl opticky skřípnut mezi klíčovými slovy, a bylo tak na první pohled viditelné členění našeho kódu.
+	</p>
+</div>
+
+<button class="collapsible" id="if">Řídicí struktura If - podmínka</button>
+<div class="collapsible-content">
+	<p> -> napíše se pomocí klíčových slov <code class="sb-keyword">If <span class="sb-funcProp">...</span> Then</code> a <code class="sb-keyword">EndIf</code></p>
+	<p>
+		Rozděluje kód na část, která se vykoná jen, když platí nějaká podmínka.<br />
+		Podmínku vytvoříme tak, že porovnáme proměnnou a hodnotu nebo dvě proměnné. (Nebo dvě hodnoty, ale to není moc užitečné)
+		Porovnávat můžeme pomocí těchto operátorů:
+		<ul>
+			<li><code class="sb-funcProp">=  </code>rovná se - platí, když jsou srovnávané věci stejné</li>
+			<li><code class="sb-funcProp">&lt; </code>menší než - platí, když je levá věc menší, než pravá</li>
+			<li><code class="sb-funcProp">&gt; </code>větší než - platí, když je levá věc větší, než pravá</li>
+			<li><code class="sb-funcProp">&lt;= </code>menší rovno - platí, když je levá věc menší, než pravá, nebo stejná</li>
+			<li><code class="sb-funcProp">&gt;= </code>větší rovno - platí, když je levá věc větší, než pravá, nebo stejná</li>
+			<li><code class="sb-funcProp">&lt;&gt; </code>nerovná se - platí, když jsou srovnávané věci různé</li>
+		</ul>
+
+		Příkaz pak vykoná kód, který následuje, jen, když podmínka platí. Pokud neplatí, vykonává se až kód, který následuje
+		za <code class="sb-keyword">EndIf</code>. Za podmínkou musí následovat <code class="sb-keyword">Then</code>! 
+	</p>
+	<p>
+		Pokud chceme přidat kód, který se vykoná, když podmínka neplatí, tak ho oddělíme pomocí <code class="sb-keyword">Else</code>. 
+		Pokud chceme udělat "kaskádu" více podmínek za sebou, na vnořené podmínky použijeme <code class="sb-keyword">ElseIf</code>.
+	</p>
+	<p>
+		Pokud potřebujeme zapsat podminek více, pak každou podmínku dáme do závorek <code class="sb-funcProp">()</code> a pospojujeme je
+		pomocí <code class="sb-keyword">And</code> ("a zároveň"), pokud mají platit současně, nebo pomocí
+		<code class="sb-keyword">Or</code> ("nebo"), pokud stačí, aby platila jedna z nich.
+	</p>
+	<p><em>Podmínky jsou hezky vidět v příkladu s kalkulačkou.</em></p>
+</div>
+
+<button class="collapsible" id="while">Řídicí struktura While - smyčka dokud</button>
+<div class="collapsible-content">
+	<p> -> napíše se pomocí klíčových slov <code class="sb-keyword">While <span class="sb-funcProp">...</span> </code> a <code class="sb-keyword">EndWhile</code></p>
+	<p>
+		Rozděluje kód na část, která se opakuje, dokud platí nějaká podmínka. Vždy, než se začne kód ve smyčce vykonávat,
+		se podmínka znovu ověří. Pokud platí, kód se vykoná. Pokud neplatí, pak říkáme, že smyčka skončí a program pokračuje
+		s kódem za smyčkou - za <code class="sb-keyword">EndWhile</code>. Podmínky jsou stejné, jako u řídicí struktury <code class="sb-keyword">If</code>, viz výše.
+		(Tedy se jen podmínka neověří jednou před vstupem, ale bude se ověřovat opakovaně na začátku každé iterace, dokud bude platit)
+	</p>
+	<p>
+		Smyčku používáme, když nevíme, kolikrát se nám bude opakovat. Například, když očekáváme nějaký vstup od uživatele - třeba heslo nebo
+		dáváme uživateli na výběr - třeba možnosti 1 - 5. Pokud uživatel napíše správné heslo nebo číslo od 1 do 5, smyčka končí
+		a pokračujeme dál. Pokud ale uživatel napíše špatné heslo nebo nějaké jiné číslo, než 1 - 5, zeptáme se ho smyčkou znovu. A znovu.
+		A znovu - smyčka prostě poběží, dokud bude platit podmínka, že uživatel nezadal očekávaný vstup.
+	</p>
+	<p>
+		Pokud se dostaneme do bodu, že jen program neustále něco opakuje, a to po něm chceme, dokud si ho uživatel nezavře křížkem
+		(například chceme do nekonečna přehrávat animaci), můžeme pomocí smyčky <code class="sb-keyword">While</code> vytvořit
+		tzv. "nekonečnou smyčku" - podmínka v záhlaví jednodušše vždy bude platit. Kvůli přehlednosti se však využívá trik, že do záhlaví
+		napíšeme jen textovou hodnotu <code class="sb-value">"True"</code>, čili anglicky pravda. Small Basic bere textový řetězec se slovem "True"
+		jako splněnou podmínku.<br />
+		<em>Nekonečný cyklus je hezky vidět v příkladu s animací mraků.</em>
+	</p>
+</div>
+
+<button class="collapsible" id="for">Řídicí struktura For - opakovací smyčka</button>
+<div class="collapsible-content">
+	<p> -> napíše se pomocí klíčových slov <code class="sb-keyword">For <span class="sb-funcProp">...</span> To <span class="sb-funcProp">...</span> </code> a <code class="sb-keyword">EndFor</code></p>
+	<p>
+		Rozděluje kód na část, která se zopakuje přesně několikrát. Smyčce se dá nějaká proměnná a limit. Program pak po každém proběhnutí
+		smyčky přičte jedničku, a pokud se proměnná do limitu vejde, proběhne znovu. Až v proměnné skončí větší číslo, než je limit,
+		pokračuje program s kódem za smyčkou - za <code class="sb-keyword">EndFor</code>. 
+	</p>
+	<p>
+		Základní forma smyčky vypadá například takto:
+		<pre><span class="sb-keyword">For</span> <span class="sb-var">i</span> <span class="sb-funcProp">=</span> <span class="sb-value">1</span> <span class="sb-keyword">To</span> <span class="sb-value">10</span>
+	...
+<span class="sb-keyword">EndFor</span>
+		</pre>
+		A ta se nám vykoná desetkrát. V proměnné <code class="sb-var">i</code> se postupně vystřídají čísla 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Je možné
+		také (nepovinně) zadat velikost kroku pomocí <code class="sb-keyword">Step</code>. Pak je možné například projet smyčku jen pětkrát a v proměnné vystřídat
+		čísla lichá (1, 3, 5, 7, 9):
+		<pre><span class="sb-keyword">For</span> <span class="sb-var">i</span> <span class="sb-funcProp">=</span> <span class="sb-value">1</span> <span class="sb-keyword">To</span> <span class="sb-value">10</span> <span class="sb-keyword">Step</span> <span class="sb-value">2</span>
+	...
+<span class="sb-keyword">EndFor</span>
+		</pre>
+
+		Nebo změnit smyčku na "odpočítání" pomocí záporného kroku. Smyčka pak projede v proměnné <code class="sb-var">i</code> čísla 10, 9, 8, 7, 6, 5, 4, 3, 2, 1:	
+		<pre><span class="sb-keyword">For</span> <span class="sb-var">i</span> <span class="sb-funcProp">=</span> <span class="sb-value">10</span> <span class="sb-keyword">To</span> <span class="sb-value">1</span> <span class="sb-keyword">Step</span> <span class="sb-value">-1</span>
+	...
+<span class="sb-keyword">EndFor</span>
+	</pre>
+	</p>
+	<p>
+		Smyčku používáme, když víme, kolikrát se nám bude opakovat. Příklad je, že se uživatele zeptáme na to, kolikrát se má něco zopakovat,
+		pak nám limit udává proměnná, a nebo to prostě víme, pak je to pevně dané číslo. Smyčky se snadno kombinují, jak je vidět na příkladu s 
+		vypsáním malé násobilky, jen pozor, ať si zvolíte různé řídicí proměnné!
+	</p>
+</div>
+
+<button class="collapsible" id="sub">Řídicí struktura Sub - podprogram či subrutina</button>
+<div class="collapsible-content">
+	<p> -> napíše se pomocí klíčových slov <code class="sb-keyword">Sub</code> a <code class="sb-keyword">EndSub</code></p>
+	<p>
+		Rozděluje kód. Část, která je uzavřena mezi klíčovými slovy, je kód podprogramu, tedy kód naší subrutiny.<br />
+		Veškerý kód se při čtení programu jen zapamatuje, jako že je to kód pojmenovaného podprogramu, ale nevykoná se. <br />
+		Subrutina může být zapsána kdekoli v programu, jen nesmíme dávat subrutinu dovnitř jiné subrutiny, podmínek ani smyček.
+		(Tedy jako struktura stojí samostatně, je to prostě kus kódu mimo hlavní kód.)
+	</p>
+	<p>
+		Kód uvnitř subrutiny se vykoná vždy, když subrutinu zavoláme. Volání se provádí stejně, jako volání funkcí na objektech. Uvedeme název subrutiny a kulaté závorky. 
+		Ty budou vždy prázdné, neboť našim subrutinám nepodstrkujeme žádná data, vše si přečtou z proměnných. <br />
+		Tomu se v programování říká, že máme "globální prostor proměnných" - na všechny proměnné vidíme odkudkoli z programu. To je někdy výhodné,
+		a jindy nevýhodné, jak uvidíme. Většinou se nám to ale hodí právě k tomu, abychom nějaké subrutině připravili data - buďto v jiné subrutině,
+		nebo přímo v hlavním kódu. Díky sdíleným proměnným si je pak subrutina snadno přečte.
+	</p>
+	<p>
+		Zde tedy příklad subrutiny:<br /><br />
+		<code>
+			<span class="sb-object">TextWindow</span><span class="sb-funcProp">.WriteLine(<span class="sb-value">"Začátek programu"</span>)</span><br />	
+			<br />
+			<span class="sb-comment">'zavedení subrutiny jménem "Podprogram1"</span><br />
+			<span class="sb-keyword">Sub</span><span class="sb-var"> Podprogram1</span><br />
+			&nbsp;&nbsp;<span class="sb-object">TextWindow</span><span class="sb-funcProp">.WriteLine(<span class="sb-value">"Výpis z podprogramu 1"</span>)</span><br />
+			<span class="sb-keyword">EndSub</span><br />
+			<br />
+			<span class="sb-object">TextWindow</span><span class="sb-funcProp">.WriteLine(<span class="sb-value">"Prostředek programu"</span>)</span><br />	
+			<span class="sb-var">Podprogram1</span><span class="sb-funcProp">()</span>  <span class="sb-comment">'Zavoláme subrutinu</span><br />
+			<span class="sb-object">TextWindow</span><span class="sb-funcProp">.WriteLine(<span class="sb-value">"Konec programu"</span>)</span><br />	
+		</code>
+		<br />
+		Tento program postupně vypíše: <code>Začátek programu - Prostředek programu - Výpis z podprogramu 1 - Konec programu</code>.
+	</p>
+	<p>
+		Názvy subrutin nám editor vykresluje <span class="sb-var">černě</span>, podobně, jako třeba proměnné. Při jejich volání nesmíme zapomenout na závorky.
+		Pro připomenutí, že subrutinu "voláme" je v nápovědním panelu označena symbolem telefonu.<br />
+		Domluvili jsme se, že pro větší přehlednost budeme dávat subrutinám jména, která začínají na VELKÉ písmeno. Jméno subrutiny by mělo mít formu
+		rozkazu, aby se kód dobře četl. Dobrá jména jsou tedy <code class="sb-var">Vykresli(), PripravPromenne(), ZabijHrace(), RestartujHru()</code>
+		a tak podobně. Název "Vykreslit" je ještě únosný, "Vykresleni" je již špatně. Háček je v tom, že ve zdrojovém kódu, při zavolání subrutiny,
+		uvidíme pouze řádek <code class="sb-var">Vykresleni<span class="sb-funcProp">()</span></code>, a to je divné - programu sice dáváme rozkaz
+		k vykreslení, ale s tímto pojmenováním to děláme nikoli tak, že mu řekneme (napíšeme) "vykresli", ale tak, že mu řekneme "vykreslení",
+		a to nedává moc smysl, takže se kód hůře čte.
+	</p>
+	<p>
+		Subrutiny se nám hodí na dvě věci - tou nejzásadnější je rozdělení kódu na logické kusy, které jen zavoláme. Když máme kód delší, špatně se v něm orientuje. 
+		Jeho rozdělením na menší úseky, které dáme do subrutin, ho zpřehledníme. Za druhé také snadno oddělíme kusy kódu, které používáme často. Kdykoliv takový kus
+		potřebujeme vykonat, jednoduše zavoláme příslušnou subrutinu, a nemusíme kód kopírovat z místa na místo. Navíc, pokud potřebujeme kód upravit,
+		uděláme to pouze jednou přímo v subrutině, a ne na 10 místech v programu. Šetří to čas i chyby, které uděláme, když někde zapomeneme změnu provést.
+	</p>
+	<p>
+		Druhé použití souvidí s tím znovupoužitelným kódem. Subrutiny se používají k obsluze událostí v aplikaci.
+	</p>
+</div>
+
+<br />
+
+<h3>Události</h3>
+<button class="collapsible" id="events"></button>
+<div class="collapsible-content">
+	<p>
+		Poslední věcí, kterou některé objekty umí, jsou takzvané události. Jedná se o zvláštní typ vlastnosti na objektu, v nápovědě má ikonku zeleného kroužku s bleskem.
+		A ta ikonka dobře ilustruje, co to taková událost je. Když totiž někde uhodí blesk, náhodně se to stalo. Byla to náhodná událost.<br />
+		K něčemu podobnému pak může dojít i v našem programu. Nestane se to, že v kódu dojdeme na nějaké místo, a to se v ten moment prostě vykoná. 
+		Stane se to, že zásahem nějaké vyšší moci k něčemu dojde v předem neznámý čas, a náš program na to nějak odpoví.
+	</p>
+	<p>
+		Taková vyšší moc je typicky uživatel. Například, že uživatel pohne myší, klikne na nějaké její tlačítko nebo stiskne klávesu na klávesnici. Nevíme sice předem,
+		kdy to udělá, ale pokud se tak stane, chceme na to umět zareagovat. A přesně k takovýmhle věcem (a jim podobným) události slouží.
+	</p>
+	<p>
+		Ve skutečnosti je to jednodušší, než by se zdálo. Událost je, dle textu výše, jen zvláštní typ vlastnosti objektu. Do této vlastnosti se dá přiřadit název subrutiny.
+		Tomu se říká obsluha události. Chceme-li v programu reagovat na nějakou událost, napíšeme pro ni "obslužný kód", "obsluhu". A tento kód se nám pak zavolá, když na událost dojde.
+	</p>
+	<p>
+		A kde se tedy nějaká událost vezme? Má ji na sobě objekt, jako tu speciální vlastnost, například na objektu <code class="sb-object">GraphicsWindow</code>
+		událost <code class="sb-funcProp">MouseMove</code>. Ta nám reprezentuje událost "Uživatel pohnul nad grafickým oknem myší". Pokud se tak opravdu stane,
+		Objekt to sám pozná a pokud má nějakou obslužnou subrutinu k události přiřazenou, sám od sebe nám ji zavolá, nezávisle na zbytku programu. 
+	</p>
+	<p>
+		Události se tedy berou na objektech, které samy poznají, že událost nastala, a samy zavolají obsluhu. Na nás je jen příslušnou obsluhu naprogramovat. Vytvoříme si tak kupříkladu 
+		<code class="sb-funcProp"><span class="sb-keyword">Sub</span><span class="sb-var"> ZpracujPohybMysi  ...  </span><span class="sb-keyword">EndSub</span></code><br />
+		a pak někde zavoláme <code class="sb-funcProp"><span class="sb-object">GraphicsWindow</span>.MouseMove = <span class="sb-var">ZpracujPohybMysi</span></code>.<br />
+		Všimněte si dobře, že tam nejsou žádné závorky. Subrutinu nevoláme, jen její jméno dáváme do události, která si ji bude volat sama.
+	</p>
+	<br />
+	<h4>Konkurence - Concurrence</h4>
+	<p>
+		S událostmi souvisí pojem konkurence. Pokud jsou nějaké dvě (a i více) věcí v konkurenci, znamená to, že se přetahují o nějaký sdílený zdroj.
+		V reálném světě se s pojmem konkurence setkáme hlavně u různých obchodů a společností, které se přetahují o zákazníky. To je mimochodem pro 
+		trh dobré. V programování to ale moc dobré není. Konkurence nastává, pokud se nějaké dva souběžně běžící kusy kódu pokoušejí dělat nějakou
+		podobnou činnost, ke které potřebují sdílený zdroj, například objekt typu želva, nebo nějakou proměnnou. Pokud si jeden kód do proměnné 
+		uloží nějakou hodnotu, ale druhý kód mu ji přemaže svou hodnotou dříve, než si první kód její obsah zase přečte, první kód se tím rozbije.
+		Stejně, jako když dá první kód Želvě nějaký kreslicí pokyn, ale než ho Želva dokončí, přijde ji jiný pokyn od druhého kódu.
+		Typicky se správně nedokončí ani jeden, a my jako programátoři nemáme vzhledem k povaze souběžně běžících kódů šanci jakkoli vytušit,
+		jak taková situace dopadne, a není tak možné na její řešení napsat kód.
+	</p>
+	<p>
+		Jak je ale vůbec možné, aby se vykonávaly dva kódy souběžně? V reálném programování se to může stát mnoha způsoby, a je to důležitá schopnost,
+		proto je studium konkurence tak důležité. Ve Small Basicu nám ale běží jen jeden kód. Ovšem, jak už jsme psali, konkurence tu souvisí s 
+		událostmi. Ty totiž nastávají ve zcela náhodné okamžiky, a tak na ně nemůžeme reagovat hlavním kódem. Namísto toho se při každém nastání události
+		vytvoří samostatně běžící kód, který vykoná obslužnou subrutinu. A to i když událost nastane víckrát po sobě - každé nastání vyvolá vznik 
+		vlastního nezávislého kódu s naší subrutinou, a jednotlivá souběžně běžící vykonání si nesmí konkurovat.
+	</p>
+	<p>
+		Takže co musíme udělat je zařídit, že obslužná subrutina nedostane šanci "vlézt do zelí" hlavnímu kódu či jinému volání téže subrutiny.
+		Buďto máme v obsluze akci, která je krátká, že se vykoná prakticky okamžitě, a tak se nestane, že by je uživatel stihnul vyvolat přes sebe. Nebo je akce
+		sice dlouhá, ale nepoužívá ke svému běhu žádnou společnou věc (proměnnou nebo objekt "jedináček" typu Želva). V těchto případech je možné napsat 
+		kód akce přímo do obslužné subrutiny a nic se nebude dít (viz třeba příklad s Malováním nebo jednoduchou hrou).
+	</p>
+	<p>
+		Pokud ale máme akci, jejíž vykonání bude nějakou chvíli trvat, a akce třeba i jen čte A ZAPISUJE nějaké proměnné, musí běžet pouze jedna naráz.
+		Kód této akce tedy nemůžeme napsat přímo do obslužné subrutiny, ale musíme ji vykonat hlavním kódem, kterému dá subrutina pouze pokyn, že to má udělat.
+		To je řešení konkurence - nebude si tu konkurovat samotná akce, ale pouze pokyn na její vykonání. Hlavní kód pak bude poslouchat jediný pokyn najednou.
+		Jedním ze způsobů, jak takovou komunikaci udělat, je pomocí konceptu "herní smyčka", který je popsán níže.
+	</p>
+</div>
+
+<br />
+
+<h3>Herní smyčka</h3>
+<button class="collapsible" id="gameloop"></button>
+<div class="collapsible-content">
+<p>
+	Koncept herní smyčky se týká aplikací v grafickém okně. Pokud máme nějakou déle trvající funkcionalitu (akci), kterou aktivujeme
+	nezávisle na hlavním kódu (typicky myšovou či klávesnicovou událostí), nemůžeme ji naprogramovat přímo do obsluhy aktivační
+	události. To je z následujícího důvodu - uživatel provede událost, a nezávisle na hlavním kódu se začne provádět. Nyní, pokud
+	uživatel opět provede aktivační událost, začne se obsluha opět provádět, opět nezávisle na hlavním kódu, a také nezávisle na
+	druhé obsluze, která ještě dobíhá. Pokud obsluha používá nějakou funkcionalitu, kterou potřebuje mít pro dobu provedení akce
+	pro sebe (Želvu či jiný objekt, obsah proměnné, geometrický útvar apod.), budou se o ni s později zavolanou obsluhou "prát"
+	a ani jedna zřejmě neproběhne korektně.
+</p>
+<p>
+	A my jako programátoři nemáme jak vědět, jak to doběhne, pakliže nezajistíme, že obsluha akce bude běžet jen jedna najednou.
+	To zajistit není až tak jednoduché, ale můžeme to udělat pomocí právě té "herní smyčky". Veškeré události necháme na hlavním
+	kódu, a obsluha událostí jen zapíše do zvláštní proměnné pokyn, že uživatel chce něco provést. Jakmile akce v rámci hlavního
+	kódu doběhne, zapíše hlavní kód do té proměnné, že se nic nemá dělat. To celé zabalíme do nekonečné smyčky
+	(<code class="sb-value"><span class="sb-keyword">While</span> "True"</code>), která se bude jen tak naprázdno točit, dokud
+	se v pokynové proměnné neukáže pokyn k akci. Pokud se z proměnné přečte pokyn, že se má provést akce, smyčka akci zavolá 
+	(či rovnou vykoná), během ní je smyčka pořád v té iteraci (průběhu cyklu), která přečetla pokyn. Jakmile akce doběhne,
+	zapíše se opět pokyn "nic nedělej" a smyčka se opět může točit na prázdno.
+</p>
+<p>
+	To je teorie, konkrétní příklad je vidět v příkladovém zdrojovém kódu.
+</p>
+</div>
+<br />
+
+<h3>Objekt TextWindow</h3>
+<button class="collapsible" id="textwindow"></button>
+<div class="collapsible-content">
+	<p> Objekt <code class="sb-object">TextWindow</code> představuje jednoduché textové okno, do kterého můžeme psát po řádkách text a číst, co napíše uživatel na klávesnici.</p>
+	<p>
+		Vypsání textu na okno se provede příkazem <code class="sb-funcProp">Write(<span class="sb-value">"text na výpis"</span>)</code><br />
+		Pokud navíc chceme odřádkovat, příkaz je <code class="sb-funcProp">WriteLine(<span class="sb-value">"text na výpis s odřádkováním"</span>)</code>
+	</p>
+	<p>
+		Čtení textu, co napsal uživatel, se udělá příkazem <code class="sb-funcProp">Read()</code>, který vrací uživatelův text.<br />
+		Uložení textu do proměnné <code class="sb-var">text</code> vypadá tedy <code class="sb-var">text <span class="sb-funcProp">= <span class="sb-object">TextWindow</span>.Read()</span></code><br />
+		Pokud chceme, aby uživatel napsal číslo, použijeme příkaz <code class="sb-funcProp">ReadNumber()</code>, a uživatel nebude moc napsat nic jiného,
+		nežli číslice (a mínus kvůli záporným číslům, a tečku kvůli desetinným číslům).
+	</p>
+	<p>
+		Někdy se hodí okno vyčistit, "vygumovat, smazat tabuli". To samozřejmě nevymaže proměnné, jen nám zmizí veškerý doposud napsaný text,
+		a to jak ten, co napsal náš kód, tak ten, co naklapal uživatel. Udělá se to příkazem <code class="sb-funcProp">Clear()</code>.
+	</p>
+	<p>
+		Pauzu vyvoláme příkazem <code class="sb-funcProp">Pause()</code>, vypíše se hláška "Press any key to continue..." a čeká se na 
+		stisk klávesy uživatelem.<br />
+		Pokud nechceme vypsat anglickou hlášku, použijeme příkaz <code class="sb-funcProp">PauseWithoutMessage()</code>.
+	</p>
+</div>
+
+<br />
+
+<h3>Objekt GraphicsWindow</h3>
+<button class="collapsible" id="graphicswindow"></button>
+<div class="collapsible-content">
+	<p> Objekt <code class="sb-object">GraphicsWindow</code> představuje grafické plátno, jaké známe třeba z Malování, a umožňuje nám kreslit na něj.</p>
+	<p>
+		Okno je samo o sobě jen "prázdné plátno", nejrůznější obrázky apod. do něj dostaneme přes objekty
+		<code class="sb-object">Turtle</code>, <code class="sb-object">Shapes</code> & <code class="sb-object">Controls</code>.<br />
+		Ty nám umožňují kreslit želví grafiku, vkládat geometrické tvary a texty & vkládat a ovládat textová pole a tlačítka.
+	</p>
+	<p>
+		Okno má několik důležitých vlastností, jež nastavují, jak je okno velké, co s ním uživatel smí dělat, jaké barvy budou použité apod.<br />
+		Kromě nastavování speciálních vlastností umí okno také zpracovávat klikání na myš a do klávesnice uživatelem, ve formě událostí.<br />
+		A v neposlední řadě také vykreslovat tvary a texty, podobně, jako objekt <code class="sb-object">Shapes</code>, rozdíl viz níže.
+	</p>
+	<br />
+	<h4>Prostor grafického okna</h4>
+	<p>
+		Grafické okno se skládá z jednotlivých "barevných bodů", neboli "pixelů", což jsou malé barevné čtverečky, které nám tvoří obrazovku počítače,
+		a tak i samotné grafické okno. Jsou pěkně vedle sebe, jako čtverečky na kostičkovaném papíře, na kterém se třeba hrají piškvorky, lodě a podobné hry.
+	</p>
+	<p>
+		Každý pixel má svoje "souřadnice", to jsou dvě čísla, která udávají, kde pixel v rámci okna je. Značí se obvykle (x;&nbsp;y), například by se pixel mohl nacházet na
+		souřadnicích (2;&nbsp;15), tedy "souřadnice dva, patnáct".<br/>
+		První číslo, "x" neboli "x-ová souřadnice", nám udává pozici na řádku, pozici zleva doprava, v kolikátém sloupečku se pixel nachází (jako zeměpisná délka na mapě).<br />
+		Druhé číslo, "y" neboli "y-ová souřadnice", nám udává pozici ve sloupečku, pozici shora dolů, v kolikátém řádku se pixel nachází (jako zeměpisná šířka na mapě).<br/>
+		Vzhledem k tomu, že souřadnice rostou doprava a dolů, je zřejmé, že pixel v levém horním rohu má souřadnice (0;&nbsp;0), pixel v pravém dolním rohu pak
+		(šířka_grafického_okna&nbsp;-&nbsp;1;&nbsp;výška_grafického_okna&nbsp;-&nbsp;1). Například pro okno o velikosti 800x600 pixelů je vpravo dole pixel se souřadnicemi (799;&nbsp;599).
+	</p>
+	<p>
+		Důležité upozornění - věci v grafickém okně mohou získat i takové souřadnice, které jsou větší, než ten pravý dolní roh. V takové případě je uživatel samozřejmě nevidí,
+		protože jsou mimo hranice okna. Důležité ale je, že pořád tam jsou, takže když je posuneme zpátky, nebo si uživatel okno do těch míst roztáhne, opět objekt uvidí.
+	</p>
+	<br />
+	<h4>Vlastnosti</h4>
+	<p>
+		Šířku a výšku okna nastavíme pomocí vlastností <code class="sb-funcProp">Width</code> a <code class="sb-funcProp">Height</code>. Udáme číslo, a na takový počet
+		pixelů se nám okno roztáhne.<br />
+		Vlastnosti <code class="sb-funcProp">Left</code> a <code class="sb-funcProp">Top</code> nám udávají, jak je okno vzdáleno od levého a horního okraje monitoru.
+	</p>
+	<p>
+		Pokud nechceme, aby uživatel oknu mohl změnit rozměr (roztáhl nebo stáhl), použijeme vlastnost <code class="sb-funcProp">CanResize</code>. Do té dáváme dvě
+		textové hodnoty - <code class="sb-value">"True"</code> jako pravda a <code class="sb-value">"False"</code> jako nepravda.
+		Pravda je výchozí a uživatel okno roztáhnout dokáže. Nepravda značí, že to nedokáže.
+	</p>
+	<p>
+		Vlastností <code class="sb-funcProp">Title</code> nastavíme "titulek okna", tedy jakýsi název programu, který je napsán na horní liště grafického okna a je vidět
+		i v systémové liště se spuštěným oknem. 
+	</p>
+	<p>
+		V Grafickém okně jsou celkem tři vlastnosti na nastavení barev. Barva se nastavuje jako textová hodnota. Tato hodnota je buďto něco jako <code class="sb-value">"#5689A5"</code>,
+		tedy znak křížek, následování šesti číslicemi či písmeny A až F. Tento způsob zápisu je složitější, zájemci se mohou podívat níže do doplňujících poznatků.<br />
+		Úplně v pohodě si totiž vystačíme s barvami, které nám autoři jazyka pojmenovali. Jejich přehled včetně českého překladu najdete <a href="SBBarvy.html">zde</a>. Jako hodnotu
+		dané vlastnosti musíte uvést anglický název z prvního sloupce tabulky, například <code class="sb-value">"OliveGreen"</code>.
+	</p>
+	<p>
+		Vlastnost <code class="sb-funcProp">BackgroundColor</code> nám udává, jakou barvu bude mít pozadí grafického okna.<br />
+		Vlastnost <code class="sb-funcProp">PenColor</code> nám udává, jakou barvu bude mít pero.<br />
+		Vlastnost <code class="sb-funcProp">BrushColor</code> nám udává, jakou barvu bude mít štětec.<br />
+		S perem souvisí ještě vlastnost <code class="sb-funcProp">PenWidth</code>, ta je číselná, a udává nám šířku pera.
+	</p>
+	<p>
+		Pero a štětec (brush a pen) nám řídí vykreslování v grafickém okně. Těchto vlastností využívá jak samotné grafické okno, tak i objekty
+		<code class="sb-object">Turtle</code>, <code class="sb-object">Shapes</code> a <code class="sb-object">Controls</code>, které nám na okno
+		také umí vykreslovat. Vykreslování přímo oknem je popsáno níže, základní poznatky o tom se pak uplatní i u zmíněných vykreslovacích objektů.
+	</p>
+	<br />
+	<h4>Příkazy</h4>
+	<p>
+		<em>Základní příkazy jsou stejné, jako u textového okna.</em>
+	</p>
+	<p>
+		Okno se nám objeví, jakmile s ním v kódu poprvé uděláme nějaký úkon, kupříkladu nastavení velikosti. Ukázání okna můžeme vždy vyvolat příkazem 
+		<code class="sb-funcProp">Show()</code>, skryjeme jej pomocí <code class="sb-funcProp">Hide()</code>.
+	</p>
+	<p>
+		Grafické okno "vyčistíme" pomocí funkce <code class="sb-funcProp">Clear()</code>. Funkce vymaže všechny čáry nakreslené želvou i želvu samotnou,
+		tvary přidané objektem <code class="sb-object">Shapes</code>, ovládací prvky přidané objektem <code class="sb-object">Controls</code>
+		a přemaže všechny vykreslené tvary barvou pozadí.
+	</p>
+	<p>
+		Pomocí funkce <code class="sb-funcProp">ShowMessage(<span class="sb-value">zpráva</span>, <span class="sb-value">titulek</span>)</code> můžeme
+		zobrazit vyskakující okno s informační zprávou. Zprávu předáme jako první parametr, jako druhý parametr dáme titulek,
+		který se zobrazí v liště okna se zprávou. Dokud uživatel okénko se zprávou neodklikne, nebude moci nijak pracovat s hlavním oknem,
+		a kód zůstane pozastavený na příkaze <code class="sb-funcProp">ShowMessage(...)</code>.
+	</p>
+	<p>
+		Grafické okno má i pomocné funkce pro práci s barvou. Zjevně by bylo zbytečné přidávat nějaký objekt "Color", ve kterém by se nacházely - 
+		už proto, že barvu vyjádříme textovou hodnotou s názvem barvy nebo šestimístným kódem. Jedná se zejména o příkaz<code class="sb-funcProp">GetRandomColor()</code>,
+		který nám vrátí náhodnou barvu. To se může hodit, když nevíme, jakou barvu chceme něčemu dát - vybereme ji zkrátka náhodně.<br />
+		Ještě je nám k dispozici příkaz na míchání barev z RGB složek - 
+		<code class="sb-funcProp">GetColorFromRGB(<span class="sb-value">červená</span>, <span class="sb-value">zelená</span>, <span class="sb-value">modrá</span>)</code>,
+		jehož popis a vysvětlení toho, co vlastně dělá, najdou dobrovolní zájemci dole v doplňujících poznatcích o barvách.
+	</p>
+	<br />
+	<h4>Události</h4>
+	<p>
+		Na grafickém okně jsou události pro reagování na uživatelovo zacházení s myší a klávesnicí.
+	</p>
+	<p>
+		Pokud uživatel pohne myší, nastane událost <code class="sb-funcProp">MouseMove</code>. V rámci obsluhy této události tak můžeme
+		reagovat na to, kde se právě myš nachází, či jaká jsou stisknuta tlačítka. Pozici myši získáme v 99% případů přímo od grafického okna.
+		Grafické okno má totiž na sobě vlastnosti <code class="sb-funcProp">MouseX</code> a <code class="sb-funcProp">MouseY</code>, podobně,
+		jako samotná myš. Tyto se ale vztahují přímo k oknu samotnému, a ne k monitoru, takže nezáleží, kde uživatel okno má. 
+		Ještě si uvědomme, že stav tlačítek nám během obsluhy hýbání myší neříká nic o tom, kdy bylo tlačítko stisknuto. Pouze víme,
+		či jej uživatel drží či ne, a tak můžeme předpokládat, že bylo drženo/puštěno stejným způsobem, jako při začátku pohybu,
+		který obsluhujeme.
+	</p>	
+	<p>
+		Pokud chceme vědět, kde se myš nacházela naposledy,	musíme si to vždy na konci obslužné subrutiny zapamatovat. Tj. na konci subrutiny
+		zapíšeme do vyhrazených proměných aktuální pozici. Na začátku takové subrutiny pak máme poslední známou pozici
+		v proměnných z minula uloženou, a můžeme tak spočítat přímku, po které uživatel myší pohnul. Úplně na začátku programu pak
+		těsně před přiřazením obslužné subrutiny do proměnných uložíme současnou polohu myši,
+		s ní uživatel totiž začíná.<br/>		
+		<br/>
+		<code class="sb-var">lastMouseX <span class="sb-funcProp"> = <span class="sb-object">GraphicsWindow</span>.MouseX</span></code><br />
+		<code class="sb-var">lastMouseY <span class="sb-funcProp"> = <span class="sb-object">GraphicsWindow</span>.MouseY</span></code><br />
+		<code class="sb-funcProp"><span class="sb-object">GraphicsWindow</span>.MouseMove = <span class="sb-var">HandleMouseMove</span></code><br />
+		<br />
+		<code class="sb-keyword">Sub <span class="sb-var">HandleMouseMove</span></code><br />
+		<code class="sb-comment">&nbsp;&nbsp;&nbsp;&nbsp;'Zde můžeme použít proměnné lastMouseX a lastMouseY</code><br />
+		<code class="sb-comment">&nbsp;&nbsp;&nbsp;&nbsp;'...</code><br />
+		<br />
+		<code class="sb-var">&nbsp;&nbsp;&nbsp;&nbsp;lastMouseX <span class="sb-funcProp"> = <span class="sb-object">GraphicsWindow</span>.MouseX</span></code><br />
+		<code class="sb-var">&nbsp;&nbsp;&nbsp;&nbsp;lastMouseY <span class="sb-funcProp"> = <span class="sb-object">GraphicsWindow</span>.MouseY</span></code><br />
+		<code class="sb-keyword">EndSub</code><br />
+	</p>
+	<br />
+	<p>
+		Pokud uživatel používá tlačítka myši, nastane událost <code class="sb-funcProp">MouseDown</code> při zmáčknutí tlačítka,
+		a <code class="sb-funcProp">MouseUp</code> při puštění tlačítka. Tyto události obsluhují přesně moment, kdy uživatel změnil
+		stav některého tlačítka - takže aktuální stav vlastností myši, které sdělují stisknutost tlačítek, jsou aktuální vůči právě 
+		obsluhované události. Pokud si v proměnné pamatujeme stav některého tlačítka, a aktuální stav je opačný, je jasné, že došlo ke změně.
+		Nesmíme ale zapomenout obsluhovat obě události a proměnnou udržovat aktuální, jinak program zřejmě začne dělat nesmysly!
+	</p>
+</div>
+
+<button class="collapsible" id="graphicsdrawing">Vykreslování Grafickým oknem</button>
+<div class="collapsible-content">
+<p>
+	Přímo skrze objekt grafického okna do něj můžeme vykreslovat. Základní příkaz je <code class="sb-funcProp">SetPixel(<span class="sb-value">x</span>,
+	<span class="sb-value">y</span>, <span class="sb-value">barva</span>)</code>, který nám pixel na zadaných souřadnicích (x, y) obarví zadanou barvou.
+	Pokud chceme zjistit, jakou barvu má nějaký pixel, použijeme příkaz <code class="sb-funcProp">GetPixel(<span class="sb-value">x</span>,
+	<span class="sb-value">y</span>)</code>, který nám barvu vrátí ve formě šestimístného kódu. Pozor, to nefunguje, když máme souřadnici překrytou
+	útvarem přidaným přes objekt <code class="sb-object">Shapes</code>! Více viz popis objektu <code class="sb-object">Shapes</code>.<br />
+	Příkaz <code class="sb-funcProp">GetPixel()</code> si taktéž nevšímá barvy pozadí! Pokud na daný pixel nenakreslíme nic, vrací příkaz vždy
+	<code class="sb-value">"#000000"</code>, tedy černou, bez ohledu na barvu pozadí!
+</p>
+<br />
+<p>
+	Asi uznáte, že nastavovat pixel po pixelu může být užitečné, například se tak dají kreslit zajímavé útvary smyčkami, ale pokud chceme vyrábět
+	složitější obrázky, bylo by to dost těžké. Za tímto účelem máme na grafickém okně několik příkazů "Draw" a několik příkazů "Fill". <br />
+	Příkazy začínající slovem "Fill" (vyplnit) nám "vyplní" geometrický útvar na plátno podle specifikovaných požadavků (pozice, tvar, velikost). Útvar
+	bude kompletně vybarvený barvou štětce. "Štětec" grafického okna tedy slouží k vybarvování útvarů, k vyplňování barevných ploch.<br/>
+	Příkazy začínající slovem "Draw" (nakreslit) nám obkreslí geometrický útvar na plátno podle specifikovaných požadavků. Útvar bude mít nakreslený pouze
+	svůj obvod, či obrys, a to barvou pera, a tlustý bude podle toušťky pera. "Pero" grafického okna tedy slouží ke kreslení čar, kreslení tahů.
+</p>
+<p>
+	POZOR - Existují i další kreslicí příkazy, které také začínají slovem "Draw". Jedna taková dvojice se používá ke psaní textů na okno. Ale
+	je tam jedna zrada, text se vypisuje barvou štětce, nikoli pera! Bohužel název je matoucí. Více dále v textu.<br />
+	Druhá dvojice slouží pro vykreslování obrázků typu fotky apod. Vyžaduje to spolupráci s dalšími objekty, takže je to celé popsáno níže
+	spolu s objektem <code class="sb-object">ImageList</code>. 
+</p>
+<p>
+	Postupné volání příkazů do okna vždy dokresluje. Tudíž záleží na pořadí příkazů, ve kterém je vykonáte. Různé pořadí vede k různému překrytí
+	útvarů a tudíž rozdílným výsledkům! Pokud tedy chceme nakreslit nějaký tvar i s okrajem, voláme nejprve "Fill" příkaz, který plochu tvarů
+	vyplní, a až po té voláme "Draw", který namaluje okraj. Okraj totiž má tloušťku dle tloušťky pera, čehož si "Fill" pochopitelně nebude všímat,
+	protože "Fill" kreslí štětcem.<br />
+	Pokud zavoláme nejprve "Draw" a pak až "Fill" se stejnými parametry, výsledný tvar bude mít vždy obrys o tloušťce 1. Je tomu tak proto,
+	že "Fill" příkazy nedotahují tvary úplně mezi zadané souřadnice, ale jen "k nim", tudíž po obvodu zbyde vždy okraj s jednotkovou šířkou.<br />
+	(Pokud tedy zadám "Fill" příkazu čtverec ze souřadnic (10, 10) na souřadnice (50, 50), pokryjí se pouze pixely mezi souřadnicemi (11, 11)
+	až (49, 49) - to je to dotažení "k souřadnicím" - pokryjí se pixely se souřadnicemi &gt; většími, než (10, 10) a zároveň &lt; menšími, než (50, 50).<br />
+	Naopak "Draw" příkaz pokryje i zadané souřadnice, čili okraj vykreslí přes souřadnice, které jsou &gt;&equals; větší nebo rovné (10, 10) a zároveň
+	&lt;&equals; menší nebo rovné (50,50) - a proto tedy "prosvítá" ten jednotkový okraj. Více je vidět na konci příkladu "14 Tvary".)
+</p>
+<br />
+<p>
+	Základními tvary pro kreslení jsou čára, obdélník, elipsa, trojúhelník a text. Vykreslovat lze také obrázky, je to popsáno u objektu
+	<code class="sb-object">ImageList</code>, jelikož to vyžaduje spolupráci s ním.
+</p>
+<p>
+	Čáru nakreslíme (perem) pomocí příkazu
+	<code class="sb-funcProp">DrawLine(<span class="sb-value">x-start</span>, <span class="sb-value">y-start</span>,
+	<span class="sb-value">x-cíl</span>, <span class="sb-value">y-cíl</span>)</code>. Příkaz dostane dvě dvojice souřadnic (x, y), 
+	startovní a cílové, a natáhne mezi nimi čáru.
+</p>
+<p>
+	Obdélník kreslíme příkazem <code class="sb-funcProp">DrawRectangle(<span class="sb-value">x-start</span>, <span class="sb-value">y-start</span>,
+	<span class="sb-value">šířka</span>, <span class="sb-value">výška</span>)</code> a komplementárním
+	<code class="sb-funcProp">FillRectangle(<span class="sb-value">x</span>, <span class="sb-value">y</span>,
+	<span class="sb-value">šířka</span>, <span class="sb-value">výška</span>)</code>. Příkaz dostane dvojici souřadnic (x, y),
+	které představují levý horní roh obdélníka (tedy ten s nejnižšími souřadnicemi) a šířku a výšku. Obdélník pak vzniká od x-ové souřadnice
+	doprava o zadanou šířku, a od y-ové souřadnice dolů o zadanou výšku.<br />
+	Čtverec nakreslíme příkazem pro obdélník, se shodnou šířkou a výškou.
+</p>
+<p>
+	Elipsu kreslíme příkazem <code class="sb-funcProp">DrawEllipse(<span class="sb-value">x-start</span>, <span class="sb-value">y-start</span>,
+	<span class="sb-value">šířka</span>, <span class="sb-value">výška</span>)</code> a komplementárním
+	<code class="sb-funcProp">FillEllipse(<span class="sb-value">x</span>, <span class="sb-value">y</span>,
+	<span class="sb-value">šířka</span>, <span class="sb-value">výška</span>)</code> vyplníme "elipsoid". Příkaz dostane dvojici souřadnic (x, y),
+	které představují levý horní roh pomyslného obdélníka, který se dá nakreslit kolem elipsy, a šířku a výšku. Elipsa má dvě tzv. "osy",
+	hlavní (delší) a vedlejší (kratší). Jsou to jakési "dva průměry" (kružnice má jen jeden), které ji tvoří - a to ji odlišuje od kružnice.
+	Tyto osy si ale můžeme představit i mimo střed elipsy podél jejích okrajů, a pak nám vlastně tvoří obdélník, který elipsu uzavírá.
+	Proto má příkaz stejnou podobu jako obdélník. Funguje to stejně, jako když vytváříte elipsu v programu "Malování", a vidíte tam i 
+	obdélník, co elipsu uzavírá, než ji odkliknete. Toto je úplně stejné.<br />
+	Kružnici (a "Fill"nutý Kruh) nakreslíme příkazem pro elipsu, se shodnou šířkou a výškou, odpovídající průměru kružnice.
+</p>
+<p>
+	Trojúhelník kreslíme příkazem <code class="sb-funcProp">DrawTriangle(<span class="sb-value">x1</span>, <span class="sb-value">y1</span>,
+	<span class="sb-value">x2</span>, <span class="sb-value">y2</span>, <span class="sb-value">x3</span>, <span class="sb-value">y3</span>)</code>
+	a komplementárním <code class="sb-funcProp">FillTriangle(<span class="sb-value">x1</span>, <span class="sb-value">y1</span>,
+	<span class="sb-value">x2</span>, <span class="sb-value">y2</span>, <span class="sb-value">x3</span>, <span class="sb-value">y3</span>)</code>.
+	Příkaz dostane tři dvojice souřadnic (x, y), které představují všechny tři rohy výsledného trojúhelníka. Příkaz má sice rekordní počet parametrů,
+	celých šest, ale jinak je takto přímočarý. Jen si dávejte pozor, ať se v souřadnicích neztratíte. 
+</p>
+<br />
+<p>
+	<em>Dále je možné vykreslovat text. Budeme si teprve ukazovat.</em>
+</p>
+</div>
+
+<br />
+
+<h3>Objekty doplňující GraphicsWindow - "vykreslovače"</h3>
+<button class="collapsible" id="turtle">Objekt Turtle</button>
+<div class="collapsible-content">
+	<p> 
+		Objekt <code class="sb-object">Turtle</code> představuje Želvičku, používanou ke kreslení tzv. želví grafiky. Tu si lze snadno představit jako když se kreslí postupným tahem pera.
+		Tedy psaní psacím (i tiskacím) písmem, kreslení domečku jedním tahem, kreslení útvarů typu spirála atp. Jednotlivé jednoduché pohyby na sebe navazují a tvoří celek.
+	</p>
+	<p>
+		Želva má "ocásek", který umí zvednout a dát dolů. Pokud jej má dole (výchozí stav), a hýbe se, nechává za sebou čáru. Pokud ho má nahoře, pohybuje se
+		bez kreslení. Ocásek nám představuje pero grafického okna. Čára kreslená želvou má tedy šířku a barvu dle vlastností pera objektu <code class="sb-object">GraphicsWindow</code>.
+		Ocásek zvedneme funkcí <code class="sb-funcProp">PenUp()</code>, dolů ho dáme funkcí <code class="sb-funcProp">PenDown()</code><br />
+		Želvu můžeme posílat na body v grafickém okně pomocí příkazu
+		<code class="sb-funcProp">MoveTo(<span class="sb-value">souřadnice x</span>, <span class="sb-value">souřadnice y</span>)</code>.
+	</p>
+	<p>
+		Rychlost želvy nastavujeme vlastnosti <code class="sb-funcProp">Speed</code>. To je číslo od 1 do 10, 1 - 9 jsou různé rychlosti, při 10 se želva teleportuje.
+	</p>
+	<p>
+		Upozorňujeme, že čáry nemusí jít úplně rovně, přestože se mění jen jedna souřadnice. Je to vidět na příkladu s domečkem jedním tahem, kdy želva tahy zcela nenaváže.
+		To je bohužel normální, a je to způsobeno směrováním želvy a následným otáčením. Následující způsob, který je vidět na druhém příkladu se stejným domečkem,
+		tuto chybu nemá, ale na kreslení předem přesně známých tvarů není tak pohodlný.
+		Želvě se dá totiž také říct jen "pohni se rovně" o zadanou vzdálenost a želva ji urazí, ve směru, do kterého je
+		natočena - slouží na to funkce <code class="sb-funcProp">Move(<span class="sb-value">vzdálenost</span>)</code>.
+	</p>
+	<p>
+		Natočení želvy pak udáváme pomocí úhlů ve stupních, od
+		<code class="sb-value">0</code> do <code class="sb-value">359</code>. Dělá se to vlastností <code class="sb-funcProp">Angle</code>.
+		Úhel 0 je, když želva kouká nahoru. 90 je doprava, 180 dolů a 270 doleva. Je možné použít i záporná čísla, proti směru hodinových ručiček, kdy -90 je doleva, -180 dolů a -270 doprava. <br />
+		Pokud chceme želvu otočit o daný úhel (tedy jen víme velikost pootočení), použijeme příkaz <code class="sb-funcProp">Turn(<span class="sb-value">úhel</span>)</code>. 90 otočí želvu kolmo vpravo, 
+		-90 kolmo vlevo. 180 i -180 mají stejný efekt, jen to želva vezme různých stran. Otočení o 360 nemá vliv. <br />
+		Tedy nastavení vlastnosti <code class="sb-funcProp">Angle</code> je "absolutní" - volání
+		<code class="sb-funcProp"><span class="sb-object">Turtle</span>.Angle = <span class="sb-value">90</span></code> nám želvu pokaždé nasměruje přímo proti pravému okraji monitoru,
+		zatímco volání příkazu <code class="sb-funcProp">Turn()</code> je "relativní" - kód 
+		<code class="sb-funcProp"><span class="sb-object">Turtle</span>.Turn(<span class="sb-value">90</span>)</code> nám želvu vždy pootočí doprava o pravý úhel (o 90°), a výsledek
+		tedy závisí na tom jak se koukala původně - teď kouká kolmo po směru hodinových ručiček vůči původnímu směru.
+	</p>
+	<p>
+		A stejně, jako grafické okno, želvu zobrazíme pomocí příkazu <code class="sb-funcProp">Show()</code>, a skryjeme pomocí <code class="sb-funcProp">Hide()</code>.
+		I s neviditelnou želvou můžeme kreslit, což může být někdy docela vtipné. Želvu nám zneviditelní také volání příkazu <code class="sb-funcProp">Clear()</code> na
+		grafickém okně.
+	</p>
+</div>
+
+<button class="collapsible" id="shapes">Objekt Shapes</button>
+<div class="collapsible-content">
+	<p>
+		Objekt <code class="sb-object">Shapes</code> představuje geometrické tvary, které je možno vkládat do Grafického okna, hýbat s nimi,
+		měnit jim velikost, natočení a další vlastnosti.
+	</p>
+	<h4>Přidávání tvarů</h4>
+	<p>
+		Srovnáme si nyní kreslení tímto objektem s kreslením grafickým oknem. Příkazy objektu <code class="sb-object">Shapes</code> pro
+		kreslení útvarů vždy začínají na "Add", tedy přidat. A to je ten zásadní rozdíl - útvar přidaný objektem <code class="sb-object">Shapes</code>
+		se neprokreslí na plátno grafického okna, ale pouze je nad ním "položen".<br />
+		V podstatě si to lze představit tak, že příkazy pro kreslení grafického okna opravdu pomocí jakéhosi myšlenkového pera a štětce
+		nakreslí tvar na plátno. Naopak příkazy objektu tvarů nic nekreslí, ale pouze stvoří daný tvar, v naší představě ho vystřihnou z papíru
+		o správné barvě, a položí na plátno. Proto je možné tyto tvary po plátně posouvat, otáčet apod.<br /> 
+	</p>
+	<p>
+		Malou poznámkou se ještě vrátíme k objektu <code class="sb-object">GraphicsWindow</code> a hlavně jeho příkazu <code class="sb-funcProp">GetPixel()</code>.
+		Veškeré kreslicí příkazy ("Fill"y, "Draw"y a SetPixel) nám, jak už jsme vysvětlili, kreslí přímo na plátno. A třeba se i vzájemně překrývají,
+		jako když při kreslení přetáhnete už nakreslenou část. Aktuální barvu nějakého pixelu nám pak zjistí <code class="sb-funcProp">GetPixel()</code>.<br/>
+		Tím, že útvary přidané objektem <code class="sb-object">Shapes</code> jsou položené přes plátno, překryjí nám, cokoli se na něm nachází. Když útvary ale
+		přesuneme jinam či je vymažeme, opět se nám malůvka na plátně zjeví, protože tam pořád je, útvar objektu tvarů to nepřemazal, jen zakryl.<br />
+		Musíme si tedy uvědomit, že pokud někam jen vložíme útvar přes objekt <code class="sb-object">Shapes</code>, a zavoláme
+		<code class="sb-funcProp"><span class="sb-object">GraphicsWindow</span>.GetPixel(...)</code>, vrátí nám barvu, která se nachází pod útvarem, a ne barvu, jakou
+		tam zrovna vidíme, když je to barva útvaru. Protože příkaz se podívá, jak je plátno nabarvené, čili "nakoukne" pod jakékoli tvary, které se mu tam zrovna válí.
+	</p>
+	<p>
+		Přidání tvaru do okna nám vrátí zvláštní hodnotu, "jméno" právě vloženého tvaru. Skrze toto jméno pak budeme s tvarem nakládat. Musíme si jej tedy
+		uschovat do nějaké proměnné, jinak už nebudeme moci s tvarem nic udělat! Jediný způsob, jak se zbavit tvaru, jehož jméno jsme zapomněli, je zavolat
+		na grafickém okně příkaz <code class="sb-funcProp">Clear()</code>, který vymaže i všechny tvary.<br />
+		Přidání tvaru vždy vyrobí tvar, který má obrys i výplň. Barvy obrysu a výplně se vezmou z pera a štětce grafického okna. Pokud chceme přidat útvar,
+		který má jen obrys, ale průhledný prostředek, je třeba nastavit štětci průhlednou barvu, tedy <code class="sb-value">"Transparent"</code>.
+	</p>
+	<br />
+	<p>
+		Přidávání tvarů tedy vykonávají příkazy "Add...", jejichž výsledek si ukládáme. Zpravidla mají jednodušší podobu, než příkazy "Draw..." a "Fill..." na
+		grafickém okně, jelikož nám některé útvary vloží na počátek okna (souřadnici (0, 0)). Přesunutí na cílové místo pak děláme dalším příkazem.
+		Základními tvary jsou čára, obdélník, elipsa, trojúhelník a text. Je možné vložit i obrázek jako útvar, je to popsáno u objektu
+		<code class="sb-object">ImageList</code>, jelikož to vyžaduje spolupráci s ním. Pokud se útvary někde překrývají, 
+	</p>
+	<p>
+		Čáru přidáme příkazem <code class="sb-funcProp">AddLine(<span class="sb-value">x1</span>, <span class="sb-value">y1</span>,
+		<span class="sb-value">x2</span>, <span class="sb-value">y2</span>)</code>. Funguje stejně, jako <code class="sb-funcProp">DrawLine(...)</code> na
+		grafickém okně, jen je samozřejmě možné s čarou nákladat jako s tvarem.<br />
+		Obdélník přidáme příkazem <code class="sb-funcProp">AddRectangle(<span class="sb-value">šířka</span>, <span class="sb-value">výška</span>)</code>.
+		Příkaz vyrobí obdélník o zadané šířce a výšce (pro čtverec dáme stejné) a umístí ho do levého horního rohu.<br />
+		Elipsu přidáme příkazem <code class="sb-funcProp">AddEllipse(<span class="sb-value">šířka</span>, <span class="sb-value">výška</span>)</code>.
+		Příkaz vyrobí elipsu o zadané šířce a výšce (pro kruh dáme stejné) a umístí ji do levého horního rohu. Šířka a výška nám představuje jakýsi virtuální obdélník,
+		do kterého je elipsa vepsaná. Podrobnější popis je u vykreslení elipsy grafickým oknem.<br />
+		Trojúhelník přidáme příkazem <code class="sb-funcProp">AddTriangle(<span class="sb-value">x1</span>, <span class="sb-value">y1</span>,
+		<span class="sb-value">x2</span>, <span class="sb-value">y2</span>, <span class="sb-value">x3</span>, <span class="sb-value">y3</span>)</code>. Funguje stejně,
+		jako DrawTriangle a FillTriangle na grafickém okně, jen je samozřejmě trojúhelník vložen jako útvar.
+	</p>
+	<p>
+		<em>Přidávání textu si ještě představíme.</em>
+	</p>
+
+	<h4>Operace s tvary</h4>
+	<p>Veškeré následující příkazy berou jako první parametr jméno útvaru, se kterým chceme příkaz provést. Jméno nám vrátí příkaz "Add..." při vytváření tvaru.</p>
+	<p>
+		Příkazem <code class="sb-funcProp">Remove(<span class="sb-value">jméno</span>)</code> odstraníme tvar. Odstranění je trvalé, takže jméno odstraněného útvaru
+		už nikdy jiný útvar nedostane, a obsah proměnné tak ztratí na významu.		
+	</p>
+	<p>
+		Příkazem <code class="sb-funcProp">HideShape(<span class="sb-value">jméno</span>)</code> můžeme tvar schovat. Pokud útvar přidáme a ihned schováme, je možné,
+		že problikne. Pokud tvar schováme, pořád je na grafickém okně přidaný, a můžeme s ním hýbat a dělat všechny další operace dle libosti (jsou popsány níže).
+		Není to tedy jako u <code class="sb-funcProp">Remove(...)</code>, kdy tvar trvale odstraníme a již neexistuje. Jakmile budeme chtít tvar znovu ukázat,
+		použijeme příkaz <code class="sb-funcProp">ShowShape(<span class="sb-value">jméno</span>)</code>, a ten nám ho znovu zjeví.
+	</p>
+	<p>
+		Příkazem <code class="sb-funcProp">Move(<span class="sb-value">jméno</span>, <span class="sb-value">x</span>, <span class="sb-value">y</span>)</code>
+		přesuneme tvar na nové místo, levý horní roh cílového místa předáme příkazu jako parametry x a y. Přesouváním po malých vzdálenostech můžeme vytvořit
+		jakousi animaci, kterou si počítáme ručně ve smyčce. Výhodou je, ža takto můžeme animovat hodně různých věcí naráz, nevýhodou je složitější výpočet.<br />
+		Proto existuje ještě příkaz <code class="sb-funcProp">Animate(<span class="sb-value">jméno</span>, <span class="sb-value">x</span>,
+		<span class="sb-value">y</span>, <span class="sb-value">čas</span>)</code>, který dělá to samé, co <code class="sb-funcProp">Move(...)</code>, ale
+		tvar nám nepřesune skokem, nýbrž plynule jako animaci, která bude trvat podle čtvrtého parametru čas. Ten se udává v milisekundách, jako je tomu 
+		u příkazu <code class="sb-funcProp"><span class="sb-object">Program</span>.Delay(...)</code>. Milisekunda je číslo 1000x větší, než je sekunda.
+		Animaci, která má trvat jeden a půl vteřiny, tedy uděláme pomocí času <code class="sb-value">1500</code>. Na doběhnutí animace příkaz nečeká, takže pokud
+		si chceme udělat více animací naráz, napíšeme prostě všechny příkazy  <code class="sb-funcProp">Animate(...)</code> za sebe, a animace proběhnou všechny najednou.
+		Pokud bychom chtěli na doběhnutí počkat, musíme doplnit animaci příkazem <code class="sb-funcProp"><span class="sb-object">Program</span>.Delay(...)</code>,
+		kterému dáme stejný čas, jako animaci. Pokud mu dáme kratší čas, program bude pokračovat klidně "v půlce" animace, a můžeme tak navázat několik animací
+		se vzájemným zpožděním.
+	</p>
+	<p>
+		Příkazem <code class="sb-funcProp">Rotate(<span class="sb-value">jméno</span>, <span class="sb-value">úhel</span>)</code> natočíme tvar o daný úhel.
+		Podrobný popis úhlů je u objektu <code class="sb-object">Turtle</code>, tady se to chová stejně. Kladný úhel otočí útvar doprava (po směru hodin)
+		o zadaný úhel, Záporný úhel (s mínusem) otočí útvar doleva (proti směru hodin) o tento úhel. 90 znamená otočení přímo na stranu (o pravý úhel) atd.
+		Podívejte se k popisu želvy, příkaz <code class="sb-funcProp">Turn(...)</code> na želvě dělá totéž, co <code class="sb-funcProp">Rotate(...)</code>
+		s útvarem. Pozor - u objektu <code class="sb-object">Shapes</code> nemáme žádnou vlastnost <code class="sb-funcProp">Angle</code>, jako má želva,
+		takže tvar otáčíme vždy vůči jeho současnému natočení! Natočení do výchozí pozice tedy není možné udělat, musíme si vždy pamatovat, o kolik jsme 
+		daný útvar již otočili, pokud to k něčemu potřebujeme.
+	</p>
+	<p>
+		Příkazem <code class="sb-funcProp">Zoom(<span class="sb-value">jméno</span>, <span class="sb-value">zvětšení-x</span>,
+		<span class="sb-value">zvětšení-y</span>)</code> můžeme zmenšovat a zvětšovat tvary. Příkazu jako parametr předáváme hodnotu zvětšení. To je
+		číslo, které udává, jak moc objekt zvětšíme či zmenšíme. Pokud dáme číslo 1, velikost se nezmění. Pokud dáme číslo větší, než 1, například 2,
+		objekt se zvětší (v případě 2 se dvakrát zvětší). Pokud dáme číslo menší, než 1, objekt se zmenší. Například číslo <code class="sb-value">0.5</code>
+		znamená scvrknutí na poloviční velikost, objekt bude dvakrát menší. Pokud neznáte desetinná čísla, tak je to totéž, co zlomky, jen uděláme vydělení.
+		Tedy zlomek 1/2 "jedna polovina" je stejný, jako číslo 0.5 (zkuste si to na kalkulačce). Výhoda je, že nemusíme do příkazu psát rovnou výsledek,
+		můžeme tam samozřejmě napsat přímo výraz, například <code class="sb-value">1 <span class="sb-funcProp">/</span> 2</code>, a Small Basic to spočítá sám.<br />
+		Pokud neznáte ani zlomky, tak si zapamatujte, že dělení menšího čísla větším může být i něco jiného, než "nula zbytek číslo". Pokud budu dělit měnší 
+		číslo větším, dostanu nějaké mezičíslo mezi 0 a 1, které mi u příkazu <code class="sb-funcProp">Zoom(...)</code> způsobí zmenšení. Pokud budu dělit
+		Větší číslo menším, bude výsledek samozřejmě větší, než 1, a vznikne zvětšení. Nicméně zvětšování je jednoduché, <code class="sb-value">2</code> mi
+		tvar zvětší dvakrát, <code class="sb-value">3</code> třikrát atd.<br />
+		Jistě vám neuniklo, že příkazu se dává zvlášť zvětšení x a zvětšení y. Protože útvar musí příkaz natáhnout či smrsknout jak ve vodorovném směru (x),
+		tak ve svislém směru (y), můžeme dát pro každý směr jiné zvětšení. Pokud to uděláme, útvar se nám při zvětšení zdeformuje. Typicky ale budeme dávat
+		obě čísla stejná, aby útvar měnil jen svou velikost (souměrně), a ne i tvar. 
+	</p>
+	<p>
+		Příkazem <code class="sb-funcProp">SetOpacity(<span class="sb-value">jméno</span>, <span class="sb-value">hodnota</span>)</code> nastavíme
+		"neprůhlednost" útvaru. Do parametru hodnota vkládáme čísla 0 - 100. Hodnota 0 znamená, že útvar se stane neviditelným, 100 je výchozí a útvar
+		normálně vidíme. Všechna čísla mezi značí, že je útvar částečně průhledný, jako duch, a prosvítají skrz něj všechny věci, co jsou pod ním.
+	</p>
+	<p>
+		Nakonec si představíme ještě příkazy, kterými můžeme zjistit nějaké informace o útvaru. Všechny začínají slovem "Get".<br />
+		<code class="sb-funcProp">GetLeft(<span class="sb-value">jméno</span>)</code> nám zjistí, jak je útvar vzdálen od levého okraje grafického okna,
+		tedy x-ovou souřadnici útvaru.<br />
+		<code class="sb-funcProp">GetTop(<span class="sb-value">jméno</span>)</code> nám zjistí, jak je útvar vzdálen od horního okraje grafického okna,
+		tedy y-ovou souřadnici útvaru.<br />
+		<code class="sb-funcProp">GetOpacity(<span class="sb-value">jméno</span>)</code> nám zjistí, jakou hodnotu neprůhlednosti má útvar právě nastavenou.
+		Příkaz vrací číslo od 0 do 100, kde 0 znamená zcela průhledný a 100 zcela neprůhledný. Viz popis příkazu <code class="sb-funcProp">SetOpacity(...)</code>
+		pro více informací.
+	</p>
+</div>
+
+<button class="collapsible" id="controls">Objekt Controls</button>
+<div class="collapsible-content">
+	<p>
+		Objekt <code class="sb-object">Controls</code> představuje tlačítka a textová pole, která je možno vkládat do grafického okna,
+		a skrz něž může uživatel interaktivně ovládat naši aplikaci klávesnicí a myší.
+	</p>
+	<p>
+		<em>Budeme si teprve ukazovat.</em>
+	</p>
+</div>
+
+<button class="collapsible" id="images">Objekt ImageList a vykreslování obrázků</button>
+<div class="collapsible-content">
+<p>
+	Objekt <code class="sb-object">ImageList</code> slouží k načítání obrázků do programu.<br />
+</p>
+<p>
+	<em>Budeme si teprve ukazovat.</em>
+</p>
+</div>
+
+<br />
+
+<h3>Objekt Mouse</h3>
+<button class="collapsible" id="mouse"></button>
+<div class="collapsible-content">
+	<p>
+		Objekt <code class="sb-object">Mouse</code> představuje myš - ovládací zařízení počítače.
+		Zvířátko na kreslení čar ve formě tahů je želva - <code class="sb-object">Turtle</code>.
+	</p>
+	<p>
+		Na myši máme dvě tlačítka, levé a pravé (samozřejmě i nějaká další, ale ty ve Small Basicu nepoužijeme).
+		Jsou-li držena uživatelem, objeví se hodnota <code class="sb-value">"True"</code> ("pravda") ve vlastnostech
+		<code class="sb-funcProp">IsLeftButtonDown</code> pro levé myšítko či <code class="sb-funcProp">IsRigthtButtonDown</code>
+		pro pravé. Jinak je ve vlastnostech hodnota<code class="sb-value">"False"</code> ("nepravda").
+	</p>
+	<p>
+		Myš nám ovládá kurzor na obrazovce. Přes vlastnosti <code class="sb-funcProp">MouseX</code> a <code class="sb-funcProp">MouseY</code>
+		můžeme získat jeho pozice. Jedná se o x-ovou a y-ovou souřadnici. Souřadnice jsou podrobně popsány u popisu objektu
+		<code class="sb-object">GraphicsWindow</code>. Každopádně <code class="sb-funcProp">MouseX</code> nám určuje počet barevných bodů,
+		kolik je kurzor vzdálen od levého okraje monitoru, <code class="sb-funcProp">MouseY</code> totéž od horního okraje monitoru.<br />
+		Vlastnostem se dá hodnota i nastavit, takže docílíme toho, že kurzor "teleportujeme" na zadané souřadnice.
+	</p>
+	<p>
+		Pomocí příkazu <code class="sb-funcProp">HideCursor()</code> můžeme kurzor skrýt. Myš tam jakoby pořád je, a můžeme s ní hýbat,
+		ale šipečka představující kurzor zmizí. Samozřejmě to platí jen pro náš program, pokud se v operačním systému přepneme jinam, tak kurzor
+		opět uvidíme. Pro opětovné ukázání kurzoru zavoláme příkaz <code class="sb-funcProp">ShowCursor()</code>.
+	</p>
+	<p>
+		Myš se používá při ovládání grafického okna, a k tomu slouží myšové události a vlastnosti na objektu
+		<code class="sb-object">GraphicsWindow</code>. Více tedy přímo u popisu událostí na grafickém okně.
+	</p>
+</div>
+
+<br />
+
+<h3>Objekt Text</h3>
+<button class="collapsible" id="text"></button>
+<div class="collapsible-content">
+	<p>
+		<em>Bude doplněno.</em>
+	</p>
+</div>
+
+<br />
+
+<h3>Objekt Maths</h3>
+<button class="collapsible" id="maths"></button>
+<div class="collapsible-content">
+	<p>
+		<em>Bude doplněno.</em>
+	</p>
+</div>
+
+<br />
+
+<h3>Objekt Sound</h3>
+<button class="collapsible" id="sound">Přehrávání zvuků</button>
+<div class="collapsible-content">
+	<p>
+		<em>Bude doplněno.</em>
+	</p>
+</div>
+<button class="collapsible" id="music">Přehrávání piánové hudby</button>
+<div class="collapsible-content">
+	<p>
+		<em>Jak hudbu zapisovat bude doplněno.</em>
+	</p>
+	<p>
+		K přehrávání piánové hudby slouží příkaz <code class="sb-funcProp">PlayMusic(<span class="sb-value">"Notový zápis"</span>)</code>.
+		Příkaz sice nemá v názvu "AndWait", ovšem příkaz skončí až v momentě, co hudba dohraje. Žádný "asynchronní" příkaz pro hudbu nemáme.
+	</p>
+	<p>
+		Pokud se chcete pustit do psaní, neváhejte si stáhnout náš tester - <a href="sbzdrojaky/PlayMusicTester.sb">Testovací program na PlayMusic</a>, který
+		pro vás naprogramoval Kryštof.<br />
+		V programu se nachází velké víceřádkové textové pole, kam je možné psát noty. Tlačítkem "přehrát" pak zapsané noty přehrajete. Jelikož příkaz PlayMusic
+		nelze nijak zapauzovat, každá skladba musí dohrát, jakmile je spuštěna. Uvnitř programu je to uděláno pomocí techniky "Herní smyčka". 
+	</p>
+	<p>
+		Aby se vám lépe skladby psaly, ve spodní části je nakreslené piánko s názvy not. A zhruba uprostřed se nachází textové pole a tlačítko "Stáhnout".
+		Tím se dá do programu přímo stáhnout skladba, kterou jsme nahráli sem na web. Pokud nějakou skladbičku zapíšete, pošlete nám ji.
+		My ji na web nahrajeme, a každý si ji bude moci stáhnout a přehrát (a samozřejmě vás nemine odměna :)). Dostupné názvy skladeb zobrazíte tak, 
+		že na místo jména skladby napíšete "seznam", a měla by se vám (po kliknutí na "Stáhnout") zobrazit zpráva se seznamem názvů. Každý z nich je možné
+		zadat jako název do políčka pro stažení. Pozor, úspěšné stažení přepíše noty, které byly zadané v hlavním textovém poli!
+	</p>
+	<p>
+		P.S - Ano, i to se dá pomocí Small Basicu dělat. Můžete se klidně podívat na zdrojový kód, jen teda pracuje se v něm s objekty
+		<code class="sb-object">Network</code> a <code class="sb-object">File</code>, které jsme neprobírali.
+	</p>
+</div>
+
+<br />
+
+<h3>Objekt Program</h3>
+<button class="collapsible" id="program"></button>
+<div class="collapsible-content">
+	<p> Objekt <code class="sb-object">Program</code> představuje náš spuštěný program. Je na něm tedy pár obecných věcí, jež souvisí s celým programem.</p>
+	<p>
+		Na objektu <code class="sb-object">Program</code> máme dva jednoduché, ale celkem užitečné příkazy.<br />
+		<code class="sb-funcProp">End()</code> okamžitě ukončí program. U Textového okna se neobjeví žádná hláška "press any key", program se "sám odkřížkuje". Veškerý kód, co 
+		následuje, se již nevykoná. Může se hodit v kombinaci s podmínkou, když se stane něco, že už nechceme pokračovat, můžeme takto program zavřít.
+	</p>
+	<p>
+		<code class="sb-funcProp">Delay(čas)</code> pozdrží program na zadaný počet milisekund. To je číslo tisíckrát menší, než je sekunda (jako je milimetr a metr). Dá se použít 
+		třeba na odpočítání, viz příklad s proměnnými. Pro pozdržení na dobu jedné sekundy tedy napíšeme
+		<code class="sb-funcProp"><span class="sb-object">Program</span>.Delay(<span class="sb-value">1000</span>)</code>
+	</p>
+	<p>
+		Dále máme na objektu vlastnost <code class="sb-funcProp">Directory</code>, je to vlastnost pouze pro čtení a vyjadřuje nám složku, ve které se nachází 
+		spustitelný soubor (.exe soubor) s naším programem. Ten se nám generuje, kdykoli zmáčkneme tlačítko "Spustit" v softwaru Small Basicu, do stejné složky,
+		ve které se nachází náš zdrojový kód (soubor .sb), čili složka, kam si program uložíme.<br />
+		To se hodí k tomu, že můžeme do složky s programem umístit další soubory, které program k běhu potřebuje, například zvuky a obrázky. Ty je pak snadné
+		načíst, protože jako cestu k nim použijeme právě <code class="sb-funcProp"><span class="sb-object">Program</span>.Directory</code>, ke kterému přes
+		zpětné lomeno "\"" připojíme název souboru.
+	</p>
+</div>
+
+<br />
+<br />
+
+<h2 id="extras">Doplňující poznatky - znalosti navíc</h3>
+<h3>Barvy</h3>
+<button class="collapsible" id="colors">Barvy v počítači a jak pracovat ve Small Basicu s barvovými kódy</button>
+<div class="collapsible-content">
+	<p>
+		Nejtypičtějším způsobem, jakým se v počítači pracuje s barvami, je tzv. režim 16 milionů barev. Pracuje v něm i Small Basic. 
+		My už známe <a href="SBBarvy.html">pojmenované barvy</a>, kterými barvíme objekty na grafickém okně. Nás teď bude zajímat
+		prostřední sloupec z tabulky barev - Kód. Každá z těch 16 milionů barev se totiž dá vyjádřit takovýmto šestimístným kódem.
+		Z toho je jasné, že pojmenované barvy ani zdaleka nepostihují celou škálu barev, které můžeme vykreslovat.
+	</p>
+	<p>
+		Každá barva, kterou na počítači máme, se skládá z červené, modré a zelené složky (Red, Green & Blue = RGB). Mícháním čisté
+		červené, čisté zelené a čisté modré pak získáme výsledek. Můžete si to vyzkoušet přes tzv. color picker, mě se líbí
+		<a href="https://htmlcolorcodes.com/">tento z webu html color codes</a>. Je tam vybírač barev, a kód vybrané barvy se vám zobrazí
+		v políčku "Hex".<br />
+		Nyní si vysvětlíme, jak tyto kódy fungují. Nicméně i bez tohoto vysvětlení je klidně můžete ve vašich programech používat namísto
+		pojmenovaných barev, například
+		<code class="sb-funcProp"><span class="sb-object">GraphicsWindow</span>.BrushColor = <span class="sb-value">"#5689A5"</span></code>
+	</p>
+	<p>
+		Možná víte, že počítač pracuje ve dvojkové soustavě, zná jen jedničky a nuly. Protože jedička znamená, že elektrický proud teče
+		a nula znamená, že neteče, jiná možnost není. Tomu říkáme digitální signál, máme buď 1 nebo 0 a nic mezi.
+		Jednomu čísílku nula či jedna se říká bit. <br />
+		A teď - možná jste už slyšeli o "bajtech", správně "bytech", resp. o větších kilobajtech, megabajtech atd. Jsou to jednotky
+		velikosti paměti počítače. Řekli jsme, že počítač pracuje s bity, čili velikost paměti je počet bitů, které se na nějaké
+		paměťové zařízení počítače vejde.<br />
+		Jeden byte se skládá z 8 bitů - tedy máme 8 čísílek, u kterých se mohu rozhodnout 0 či 1. Čili mám dvě možnosti pro každé z nich.
+		Udělám-li 2x2x2x2x2x2x2x2 (vynásobím 8 dvojek za každý bit), dostanu 256. Jeden byte nám tedy umí představovat číslo mezi 
+		0 a 255 (256 možností, jako když je mezi 0 a 9 deset čísel, deset možností).<br />
+		<em>(Kilobyty jsou pak 1000 bytů, Megabyty 1000 kilobytů atd. Možná jste už slyšeli, že správně je to 1024. A to je skutečně
+			správnější, pak se to ovšem správně nazývá Kibibyty, Mebibyty atd.)</em>
+	</p>
+	<p>
+		No a tak se vzalo, že každou složku, červenou, zelenou i modrou, můžeme míchat v rozsahu 1 byte, tedy pro každou složku 
+		máme zvlášť možnost vybrat 0 - 255 dílků, které přispějí k finálnímu mixu barev. Čím bude celkově dílků méně, tím tmavší bude
+		barva, čím více, tím světlejší barva. Tedy (0, 0, 0) je úplně černá, (255, 255, 255) je úplně bílá. (255, 0, 0) je čistá
+		červená, (0, 255, 0) čistá zelená a (0, 0, 255) čistá modrá. Čím si jsou čísla blíže, tím je barva více šedá,
+		když jsou stejná, je to vždy nějaký odstín šedé (máme 256 odstínů čistě šedé od bílé po černou). Naopak, když převažuje jedna
+		ze složek, je barva spíše do červena, zelena či modra, když převažují dvě složky, je barva do azurova, purpurova či žluta.
+		(255, 255, 0) je čistá žlutá, (255, 0, 255) je čistá purpurová a (0, 255, 255) je čistá azurová. Tomu se někdy
+		říká doplňkové barvy k červené, zelené a modré (doplněk k RGB je CMY - cyan, magenta a yellow, tedy azurová, purpurová a žlutá).
+	</p>
+	<p>
+		Dílků máme tedy až 256 ve třech složkách. Vynásobíme-li 256x256x256, dostáváme 16 777 216 kombinací, tedy něco přes 16 milionů.
+		Proto se také tomuto způsobu tvoření a používání počítačových barev říká režim 16 milionů barev. A skutečně, těch kombinací je 
+		takto "nepřeberné množství". Zbytek textu se zabývá ve zkratce tím, kde se berou ty šestimístné kódy z číslic a písmen. Je to
+		těžší porce, ale kdo ji pochopí, dokáže správně přečíst a interpretovat význam kódu. Je to také nejrychlejší způsob, jak Small
+		Basicu barvu předat, přímo textová hodnota s kódem.<br/ >
+		Naštěstí máme na grafickém okně příkaz <code class="sb-funcProp">GetColorFromRGB(<span class="sb-value">červená</span>,
+		<span class="sb-value">zelená</span>, <span class="sb-value">modrá</span>)</code>, kterému dáme tři čísla v rozmezí
+		0-255 reprezentující červenou, zelenou a modrou složku cílové barvy, a příkaz nám spočítá a vrátí šestimístný kód
+		i se znakem <code class="sb-value">#</code> křížek na začátku. Kód pak můžeme vložit do nějaké barvové vlastnosti.
+		Pokud se chcete dovědět, jak se číselný kód počítá, přečtěte si i následující text o průhlednosti.
+	</p>
+	<hr />
+	<p>
+		Následující text vysvětluje matematiku za šestimístnými kódy. Je to těžší kus, a je tu spíš pro zajímavost. Pro práci s libovolnými
+		barvami mimo ty pojmenované stačí znát <code class="sb-funcProp">GetColorFromRGB(...)</code>, viz předchozí odstavec; nebo 
+		použít nějaký color picker a zjistit si kód barvy vybráním z palety. 
+	</p>
+	<p>
+		A kde se vezme ten šestimístný kód? Když za každou barvu dávám 1 byte, a každý tvoří 8 bitů? 
+		Pro pochopení musí následovat troška matematiky. Všichni dobře známe desítkovou soustavu. Čísla v desítkové soustavě zapisujeme
+		číslicemi od 0 do 9 (tedy 0,1,2,3,4,5,6,7,8,9), a těch číslic je celkem deset, proto je soustava desítková.
+		Dokud tedy máme počet devět a menší, vystačíme si s jednou číslicí pro celé číslo. Tomu říkáme jednotky.<br />
+		Jakmile ale přelezeme desítku, přidám si do čísla další číslici, tedy desítky. Například dvacet sedm věcí zapíšeme jako 27,
+		tedy máme 2 desítky a 7 jednotek. Tedy vlastně 27 = 2x10 + 7x1 - dvacet sedm je 2 krát desítka a 7 krát jednotka.
+		Když nám dojdou desítky, přidáme stovky, pak tisíce, desetitisíce a tak dále.<br />
+		Vidíme, že číslice přidáme vždycky, když se dostaneme k číslu, které je deset krát to, co už jsme měli. Tedy jakmile znovu
+		vynásobíme číslem naší soustavy, přidáváme číslici - 1 - 10 - 100 - 1000 - 10000 a tak dále.
+	</p>
+	<p>
+		Teď se podíváme na výše zmiňovanou dvojkovou soustavu. Je dvojková, takže má jen dvě číslice, 0 a 1. S jednotkami tedy zvládneme
+		zapsat nejvýše číslo jedna, a pak potřebuju přidat číslici. Ale pozor - říkali jsme, že číslici přidáváme, když vynásobíme číslem 
+		naší soustavy. Takže to, co přidáme, nebudou desítky, ale dvojky. Další nebudou stovky, ale čtyřky. Pak osmičky, šestnáctky atd.<br />
+		Čili opět, jakmile znovu vynásobíme číslem soustavy, což je tentokrát 2, přidáváme číslici - 1 - 2 - 4 - 8 - 16 - 32 - 64 - 128 - 256 - 512 atd.<br/ > 
+		Zkusme se podívat na číslo ve dvojkové soustavě 1001 = 1x8 + 0x4 + 0x2 + 1x1 - jedna nula nula jedna je 1 krát osmička + 0 krát čtyřka +
+		0 krát dvojka + 1 krát jednotka. Takže 1001 ve dvojkové soustavě je 9 v desítkové soustavě. Srovnej s příkladem s 27 výše.<br />
+		Rozeberu tu ještě tu dvacet sedmičku, 27 = 2x10 + 7x1 = 1x16 + 1x8 + 0x4 + 1x2 + 1x1 = 11011. A pozor, nečteme to "jedenáct tisíc jedenáct", ale
+		"jedna jedna nula jedna jedna".
+	</p>
+	<p>
+		Zpátky k bytu. Skládá-li se z osmi bitů, skládá se vlastně zároveň z 8 dvojkových číslic. Tedy zprava z jednotek, dvojek, čtyřek, 
+		osmiček, šestnáctek, dvaatřicítek, čtyřiašedesátek a stoosmadvacítek. Proto je nejvyšší číslo 255 - když uděláme 128x2, dostaneme 256 a vidíme,
+		že bychom museli přidat devátou číslici reprezentující dvěstěšestapadesátky. Ovšem informatici si vcelku prakticky řekli, že psát kódy barev jako
+		24 místná čísla z jedniček a nul je nepraktické, a vymysleli zlepšovák.
+	</p>
+	<p>
+		Pro zlepšovák se musíme podívat na šestnáctkovou soustavu. Pokud jste pochopili povídání doposud, asi vás napadá, jak se to asi 
+		napíše, když bychom potřebovali šestnáct číslic od nuly do patnáctky. Naše arabské číslice jdou ale jen do devítky. Řešení je jednoduché,
+		použijí se písmenka A - F.<br />
+		Máme tedy v šestnáctkové soustavě číslice od 0 do F (tedy 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F), a je jich skutečně šestnáct.
+		Naše známé číslo 27 tak v šestnáctkové soustavě zapíšeme jako 27 = 2x10 + 7x1 = 1x16 + 11x1 = 1x16 + Bx1 = 1B, čteme "jedna bé".
+		Tedy 1B je 1 krát šestnáctka a B-krát (=11 krát) jednotka.<br />
+		Číslice přidáváme při násobení 16 - tedy 1 - 16 - 256 - 4096 - 65536 a tak dále. 
+	</p>
+	<p>
+		A teď finální trik. Číslice 0-F nám na jednom místě, jako jednotky, zachytí číslo až do patnáctky. Dvojkové číslo 1111 je ale také patnáct (1x8 + 1x4 + 1x2 + 1x1).
+		Zároveň je to ale také půlka jednoho byte! Takže můžeme vzít obě půlky každého bytu zvlášť, přečíst je jako čísla ve dvojkové soustavě, zapsat jako šestnáctkovou číslici
+		a dát to za sebe. Vzkoušejme to opět na našem známém, čísle 27. Mělo by nám vyjít jako 1B, tak schválně, jestli se to povede.<br />
+		Dvojkový zápis je 00011011 (doplněno na 8 číslic, aby to byl celý byte). Teď číslo roztrhneme na dvě půlky, 0001 a 1011. První půlka, 0001, to je vlastně jen jednotka, takže 
+		výsledek je 1. Druhá půlka, to je 8 + 2 + 1 (1x8 + 0x4 + 1x2 + 1x1), to je jedenáct, takže číslice B. Slepíme k sobě a máme výsledek - 1B. Hurá, všechno funguje.<br />
+		A tak tedy vzniká šestimístný kód. Do šestnáctkové soustavy se převede hodnota červené složky, zelené složky a modré složky, dá se to za sebe a plácne se před to křížek #.
+		Mimochodem, to je i vysvětlení, proč ve vybírači barviček najdeme kód jako položku "Hex", je to zkratka anglického slova "hexadecimal", což znamená "šestnáctkový".
+	</p>
+</div>
+
+<button class="collapsible" id="transparency">Průhlednost barev a práce s průhledností ve Small Basicu</button>
+<div class="collapsible-content">
+	<p>
+		Pro pochopení si projděte začátek předchozího textu. Práce s průhlednými barvami je možná, ovšem skýtá několik podivností,
+		proto jsme do ní nepouštěli přímo na kroužku. 
+	</p>
+	<p>
+		Jak už víme, existuje pojmenovaná barva "Průhledná", čili "Transparent". Podle tabulky barev má hodnotu <code class="sb-value">"#00000000"</code>.
+		To je nějaké podezřelé, ten kód má 8 šetnáctkových číslic, nikoli 6, jak o tom píšeme všude na této stránce. Ona totiž každá barva má kromě 
+		3 bytů pro barevnou složku ještě jeden byte pro tzv. "alfa" (správně alpha) složku. Té složce se také někdy říká "opacity", česky "neprůhlednost".
+		Pro všechny pojmenované barvy (mimo průhledné) a pro každou ze 16 milionů barev se šestimístným kódem má tato složka hodnotu plných 255
+		(čili "FF" šestnáctkově), tedy zcela neprůhledná. Pokud ale chceme mít barvu částečně průhlednou, můžeme dát jinou hodnotu této alfa složce.
+	</p>
+	<p>
+		S názvem opacity jsme se potkali už u objektu <code class="sb-object">Shapes</code>, kdy můžeme útvaru jako celku změnit, jak neprůhledný je,
+		vcelku přímočaře od 0 do 100. Dále jsme v předchozím textu rozebrali, že příkazem
+		<code class="sb-funcProp"><span class="sb-object">GraphicsWindow</span>.GetColorFromRGB(...)</code> si můžeme ulehčit získání kódu barvy,
+		kdy příkazu dáme jen tři čísla reprezentující počet dílků červené, zelené a modré složky, a samotný výpočet šestnáctkového kódu barvy
+		provede příkaz. U průhledných barev bohužel žádný takovýto komfort nemáme, a tak si musíme spočítat šestnáctkové číslo sami. Naštěstí na to 
+		existuje poměrně jednoduchý trik, který je popsán níže.
+	</p>
+	<p>
+		V osmimístném kódu barvy je alfa složka jako první. Pro ilustraci tedy napišme například, že
+		<code class="sb-value">"#5689A5" <span class="sb-funcProp">=</span> "#FF5689A5"</code>. Obě hodnoty opravdu vyjadřují tutéž barvu,
+		jak je popsáno v prvním odstavci. Pokud naopak dáme první dva znaky "00", je úplně jedno, co bude následovat, barva se bude vždy
+		chovat jako průhledná. Mezihodnoty (01 až FE) pak reprezentují nějak průhlednou barvu. Šestnáctkové hodnoty 1 až FE jsou čísla 1 až 254.
+		Ukážeme si nyní, jak si šestnáctkovou hodnotu spočítat.
+	</p>
+	<p>
+		Tím, že převádíme čísla menší, než 256, funguje následující matematický trik: Převáděné číslo vydělíme 16 (pod čarou). Výsledek i zbytek převedeme na šestnáctkovou číslici
+		(0-9 je stejné, 10-15 jsou A-F). První číslice je výsledek, druhá zbytek, tím vzniká šetnáctkový kód. Ukažme si konkrétní příklad, zkusíme číslo 186:
+		<pre>
+ 186 : 16 = 11 (10)
+ 186
+-176
+  10
+		</pre>
+		Výsledek 11 odpovídá číslici B, zbytek 10 číslici A. Číslo 186 je tedy v šestnáctkové soustavě BA. 
+	</p>
+	<p>
+		Jak je možné, že to funguje? Výsledkové číslo má jen dvě číslice, což v šestnáctkové soustavě znamená FF, tedy 255. V desítkové soustavě je to 99,
+		další číslo, což je 100, už má 3 číslice. Pokud bychom tedy převáděli z desítkové do desítkové soustavy číslo 86, tak <code>86 : 10 = 8 (6)</code>,
+		a stejným postupem vznikne zpátky 86. Pokud bychom ale dělali číslo širší, než 99, museli bychom dělit nejdříve 100 a až pak 10. Pro převod
+		čísla většího, než 255, do šestnáctkové soustavy, bychom museli dělit nejdříve 256 a až pak 16. To by bylo těžší, dělit pod čarou 256 je "otrava",
+		ale protože FF je maximum, nemusíme to dělat.
+	</p>
+	<br />
+	<p>
+		Nyní si ještě vysvětleme záludnosti příkazu <code class="sb-funcProp"><span class="sb-object">GraphicsWindow</span>.GetPixel(...)</code>. Jak 
+		už víme, zjistí nám barvu pixelu na grafickém okně. Ovšem pouze tehdy, když byl tento pixel pokreslen přímo grafickým oknem. Nevšímá si tedy 
+		barev útvarů objektu <code class="sb-object">Shapes</code>, barev čas namalovaných želvou nebo barev ovládacích prvků objektu
+		<code class="sb-object">Controls</code>. Ignoruje také barvu pozadí - pozadí je speciální vrstva, která se nachází "pod" plátnem grafického okna,
+		a té můžeme dávat barvu, ale do stavu plátna samotného nezasahuje. Je to logické - při změně barvy plátna nedojde k překrytí vykreslenců novým
+		pozadím. Jak také víme, u nevykreslených pixelů nám příkaz vrátí #000000, tedy černou. Oni jsou ty pixely ve skutečnosti průhledné, ovšem průhlednost
+		nám <code class="sb-funcProp">GetPixel()</code> ignoruje.
+	</p>
+	<p>
+		A to je poslední záludnost. Barvu s průhledností samozřejmě můžeme nastavit Peru a Štětci grafického okna. Ostatně jsme to už dělali, když jsme nastavovali
+		štětec jako <code class="sb-value">"Transparent"</code>, aby se nám útvary přidávaly jen jako rámečky (u objektu Shapes, proto mluvíme o přidávání).
+		U přidávání to tedy funguje, a světe div se, funguje to i u vykreslování (Fill a Draw). Ovšem <code class="sb-funcProp">GetPixel()</code> průhlednost
+		ignoruje, jak už víme. Pokud tedy zajistíme barvu nějakého zčásti průhledného pixelu, vrátí se nám úplně jiná barva, než ta, kterou měl štětec/pero, co 
+		vykreslilo zjišťovaný pixel.
+	</p>
+	<p>
+		Představme si, že pixel byl vykreslen štětcem, který měl hodnotu "#80FF0000". Tedy přesně napůl průhlednou čistě červenou barvu. Intuitivní by zřejmě bylo,
+		aby <code class="sb-funcProp">GetPixel()</code> vrátil "#FF0000" (tedy totéž, co "#FFFF0000"), tedy že by alpha složku prostě vyignoroval. Nebo, že by se podíval
+		na barvu pozadí, tu by namíchal podle alpha složky (tedy v našem případě půl na půl) s barvou pozadí a vrátil tento mix.<br />
+		Bohužel se neděje ani jedno. Příkaz částečně průhlednou barvu opravdu namíchá a vrátí nám hodnotu mixu, ale nikoli s barvou pozadí. Vždy s ČERNOU
+		barvou #000000. Což je trochu neintuitivní, když většinou máme bílé pozadí. Vrácená barva GetPixelem bude tak #800000, tedy tmavě čistě červená
+		(poloviční červená). Naprotitomu mix s bílou barvou by byl #FF8080, což je světlá červená (a tedy opravdu napůl míchaná čistá červená s bílou).
+		Ten však nedostaneme, jak jsme již řekli, takže bychom si výpočet mixu s pozadím museli doprogramovat sami, pokud bychom to potřebovali.
+	</p>
+</div>
+
+<script>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+	
+	for (i = 0; i < coll.length; i++) {
+	  coll[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var content = this.nextElementSibling;
+		if (content.style.maxHeight){
+		  content.style.maxHeight = null;
+		} else {
+		  content.style.maxHeight = content.scrollHeight + "px";
+		} 
+	  });
+	}
+</script>
+</body></html>

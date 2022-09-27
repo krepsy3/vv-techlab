@@ -1,0 +1,80 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' 24) Jednoduchá hra
+
+GraphicsWindow.Width  = 640
+GraphicsWindow.Height = 360
+GraphicsWindow.CanResize = "False"
+GraphicsWindow.Title = "Hra s míčkem"
+GraphicsWindow.BackgroundColor = "Ivory"
+
+sirkaPadla = 120
+vyskaPadla = 15
+levitacePadla = 3
+velikostMicku = 35
+
+GraphicsWindow.PenColor = "SteelBlue"
+GraphicsWindow.BrushColor = "AliceBlue"
+padlo = Shapes.AddRectangle(sirkaPadla, 15)
+Shapes.Move(padlo, 0, GraphicsWindow.Height - vyskaPadla - levitacePadla)
+
+GraphicsWindow.PenColor = "DarkOliveGreen"
+GraphicsWindow.BrushColor = "Honeydew"
+micek = Shapes.AddEllipse(velikostMicku, velikostMicku)
+
+GraphicsWindow.MouseMove = ZpracujPohybMysi
+GraphicsWindow.MouseDown = ZpracujKlikMysi
+
+NovaHra()
+
+While "True"
+  While nazivu
+    novaX = Shapes.GetLeft(micek) + pohybX
+    novaY = Shapes.GetTop(micek) + pohybY
+    
+    If (novaX > GraphicsWindow.Width - velikostMicku) Or (novaX < 0) Then
+      novaX = novaX - 2 * pohybX
+      pohybX = -pohybX
+    EndIf 
+    
+    If (novaY < 0) Then
+      novaY = novaY - 2 * pohybY
+      pohybY = -pohybY
+    EndIf 
+    If (novaY > GraphicsWindow.Height - velikostMicku - vyskaPadla - levitacePadla) Then
+      If (novaX > Shapes.GetLeft(padlo) - velikostMicku / 2) And (novaX < Shapes.GetLeft(padlo) + sirkaPadla - velikostMicku / 2) Then
+        novaY = novaY - 2 * pohybY
+        pohybY = -pohybY
+        Sound.PlayClick()
+      Else
+        nazivu = "False"
+        Sound.PlayBellRing()
+        GraphicsWindow.ShowMessage("Prohrál jsi!", ":(")
+        novaY = GraphicsWindow.Height - velikostMicku
+      EndIf
+    EndIf  
+    
+    Shapes.Move(micek, novaX, novaY)
+    Program.Delay(1)
+  EndWhile
+EndWhile
+
+Sub NovaHra
+  pohybX = 2
+  pohybY = 2
+  Shapes.Move(micek, 5, 5)
+  nazivu = "True"
+EndSub
+
+Sub ZpracujPohybMysi
+  pozice = GraphicsWindow.MouseX - sirkaPadla / 2 
+  pozice = Math.Min(GraphicsWindow.Width - sirkaPadla, pozice)
+  pozice = Math.Max(0, pozice)
+  
+  Shapes.Move(padlo, pozice, GraphicsWindow.Height - vyskaPadla - levitacePadla)
+EndSub
+
+Sub ZpracujKlikMysi
+  If nazivu = "False" Then
+    NovaHra()
+  EndIf
+EndSub

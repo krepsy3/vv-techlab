@@ -1,0 +1,49 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VII
+' 28)  Správně napsané vyšrafování čtverce želvou z hlediska konkurence
+
+' Inicializace 
+Turtle.Show()
+Turtle.Speed = 9
+velikost = 20
+GraphicsWindow.MouseDown = HandleMouseDown
+
+' proměnná pokyn slouží k předání informace, že uživatel chce nakreslit šrafování
+' pokyn = 0 -> nic nedělej
+' pokyn = 1 -> opiš si lastx a lasty a kolem nich vyšrafuj čtvereček
+pokyn = 0
+
+' herní smyčka
+While "True"
+  ' dostaneme-li pokyn něco děláme
+  If pokyn = 1 Then
+    ' jako první musíme opsat společné proměnné, na které může obslužná subrutina 
+    ' kdykoli znovu sáhnout, pokud uživatel klikne jinam
+    basex = lastx
+    basey = lasty
+    
+    'provedeme kreslení
+    Turtle.PenUp()
+    Turtle.MoveTo(basex - velikost / 2, basey - velikost / 2)
+    Turtle.PenDown()
+    Turtle.Angle = 90
+    uhel = 90
+    For i = 0 To velikost Step 3
+      Turtle.Move(velikost)
+      Turtle.Turn(uhel)
+      Turtle.Move(3)
+      Turtle.Turn(uhel)
+      
+      uhel = -uhel
+    EndFor
+    
+    'na závěr obsluhy pokynu nastavíme pokyn opět na 0. v příští iteraci se tak nepokusíme
+    'znovu kreslit, ale vyčkáme, až se opět objeví pokyn = 1
+    pokyn = 0
+  EndIf
+EndWhile
+
+Sub HandleMouseDown
+  pokyn = 1
+  lastx = GraphicsWindow.MouseX
+  lasty = GraphicsWindow.MouseY
+EndSub

@@ -1,0 +1,67 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' Úkol na doma VI
+'
+' Tady je malý úkol, který můžete zkusit naprogramovat doma a přinést
+' na další lekci, nebo nám ho poslat emailem. Pokud to dokážete, tak to
+' znamená, že jste se na dnešní lekci naučili, co jste měli a navíc
+' od nás dostanete malou odměnu :) Tak s chutí do toho!
+'
+' Pokud si nevíte rady, podívejte se na webovou stránku krepsy3.wz.cz/techlab.html
+' (to je ta, kde jste si tohle stáhli), na popis toho, co jsme se učili, nebo do zdrojových
+' kódů, které jste si odnesli z kroužku nebo stáhli z webu od nás
+'
+
+
+'______________________________________________________________
+' ZADÁNÍ 1 - Úkol slouží k procvičení práce s poli. Napište program, který si od uživatele
+' načte věky jeho kamarádů. Zadávání končí, pokud je načtený věk nula a menší.
+' Z věků spočítá průměr, a pro každého kamaráda spočítá odchylku od průměru.
+' Odchylka se spočítá jako hodnota mínus průměr. Tedy odchylka je číslo, které nám
+' řekne, jak moc se každý kamarád odlišuje od průměru. Když je odchylka kladná, je
+' kamarád o odchylku starší, než je průměr. Pokud je záporná, je kamarád o odchylku
+' mladší, než je průměr. Nakonec všechny odchylky vypište
+
+' příklad vstupu od uživatele:
+'    12 - ENTER
+'    13 - ENTER
+'    15 - ENTER
+'    8 - ENTER
+'    0 - ENTER
+' co vypíše program:
+'    0
+'    1
+'    3
+'    -4
+'    Press any key to continue...
+
+
+' Vylepšení - všimněte si, že součet odchylek je 0. Pokud ne, je chyba ve výpočtu.
+' Nicméně je také zajímavé spočítat, kolik je průměrná odchylka. Pokud bychom ji
+' počítali rovnou, vyjde samozřejmě pokaždé 0, protože součet vyjde nulový. S tím
+' si poradíme tak, že budeme brát čísla kladná. K tomu slouží příkaz Math.Abs(číslo).
+' Příkazu dáme číslo. Je-li kladné, příkaz nám ho vrátí beze změny. Je-li záporné,
+' příkaz odstraní mínus a číslo vrátí.
+' Math.Abs(5) nám dá 5, Math.Abs(-3) nám dá 3.
+' Abs znamená absolutní hodnota - absolutní hodnota čísla je totéž číslo, jen vždy
+' kladné.
+
+' Vezměte tedy spočítané odchylky, a spočítejte z jejich absolutních hodnot nový
+' průměr, a ten vypište. Průměrná odchylka se nazývá "rozptyl", protože nám
+' říká, jak moc rozptýlená je věkově daná skupina kamarádů. Pokud je malý,
+' znamená to, že mají všichni kamarádi podobný věk. Pokud je velký, znamená
+' to, že ve skupině jsou někteří kamarádi výrazně starší či mladší, než ostatní.
+
+' příklad vstupu od uživatele:
+'    12 - ENTER
+'    13 - ENTER
+'    15 - ENTER
+'    8 - ENTER
+'    0 - ENTER
+' co vypíše program:
+'    odchylky:
+'    0
+'    1
+'    3
+'    -4
+'    rozptyl: 2
+'    Press any key to continue...

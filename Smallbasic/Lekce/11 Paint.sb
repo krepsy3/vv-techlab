@@ -1,0 +1,48 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic V
+' 18) Malování v Grafickém okně - verze 2
+
+'Nastavení velikosti okna - tím se nám i ukáže
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 800
+
+'Nastavení důležitých vlastností
+GraphicsWindow.BackgroundColor = "Gold"
+GraphicsWindow.PenColor = "Indigo"
+
+'start malování je tam, kde má uživatel zrovna myš - vůči oknu!
+xstart = GraphicsWindow.MouseX
+ystart = GraphicsWindow.MouseY
+
+'Nastavení zpracovávání událostí myši
+GraphicsWindow.MouseMove = Nakresli
+GraphicsWindow.MouseDown = ZpracujZmacknuti
+GraphicsWindow.MouseUp   = ZpracujZvednuti
+
+
+'Subrutina pro zpracování stisknutí tlačítka myši uživatelem
+'Schová kurzor myši
+Sub ZpracujZmacknuti
+  Mouse.HideCursor()
+EndSub
+
+'Subrutina pro zpracování puštění tlačítka myši uživatelem
+'Zjeví kurzor myši
+Sub ZpracujZvednuti
+  Mouse.ShowCursor()
+EndSub
+
+'Subrutina pro zpracování pohnutí myší uživatelem
+Sub Nakresli  
+  'Získáme cíl malování - místo, kam se uživatel nově pohnul
+  xcil = GraphicsWindow.MouseX
+  ycil = GraphicsWindow.MouseY
+  
+  'Namalujeme přímku do cíle - pouze když uživatel drží levé myšítko
+  If Mouse.IsLeftButtonDown Then
+    GraphicsWindow.DrawLine(xstart, ystart, xcil, ycil)
+  EndIf
+  
+  'Nynější cíl nastavíme jako start pro budoucí malování
+  xstart = xcil
+  ystart = ycil
+EndSub

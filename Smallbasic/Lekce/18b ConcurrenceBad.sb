@@ -1,0 +1,31 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VII
+' 26) Špatně napsané vyšrafování čtverce želvou z hlediska konkurence
+
+' Inicializace 
+Turtle.Show()
+Turtle.Speed = 9
+velikost = 20
+GraphicsWindow.MouseDown = HandleMouseDown
+
+Sub HandleMouseDown
+  basex = GraphicsWindow.MouseX
+  basey = GraphicsWindow.MouseY
+  
+  Turtle.PenUp()
+  Turtle.MoveTo(basex - velikost / 2, basey - velikost / 2)
+  Turtle.Angle = 90
+  Turtle.PenDown()
+  
+  angle = 90  
+  For i = 0 To velikost Step 3
+    Turtle.Move(velikost)
+    Turtle.Turn(angle)
+    Turtle.Move(3)
+    Turtle.Turn(angle)
+    angle = -angle
+  EndFor  
+EndSub
+  
+
+' Tento kód je špatně napsán z hlediska konkurence - náhodné, rychlé klikání v okně
+' želvu "zblázní"

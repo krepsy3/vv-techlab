@@ -1,0 +1,29 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' Úkol na doma V
+'
+' Tady je malý úkol, který můžete zkusit naprogramovat doma a přinést
+' na další lekci, nebo nám ho poslat emailem. Pokud to dokážete, tak to
+' znamená, že jste se na dnešní lekci naučili, co jste měli a navíc
+' od nás dostanete malou odměnu :) Tak s chutí do toho!
+'
+' Pokud si nevíte rady, podívejte se na webovou stránku krepsy3.wz.cz/techlab.html
+' (to je ta, kde jste si tohle stáhli), na popis toho, co jsme se učili, nebo do zdrojových
+' kódů, které jste si odnesli z kroužku nebo stáhli z webu od nás
+'
+
+
+'___________________________________________________________
+' ZADÁNÍ 1 - Opět  si budeme hrát s grafikou. Naučili jsme se pracovat s textem a
+' stylovat ho, takže úkol bude namalovat pomocí čar (a případně dalších tvarů)
+' půdorys vašeho pokojíčku či bytu, ve kterém bydlíte. K jednotlivým prvkům pak
+' vykreslete nějaké popisky.
+
+' Půdorys je výkres (zjednodušený) toho, jak něco vypadá zeshora. Například právě
+' místnost - čáry kolem dokola jsou jako zdi, obdélník může být skříň, postel, psací stůl,
+' kolečko například židle nebo i plyšák na posteli apod. Fantazie se meze nekladou.
+' Pro inspiraci se podívejte na výstup našeho řešení na
+' http://krepsy3.wz.cz/pudorys.png
+
+
+' Vylepšení - do programu udělejte tlačítko, které když uživatel zmáčkne, tak zmizí
+' všechny popisky, opětovným zmáčknutím se mu opět zobrazí.

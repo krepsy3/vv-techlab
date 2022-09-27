@@ -1,0 +1,58 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' 22) Simulace mraků na nebi
+
+'Nastavení okna
+GraphicsWindow.Height = 400
+GraphicsWindow.Width = 400
+GraphicsWindow.Title = "Mraky"
+GraphicsWindow.PenWidth = 1
+GraphicsWindow.PenColor = "Black"
+GraphicsWindow.BrushColor = "White"
+GraphicsWindow.BackgroundColor = "SkyBlue"  'nebeská modrá ;)
+
+'Příprava proměnných
+sirkaMraku = 150
+vyskaMraku = 70
+animacniPosun = 5
+
+mrak1 = Shapes.AddEllipse(sirkaMraku, vyskaMraku)
+mrak2 = Shapes.AddEllipse(sirkaMraku, vyskaMraku)
+mrak3 = Shapes.AddEllipse(sirkaMraku, vyskaMraku)
+
+'Pozice mraků
+x1 = 100
+y1 = 120
+
+x2 = 300
+y2 = 400
+
+x3 = 200
+y3 = 50
+
+'Hlavní programová nekonečná smyčka - program si ukončí uživatel křížkem
+While "true"
+  Shapes.Move(mrak1, x1, y1)
+  Shapes.Move(mrak2, x2, y2)
+  Shapes.Move(mrak3, x3, y3)
+  
+  If x1 > GraphicsWindow.Width Then
+    x1 = -sirkaMraku
+    y1 = Math.GetRandomNumber(300)
+  EndIf
+  x1 = x1 + animacniPosun
+  
+  If x2 > GraphicsWindow.Width Then
+    x2 = -sirkaMraku
+    y2 = Math.GetRandomNumber(200)
+  EndIf
+  x2 = x2 + animacniPosun
+  
+  If x3 > GraphicsWindow.Width Then
+    x3 = -sirkaMraku
+    y3 = Math.GetRandomNumber(300)
+  EndIf
+  x3 = x3 + animacniPosun
+  
+  'Pauzička - reguluje rychlost animace  
+  Program.Delay(10)
+EndWhile

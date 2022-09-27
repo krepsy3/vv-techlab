@@ -1,0 +1,103 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic X
+' 40)  Příklad na použití polí - spočítání průměru známek
+
+TextWindow.WriteLine("Piš známky:")
+znamkujeme = "True"
+pocetZnamek = 0
+
+While znamkujeme
+  znamka = TextWindow.ReadNumber()
+  
+  'je-li zadané číslo mimo možné známky (1 - 5), značí to konec zadávání
+  If (znamka > 5) Or (znamka < 1) Then
+    znamkujeme = "False"
+  Else
+    'přidání známky na konec pole - zvýšíme počet o jedna a na index s tímto počtem dáme známku
+    pocetZnamek = pocetZnamek + 1
+    znamky[pocetZnamek] = znamka
+  EndIf
+EndWhile
+
+If pocetZnamek = 0 Then
+  TextWindow.WriteLine("Nezadal jsi žádnou známku, nelze určit průměr ničeho.")
+Else
+  soucet = 0
+  
+  ' Projedeme pole známek pomocí smyčky For, a každou přičteme k celkovému součtu
+  For i = 1 To pocetZnamek
+    soucet = soucet + znamky[i]
+  EndFor
+  
+  vysledek = soucet / pocetZnamek
+  zaokrouhlene = Math.Round(vysledek)
+  TextWindow.WriteLine("Tvoje známka na vysvědčení je " + zaokrouhlene + " (z průměru známek " + vysledek + ").")
+EndIf
+
+
+'____________________
+TextWindow.Pause()
+TextWindow.Clear()
+'____________________
+
+
+' 41)  Příklad na použití polí - evidence položek jedné věci
+uzivatel["Jméno"] = "Karel"
+uzivatel["Příjmení"] = "Novák"
+uzivatel["Heslo"] = "Nowak@123445hslo"
+uzivatel["Datum narození"] = "02-08-1986"
+
+TextWindow.WriteLine(uzivatel)
+
+' Necháme si od uživatele říci, jakou uživatelskou položku chce vypsat:
+TextWindow.WriteLine("Napište položku (Jméno, Příjmení, Heslo, Datum narození):")
+polozka = TextWindow.Read()
+TextWindow.WriteLine(uzivatel[polozka])
+' A obejdeme se bez If polozka = "Jméno" Then ... ElseIf polozka = "Příjmení" Then ... a tak dále, funguje to rovnou
+
+
+'____________________
+TextWindow.Pause()
+TextWindow.Clear()
+'____________________
+
+
+' 42)  Příklad na vícerozměrná pole - databáze uživatelů
+uzivatele[1] = uzivatel   ' přidání pole do pole - vzniká dvourozměrné pole
+pocetUzivatelu = 1
+
+Sub pridejUzivatele
+  pocetUzivatelu = pocetUzivatelu + 1
+  uzivatele[pocetUzivatelu]["Jméno"] = jmeno
+  uzivatele[pocetUzivatelu]["Příjmení"] = prijmeni
+  uzivatele[pocetUzivatelu]["Heslo"] = heslo
+  uzivatele[pocetUzivatelu]["Datum narození"] = datum
+EndSub
+
+jmeno = "Kryštof"
+prijmeni = "Žucha"
+heslo = "D0stB3zp3cn3H3sl0"
+datum = "27-05-1999"
+pridejUzivatele()
+
+jmeno = "Matěj"
+prijmeni = "Žucha"
+heslo = "123MamRadZemlbabu456"
+datum = "03-12-2000"
+pridejUzivatele()
+
+jmeno = "Klára"
+prijmeni = "Hájková"
+heslo = "heslo12345"
+datum = "25-05-1984"
+pridejUzivatele()
+
+TextWindow.Write("Evidujeme uživatele: ")
+For i = 1 To pocetUzivatelu
+  If i > 1 Then
+    TextWindow.Write(", ")
+  EndIf
+  TextWindow.Write(uzivatele[i]["Jméno"])
+EndFor
+TextWindow.WriteLine("")
+
+' Pokročilejší práci nám zajistí objekt Array. Zájemci se podívají na web do doplňujících poznatků.

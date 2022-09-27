@@ -1,0 +1,112 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VIII
+' 29)  Manipulace s textem pomocí objektu Text
+
+' Příkaz append a operátor + (plus) dělají to samé
+a = "Mám rád "
+b = "žemlovku"
+TextWindow.WriteLine(a + b)
+TextWindow.WriteLine(Text.Append(a, b))
+
+
+'--------------------------
+TextWindow.Pause()
+TextWindow.Clear()
+'--------------------------
+
+
+'Pokud je ale obsah proměnných číslo, plus udělá sčítání
+cisloJedna = 1 'číselná hodnota 1
+textJedna = "1" 'textová hodnota "1"
+
+TextWindow.WriteLine(cisloJedna + cisloJedna)
+TextWindow.WriteLine(cisloJedna + textJedna)
+TextWindow.WriteLine(textJedna + textJedna)
+
+TextWindow.WriteLine("")
+
+TextWindow.WriteLine(Text.Append(cisloJedna, cisloJedna))
+TextWindow.WriteLine(Text.Append(cisloJedna, textJedna))
+TextWindow.WriteLine(Text.Append(textJedna, textJedna))
+
+'--------------------------
+TextWindow.Pause()
+TextWindow.Clear()
+'--------------------------
+
+'Pokud máme v proměnné text a použijeme matematický operátor, z textu se stane 0 (nula):
+a = "tohle rozhodně není číslo"
+
+TextWindow.Write("a - 0 = ")
+TextWindow.WriteLine(a - 0)
+
+TextWindow.Write("a * 1 = ")
+TextWindow.WriteLine(a * 1)
+
+TextWindow.Write("a / 1 = ")
+TextWindow.WriteLine(a / 1)
+
+'U sčítání se ale přejde ke spojování textů
+TextWindow.Write("ale a + 0 = ")
+TextWindow.WriteLine(a + 0)
+
+TextWindow.WriteLine("")
+
+'"Špinavé" řešení je odečítat mínusové číslo
+b = 2
+
+TextWindow.Write("a - b = ")
+TextWindow.WriteLine(a - b)
+
+TextWindow.Write("a + b = ")
+TextWindow.WriteLine(a + b)
+
+TextWindow.Write("a - (-b) = ")
+TextWindow.WriteLine(a - (-b))
+
+'Když tedy máme neznámé proměnné, textové spojení provedeme přes Text.Append() a číselné sečtení přes - (-). To je jistota.
+
+
+'--------------------------
+TextWindow.Pause()
+TextWindow.Clear()
+'--------------------------
+
+
+'Další příkazy
+zprava = "Tohle je testovací zpráva našeho programu. Jupí! :)"
+TextWindow.WriteLine("Zpráva: " + zprava)
+TextWindow.WriteLine("")
+
+'Zjištění délky textu
+TextWindow.WriteLine("Zpráva má délku " + Text.GetLength(zprava) + " znaků")
+TextWindow.WriteLine("")
+
+'Převod na samá velká či samá malá písmena
+TextWindow.WriteLine("ToLowerCase: " + Text.ConvertToLowerCase(zprava))  'Convert to lower case - převeď na malá písmena
+TextWindow.WriteLine("ToUpperCase: " + Text.ConvertToUpperCase(zprava))  'Convert to UPPER case - převeď na VELKÁ písmena
+TextWindow.WriteLine("")
+
+'Získávání části textu
+TextWindow.WriteLine(Text.GetSubText(zprava, 7, 4))  'Získáme 4 čtyři znaky od sedmého písmenka (včetně), tedy "je t"
+TextWindow.WriteLine(Text.GetSubTextToEnd(zprava, 20))  'Získáme vše od dvacátého písmenka dál - tedy "zpráva našeho programu. Jupí! :)"
+
+'písmenkem se rozumí jakýkoli znak, tedy písmena, mezery, tečky, čárky, vykřičníky, závorky...
+
+
+'--------------------------
+TextWindow.Pause()
+TextWindow.Clear()
+'--------------------------
+
+
+'Ukázka použití - získáme od uživatele zprávu, a první písmenko přeměníme vždy na velké
+TextWindow.WriteLine("Napište prosím vzkaz:")
+vzkaz = TextWindow.Read()
+
+prvniPismeno = Text.GetSubText(vzkaz, 1, 1)  'první písmeno je část textu délky 1 od písmene 1
+zbytek = Text.GetSubTextToEnd(vzkaz, 2)  'zbytek je část textu od písmene 2 do konce
+
+prvniPismeno = Text.ConvertToUpperCase(prvniPismeno)  'první písmeno převedeme na velké - a je jedno, zdali bylo velké nebo ne
+
+TextWindow.WriteLine("_______________________")
+TextWindow.WriteLine(prvniPismeno + zbytek)

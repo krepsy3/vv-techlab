@@ -1,0 +1,79 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IV
+' Úkol na doma III
+'
+' ŘEŠENÍ
+
+'___________________________________________________________
+' ZADÁNÍ 1 - Nakreslete pyramidu do výšky, kterou zadá uživatel. Vyberte si
+' libovolný znak, a ten použijte, třeba křížek # (pravý Alt + X) na vymalování pyramidy.
+
+vybarvovac = "#"
+TextWindow.WriteLine("Zadejte prosím výšku pyramidy:")
+vyska = TextWindow.ReadNumber()
+
+'Vnější smyčka - udělá řádky
+For i = 1 To vyska
+  'První vnitřní smyčka - udělá počáteční mezery
+  For j = 1 To vyska - i
+    TextWindow.Write(" ")
+  EndFor
+  
+  'Druhá vnitřní smyčka - udělá cihly pyramidy
+  For j = 1 To (2 * i - 1)
+    TextWindow.Write(vybarvovac)
+  EndFor
+  
+  'Ukončení řádku
+  TextWindow.WriteLine("")
+EndFor
+
+'__________________________
+TextWindow.Pause()
+TextWindow.Clear()
+'__________________________
+
+'___________________________________________________________
+' ZADÁNÍ 2 - Vylepšení pyramidy. Zkuste si vykreslit strom. Výšku od uživatele
+' použijte k vytvoření koruny stromu a pod ni namalujte kmen tloušťky a výšky,
+' jakou si sami zvolíte, třeba 3 a 2. Nebo necháte vybrat uživatele? To je na vás! Fantazii se
+' meze nekladou :)
+
+vybarvovac = "#"
+TextWindow.WriteLine("Zadejte prosím výšku stromu:")
+vyska = TextWindow.ReadNumber()
+
+'Vnější smyčka - udělá řádky
+For i = 1 To vyska
+  'První vnitřní smyčka - udělá počáteční mezery
+  For j = 1 To vyska - i
+    TextWindow.Write(" ")
+  EndFor
+  
+  'Druhá vnitřní smyčka - udělá jehličky stromu
+  For j = 1 To (2 * i - 1)
+    TextWindow.Write(vybarvovac)
+  EndFor
+  
+  'Ukončení řádku
+  TextWindow.WriteLine("")
+EndFor
+
+
+vyskaKmenu = 2
+sirkaKmenu = 3
+
+'Vnější smyčka - udělá řádky
+For i = 1 To vyskaKmenu
+  'První vnitřní smyčka - udělá počáteční mezery
+  For j = 1 To vyska - sirkaKmenu / 2
+    TextWindow.Write(" ")
+  EndFor
+  
+  'Druhá vnitřní smyčka - udělá kůru kmenu
+  For j = 1 To sirkaKmenu
+    TextWindow.Write(vybarvovac)
+  EndFor
+  
+  'Ukončení řádku
+  TextWindow.WriteLine("")
+EndFor

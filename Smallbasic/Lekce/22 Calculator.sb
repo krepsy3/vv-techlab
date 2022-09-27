@@ -1,0 +1,197 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VIII
+' 31)  Okenní kalkulačka pomocí Controls
+
+' Tato kalkulačka je udělána pomocí Controls - MultiLineTextBox pro displej a Buttony pro tlačítka jako na opravdové 
+' kalkulačce. Na začátku programu je hromada kódu, který jen přidá kontrolky a nastaví jim správnou velikost.
+' y-ová pozice tlačítek je po řádcích totožná, takže je zde použita proměnná top, aby bylo kdykoli možné snadno posunout celou
+' klávesnici kalkulačky nahoru či dolů.
+' 
+' Samotné počítání se pak děje přes proměnné cislo1, cislo2 a operace. Do těch se opisují přímo nápisy z tlačítek za pomoci příkazu
+' GetButtonCaption(...) na Objektu Controls. To je snadný způsob, jak si uštřit kód - samotnou operaci či číslici mám na tlačítku
+' rovnou napsanou, tak ji využiji i pro samotný výpočet. Ten se děje v subrutině VypisPriklad(), a obsah proměnné operace 
+' porovnává s hodnotami na tlačítkách. 
+' 
+' Jinak je aplikace řízena událostí stisku tlačítka, a to napřímo bez herní smyčky, jelikož se vše odehrává okamžitě.
+' Samotná obsluha stisku jen zjistí, jaké tlačítko bylo stisknuto (C nebo = nebo +-⨉: nebo 0123456789) a podle toho zavolá subrutinu,
+' která obsahuje kód pro příslušné tlačítko.
+' 
+' To, v jaké fázi se nachází uživatelovo zadávání příkladu, zjišťují subrutiny podle délky textu uloženého v proměnných čísel a operace.
+' Pokud je text délky 0, znamená to, že daná proměnná ještě nebyla v současném výpočtu nastavena. Pozor, jakmile se do proměnné dostane
+' číslo, byť to bude nula, její textová délka už bude jedna a větší, dokud proměnnou opět nevymažeme. Zjištění délky proměnné provede příkaz
+' Text.GetLength()
+'
+' Jednotlivé fáze zadávání jsou tyto:
+'    - zadávání prvního čísla - ukončí stisk tlačítka s operací
+'    - oprava zvolené operace - dokud uživatel nezačne zadávat druhé číslo, stisk tlačítka operace ji vybere
+'    - zadávání druhého čísla - ukončí stisk tlačítka rovnítka
+'    - výpis výsledku. Stisk rovnítka či operace nic už neudělá, stisk číslice zahájí zadávání nového příkladu
+' 
+'    - kdykoli je stisknuto tlačítko C, vše se vymaže a výpočet začne od znova
+
+'Inicializace okna
+GraphicsWindow.Width = 260
+GraphicsWindow.Height = 350
+GraphicsWindow.FontSize = 25
+
+
+'Inicializace kontrolek
+'horní "displej" kalkulačky
+displej = Controls.AddMultiLineTextBox(15, 15)
+Controls.SetSize(displej, 230, 70)
+
+'první řada tlačítek
+top = 95
+tlacitko7 = Controls.AddButton("7", 15, top)
+tlacitko8 = Controls.AddButton("8", 75, top)
+tlacitko9 = Controls.AddButton("9", 135, top)
+tlacitkorovnase = Controls.AddButton("=", 195, top)
+Controls.SetSize(tlacitko7,       50, 50)
+Controls.SetSize(tlacitko8,       50, 50)
+Controls.SetSize(tlacitko9,       50, 50)
+Controls.SetSize(tlacitkorovnase, 50, 50)
+
+'druhá řada tlačítek
+top = top + 60  'další řada tlačítek je o 60 pixelů níže
+tlacitko4 = Controls.AddButton("4", 15, top)
+tlacitko5 = Controls.AddButton("5", 75, top)
+tlacitko6 = Controls.AddButton("6", 135, top)
+tlacitkoplus = Controls.AddButton("+", 195, top)
+Controls.SetSize(tlacitko4,    50, 50)
+Controls.SetSize(tlacitko5,    50, 50)
+Controls.SetSize(tlacitko6,    50, 50)
+Controls.SetSize(tlacitkoplus, 50, 50)
+
+'třetí řada tlačítek
+top = top + 60  'další řada tlačítek je o 60 pixelů níže
+tlacitko1 = Controls.AddButton("1", 15, top)
+tlacitko2 = Controls.AddButton("2", 75, top)
+tlacitko3 = Controls.AddButton("3", 135, top)
+tlacitkominus = Controls.AddButton("-", 195, top)
+Controls.SetSize(tlacitko1,     50, 50)
+Controls.SetSize(tlacitko2,     50, 50)
+Controls.SetSize(tlacitko3,     50, 50)
+Controls.SetSize(tlacitkominus, 50, 50)
+
+'čtvrtá řada tlačítek
+top = top + 60  'další řada tlačítek je o 60 pixelů níže
+tlacitkoC = Controls.AddButton("C", 15, top)
+tlacitko0 = Controls.AddButton("0", 75, top)
+tlacitkodeleno = Controls.AddButton(":", 135, top)
+tlacitkokrat = Controls.AddButton("⨉", 195, top)
+Controls.SetSize(tlacitkoC,      50, 50)
+Controls.SetSize(tlacitko0,      50, 50)
+Controls.SetSize(tlacitkodeleno, 50, 50)
+Controls.SetSize(tlacitkokrat,   50, 50)
+
+
+'nastavení obsluhy
+Controls.ButtonClicked = ZpracujKlikNaTlacitko
+
+
+'inicializace proměnných
+cislo1 = ""
+cislo2 = ""
+operace = ""
+
+
+
+'Obsluha události klinutí na tlačítko
+Sub ZpracujKlikNaTlacitko
+  If Controls.LastClickedButton = tlacitkoC Then
+    ZpracujSmazani()
+  ElseIf Controls.LastClickedButton = tlacitkorovnase Then
+    ZpracujRovnitko()
+  ElseIf (Controls.LastClickedButton = tlacitkoplus) Or (Controls.LastClickedButton = tlacitkominus) Or (Controls.LastClickedButton = tlacitkokrat) Or (Controls.LastClickedButton = tlacitkodeleno) Then
+    ZpracujOperaci()
+  Else
+    ZpracujCislici()
+  EndIf
+EndSub
+
+
+'Obsluha, pokud uživatel stiskl C
+Sub ZpracujSmazani
+  
+  'Stiskl-li uživatel C, chce vše smazat a začít znovu
+  
+  'nastavíme proměnné na výchozí stav
+  cislo1 = ""
+  cislo2 = ""
+  operace = ""
+  
+  'vymažeme displej
+  Controls.SetTextBoxText(displej, "")
+EndSub
+
+
+'Obsluha, pokud uživatel stiskl =
+Sub ZpracujRovnitko
+  
+  'Stiskl-li uživatel rovnítko, chce  vypsat příklad - to je možné jen, když už zvolil první číslo a operaci
+  If (Text.GetLength(cislo1) > 0) And (Text.GetLength(operace) > 0) Then
+    
+    'nemáme-li 2. číslo, opíšeme jej z displeje
+    If Text.GetLength(cislo2) = 0 Then
+      cislo2 = Controls.GetTextBoxText(displej) - 0  'odečtením nuly na jistotu vyrobíme číslo - pro případ, že by uživatel napsal do displeje klávesnicí nějaký nesmysl
+    EndIf
+    
+    'Vypíšeme hotový příklad
+    VypisPriklad()
+  EndIf 
+EndSub
+
+
+'Obsluha, pokud uživatel stiskl +, -, x nebo :
+Sub ZpracujOperaci
+  
+  'Stiskem operace uživatel potvrdí první číslo a vybere operaci - to je možné jen, pokud první číslo ještě nezvolil
+  If Text.GetLength(cislo1) = 0 Then
+    cislo1 = Controls.GetTextBoxText(displej) - 0  'odečtením nuly na jistotu vyrobíme číslo - pro případ, že by uživatel napsal do displeje klávesnicí nějaký nesmysl
+    operace = Controls.GetButtonCaption(Controls.LastClickedButton)  'operaci opíšeme jako nápis na tlačítku operace
+    Controls.SetTextBoxText(displej, "")  'vymažeme displej pro zadání druhého čísla
+    
+  Else
+    
+    'Pokud již číslo 1 existuje, ale neexistuje číslo 2, a displej je prázdný, chce uživatel zjevně opravit původní volbu operace
+    If (Text.GetLength(cislo2) = 0) And (Text.GetLength(Controls.GetTextBoxText(displej)) = 0) Then
+      operace = Controls.GetButtonCaption(Controls.LastClickedButton)
+    EndIf   
+  EndIf  
+EndSub
+
+
+'Obsluha, pokud uživatel stiskl 0, 1, 2, 3, 4, 5, 6, 7, 8 nebo 9
+Sub ZpracujCislici
+  
+  'Zmáčknutí tlačítka číslice jen přidá číslici za aktuální číslo
+  
+  'Pokud již existují obě čísla, znamená to, že uživatel stiskl rovnítko a výpočet již proběhl.
+  'Zmáčknutím číslice chce tedy nastartovat nový výpočet, tedy v uvedeném případě nejprve zavoláme vymazání
+  If (Text.GetLength(cislo2) > 0) And (Text.GetLength(cislo1) > 0) Then        'Zde navíc kvíz pro chytré hlavy - proč se první ptám na cislo2 a až pak na cislo1?
+    ZpracujSmazani()
+  EndIf
+  
+  novytext = Controls.GetTextBoxText(displej)
+  novytext = Text.Append(novytext, Controls.GetButtonCaption(Controls.LastClickedButton))
+  Controls.SetTextBoxText(displej, novytext)  
+EndSub
+
+
+
+'Vypsání příkladu na displej
+Sub VypisPriklad
+  If operace = Controls.GetButtonCaption(tlacitkoplus) Then
+    vysledek = cislo1 + cislo2
+  ElseIf operace = Controls.GetButtonCaption(tlacitkominus) Then
+    vysledek = cislo1 - cislo2
+  ElseIf operace = Controls.GetButtonCaption(tlacitkokrat) Then
+    vysledek = cislo1 * cislo2
+  ElseIf (operace = Controls.GetButtonCaption(tlacitkodeleno)) And (cislo2 <> 0) Then
+    vysledek = cislo1 / cislo2
+  Else
+    vysledek = "nesmysl"
+  EndIf
+  
+  priklad = cislo1 + " " + operace + " " + cislo2 + " = " + vysledek
+  Controls.SetTextBoxText(displej, priklad)
+EndSub

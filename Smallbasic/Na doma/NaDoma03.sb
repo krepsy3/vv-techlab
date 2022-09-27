@@ -1,0 +1,65 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IV
+' Úkol na doma III
+'
+' Tady je malý úkol, který můžete zkusit naprogramovat doma a přinést
+' na další lekci, nebo nám ho poslat emailem. Pokud to dokážete, tak to
+' znamená, že jste se na dnešní lekci naučili, co jste měli a navíc
+' od nás dostanete malou odměnu :) Tak s chutí do toho!
+'
+' Pokud si nevíte rady, podívejte se na webovou stránku krepsy3.wz.cz/techlab.html
+' (to je ta, kde jste si tohle stáhli), na popis toho, co jsme se učili, nebo do zdrojových
+' kódů, které jste si odnesli z kroužku nebo stáhli z webu od nás
+'
+' U každého ze dvou zadání jsou i možná vylepšení. Pro získání odměny stačí, když
+' naprogramujete základní zadání. Ale můžete si některý program zkusit 
+' vylepšit, klidně podle našeho zadání, klidně po svém, je to pro zábavu a abyste
+' se to fakt naučili, pokud vás to baví. Fantazii se meze nekladou :)
+
+
+
+'___________________________________________________________
+' ZADÁNÍ 1 - Nakreslete pyramidu do výšky, kterou zadá uživatel. Vyberte si
+' libovolný znak, a ten použijte, třeba křížek # (pravý Alt + X) na vymalování pyramidy.
+
+' příklad vstupu od uživatele:
+'    5 - ENTER
+
+' co vypíše program:
+' Zadejte prosím výšku pyramidy:
+'
+     #
+    ###
+   #####
+  #######
+ #########
+ 
+' (z pyramidy výše v příkladu jsme odstranili komentářové apostrofy '
+' aby bylo lépe vidět počet mezer apod. )
+ 
+ 
+vybarvovac = "#"
+TextWindow.WriteLine(vybarvovac) ' jeeej máme pyramidu výšky jedna!
+'  ...  '
+
+
+
+'___________________________________________________________
+' ZADÁNÍ 2 - Vylepšení pyramidy. Zkuste si vykreslit strom. Výšku od uživatele
+' použijte k vytvoření koruny stromu a pod ni namalujte kmen tloušťky a výšky,
+' jakou si sami zvolíte, třeba 3 a 2. Nebo necháte vybrat uživatele? To je na vás! Fantazii se
+' meze nekladou :),
+
+' příklad vstupu od uživatele:
+'    6 - ENTER
+
+' co vypíše program:
+' Zadejte prosím výšku pyramidy:
+'
+     #
+    ###
+   #####
+  #######
+ #########
+###########
+    ###
+    ###

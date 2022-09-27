@@ -1,0 +1,34 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic V
+' 20) Objekt Mouse - myš
+
+'nekonečná smyčka - program si ukončí uživatel křížkem
+While "True"  
+  'zjištění informací o myši
+  If Mouse.IsLeftButtonDown Then
+    leve = "zmáčknuté."
+  Else
+    leve = "puštěné."
+  EndIf
+  
+  If Mouse.IsRightButtonDown Then
+    prave = "zmáčknuté."
+  Else
+    prave = "puštěné."
+  EndIf
+  
+  mx = Mouse.MouseX
+  my = Mouse.MouseY
+  
+  'nastavení kurzoru na začátek a přepis okna
+  TextWindow.CursorLeft = 0
+  TextWindow.CursorTop = 0
+  TextWindow.Write("Levé tlačítko myši je " + leve)
+  TextWindow.WriteLine("          ") 
+  TextWindow.Write("Levé tlačítko myši je " + prave)
+  TextWindow.WriteLine("          ") 
+  TextWindow.Write("Pozice myši na monitoru je (X: " + mx + "; Y: " + my + ")")
+  TextWindow.WriteLine("          ") 
+  
+  'počkáme chvilinku, aby se okno nepřemazávalo tak často a kurzor neblikal
+  Program.Delay(25)  'schválně si zkuste dát menší číslo nebo Delay() úplně vymazat
+EndWhile

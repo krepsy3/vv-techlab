@@ -1,0 +1,102 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic V
+
+
+'Nastavení velikosti okna - tím se nám i ukáže
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 800
+
+'Nastavení důležitých vlastností
+GraphicsWindow.BackgroundColor = "Gold"
+GraphicsWindow.PenColor = "Indigo"
+GraphicsWindow.PenWidth = 2
+
+barvaKyblu = "Orange"
+
+'start malování je tam, kde má uživatel zrovna myš - vůči oknu!
+xstart = GraphicsWindow.MouseX
+ystart = GraphicsWindow.MouseY
+
+'Nastavení zpracovávání událostí myši
+GraphicsWindow.MouseMove = Nakresli
+GraphicsWindow.MouseDown = ZpracujZmacknuti
+
+
+'Subrutina pro zpracování stisknutí tlačítka myši uživatelem
+Sub ZpracujZmacknuti
+  If Mouse.IsRightButtonDown Then
+    Zakybluj()
+  EndIf
+EndSub
+
+'Subrutina pro zpracování pohnutí myší uživatelem
+Sub Nakresli  
+  'Získáme cíl malování - místo, kam se uživatel nově pohnul
+  xcil = GraphicsWindow.MouseX
+  ycil = GraphicsWindow.MouseY
+  
+  'Namalujeme přímku do cíle - pouze když uživatel drží nějaké myšítko
+  If Mouse.IsLeftButtonDown Then
+    GraphicsWindow.DrawLine(xstart, ystart, xcil, ycil)
+  EndIf
+  
+  'Nynější cíl nastavíme jako start pro budoucí malování
+  xstart = xcil
+  ystart = ycil
+EndSub
+
+Sub Zakybluj
+  kyblx = GraphicsWindow.MouseX
+  kybly = GraphicsWindow.MouseY
+  menenaBarva = GraphicsWindow.GetPixel(kyblx, kybly)
+  souradnice[1] = kyblx
+  souradnice[2] = kybly
+  navstivene = 0
+  maximum = 2
+  
+  While navstivene < maximum
+    actx = souradnice[navstivene + 1]
+    acty = souradnice[navstivene + 2]
+    navstivene = navstivene + 2
+    
+    If GraphicsWindow.GetPixel(actx, acty) = menenaBarva Then
+      GraphicsWindow.SetPixel(actx, acty, barvaKyblu)
+      
+      If ((actx - 1) >= 0) And (GraphicsWindow.GetPixel(actx - 1, acty) = menenaBarva) Then
+        souradnice[maximum + 1] = actx - 1
+        souradnice[maximum + 2] = acty
+        maximum = maximum + 2
+      EndIf
+      
+      If ((actx + 1) <= GraphicsWindow.Width) And (GraphicsWindow.GetPixel(actx + 1, acty) = menenaBarva) Then
+        souradnice[maximum + 1] = actx + 1
+        souradnice[maximum + 2] = acty
+        maximum = maximum + 2
+      EndIf
+      
+      If ((acty - 1) >= 0) And (GraphicsWindow.GetPixel(actx, acty - 1) = menenaBarva) Then
+        souradnice[maximum + 1] = actx
+        souradnice[maximum + 2] = acty - 1
+        maximum = maximum + 2
+      EndIf
+      
+      If ((acty + 1) <= GraphicsWindow.Height) And (GraphicsWindow.GetPixel(actx, acty + 1) = menenaBarva) Then
+        souradnice[maximum + 1] = actx
+        souradnice[maximum + 2] = acty + 1
+        maximum = maximum + 2
+      EndIf
+      
+      ZrusZbytekPole()
+    EndIf
+  EndWhile
+EndSub
+
+Sub ZrusZbytekPole
+  temp = souradnice
+  souradnice = ""
+  For i = navstivene + 1 To maximum
+    souradnice[i - navstivene] = temp[i]
+  EndFor
+  
+  maximum = maximum - navstivene
+  navstivene = 0
+EndSub

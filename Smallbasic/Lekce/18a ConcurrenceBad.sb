@@ -1,0 +1,26 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VII
+' 25) Špatně napsané kreslení želvou z hlediska konkurence
+
+' Inicializace 
+Turtle.Show()
+Turtle.Speed = 9
+GraphicsWindow.MouseDown = HandleMouseDown
+GraphicsWindow.MouseUp = HandleMouseUp
+
+'Stisk tlačítka - podle tlačítka zvedneme/dáme dolů ocásek Želvy
+Sub HandleMouseDown
+  If Mouse.IsLeftButtonDown Then
+    Turtle.PenDown()
+  ElseIf Mouse.IsRightButtonDown Then
+    Turtle.PenUp()
+  EndIf
+EndSub
+
+'Puštění tlačítka - při puštění každého tlačítka dáme Želvě pokyn k přesunu na místo kliku
+Sub HandleMouseUp
+  Turtle.MoveTo(GraphicsWindow.MouseX, GraphicsWindow.MouseY)
+EndSub
+
+
+' Tento kód je špatně napsán z hlediska konkurence - náhodné, rychlé klikání v okně
+' želvu "zblázní"

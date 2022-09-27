@@ -1,0 +1,161 @@
+' MEC    Kroužek Tech lab    SmallBasic Bonus
+' TESTOVACÍ PROGRAM NA HUDBU
+
+
+GraphicsWindow.CanResize = "False"
+GraphicsWindow.Title = "Testovač příkazu Sound.PlayMusic()"
+GraphicsWindow.Width = 350
+GraphicsWindow.Height = 650
+GraphicsWindow.Left = (Desktop.Width - 350) / 2
+GraphicsWindow.FontName = "Calibri"
+GraphicsWindow.FontSize = 18
+GraphicsWindow.BrushColor = "Black"
+
+vzdalenaSlozka = "http://krepsy3.wz.cz/sbmusic/"
+endl = Text.Append(Text.GetCharacter(13), Text.GetCharacter(10))  'CRLF
+
+notyTB = Controls.AddMultiLineTextBox(10, 10)
+Controls.SetSize(notyTB, 330, 400)
+'Tajná skladba, hehe
+'Controls.SetTextBoxText(notyTB, "O6C5D+5F5F+5F5D+5C5R3<B-10>D10C2")
+
+prehratBtn = Controls.AddButton("Přehrát", 10, 420)
+Controls.SetSize(prehratBtn, 230, 70)
+Controls.ButtonClicked = ZpracujKlikTlacitka
+
+souborTB = Controls.AddTextBox(10, 505)
+Controls.SetSize(souborTB, 230, 35)
+Controls.SetTextBoxText(souborTB, "seznam")
+stahnoutBtn = Controls.AddButton("Stáhnout", 250, 505)
+Controls.SetSize(stahnoutBtn, 90, 35)
+stahujeSe = "False"
+
+NakresliTvary()
+
+
+'Herní smyčka
+While "True"
+  If prehrat Then
+    UkazZvuk()
+    Sound.PlayMusic(Controls.GetTextBoxText(notyTB))
+    SkryjZvuk()
+    prehrat = "False"
+  EndIf
+EndWhile
+
+
+Sub ZpracujKlikTlacitka
+  If Controls.LastClickedButton = prehratBtn Then
+    prehrat = "True"
+  ElseIf Controls.LastClickedButton = stahnoutBtn Then
+    StahniNoty()
+  EndIf
+EndSub
+
+
+Sub StahniNoty
+  If stahujeSe = "False" Then
+    stahujeSe = "True"
+    soubor = Controls.GetTextBoxText(souborTB)
+    okay = "True"
+    For i = 1 To Text.GetLength(soubor)
+      If Text.GetIndexOf("abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ ._-0123456789", Text.GetSubText(soubor, i, 1)) < 1 Then
+        okay = "False"
+      EndIf
+    EndFor
+    
+    If okay Then
+      soubor = Network.DownloadFile(Text.Append(vzdalenaSlozka, soubor))
+      If Text.GetLength(soubor) > 0 Then
+        stazeneNoty = File.ReadContents(soubor)
+        konecRadku = Text.GetIndexOf(stazeneNoty, endl)
+        stazenyAutor = Text.GetSubText(stazeneNoty, 1, konecRadku - 1)
+        stazeneNoty = Text.GetSubTextToEnd(stazeneNoty, konecRadku + 2)
+        
+        File.DeleteFile(soubor)
+        If stazenyAutor = "DisplayList" Then
+          GraphicsWindow.ShowMessage("Seznam skladeb:" + endl + stazeneNoty, "Úspěšně stažen seznam")          
+        Else
+          Controls.SetTextBoxText(notyTB, stazeneNoty)
+          GraphicsWindow.ShowMessage("Byly úspěšně staženy noty:" + endl + stazenyAutor, "Úspěšně staženo")
+        EndIf
+        
+      Else
+        GraphicsWindow.ShowMessage("Stažení souboru se nezdařilo. Soubor buďto neexistuje (zkrontrolujte překlepy), nemáte přístup na internet nebo je cílová internetová stránka nefunkční.", "Chyba")
+      EndIf
+      
+    Else
+      GraphicsWindow.ShowMessage("Název souboru ke stažení obsahuje nesmyslné znaky", "Chyba")
+    EndIf
+    stahujeSe = "False"
+  EndIf  
+EndSub
+
+
+Sub SkryjZvuk
+  Shapes.HideShape(zvuk1)
+  Program.Delay(5)
+  Shapes.HideShape(zvuk2)
+  Program.Delay(5)
+  Shapes.HideShape(zvuk3)
+  Program.Delay(5)
+  Shapes.HideShape(zvuk4)
+EndSub
+
+Sub UkazZvuk
+  Shapes.ShowShape(zvuk1)
+  Program.Delay(5)
+  Shapes.ShowShape(zvuk2)
+  Program.Delay(5)
+  Shapes.ShowShape(zvuk3)
+  Program.Delay(5)
+  Shapes.ShowShape(zvuk4)
+EndSub
+
+Sub NakresliTvary
+  y = 400
+  GraphicsWindow.DrawLine(250, y + 40, 250, y + 70)
+  GraphicsWindow.DrawLine(250, y + 70, 270, y + 70)
+  GraphicsWindow.DrawLine(270, y + 70, 300, y + 90)
+  GraphicsWindow.DrawLine(300, y + 90, 300, y + 20)
+  GraphicsWindow.DrawLine(300, y + 20, 270, y + 40)
+  GraphicsWindow.DrawLine(270, y + 40, 250, y + 40)
+  zvuk1 =  Shapes.AddLine(310, y + 45, 310, y + 65)
+  zvuk2 =  Shapes.AddLine(318, y + 40, 318, y + 70)
+  zvuk3 =  Shapes.AddLine(326, y + 35, 326, y + 75)
+  zvuk4 =  Shapes.AddLine(334, y + 30, 334, y + 80)
+  Shapes.HideShape(zvuk1)
+  Shapes.HideShape(zvuk2)
+  Shapes.HideShape(zvuk3)
+  Shapes.HideShape(zvuk4)
+  y = y + 150
+  GraphicsWindow.DrawLine(0, y, 350, y)
+  For i = 0 To 7
+    GraphicsWindow.DrawLine(17 + i * 45, y, 17 + i * 45, y + 100)
+    If (i <> 0) And (i <> 3) And (i <> 7) Then
+      GraphicsWindow.FillRectangle(4 + i * 45, y, 25, 62)
+    EndIf
+  EndFor
+  
+  GraphicsWindow.FontSize = 18
+  bile   = "1=C;2=D;3=E;4=F;5=G;6=A;7=B"
+  cerne1 = "2=C+;3=D+;5=F+;6=G+;7=A+"
+  cerne2 = "2=C#;3=D#;5=F#;6=G#;7=A#"
+  cerne3 = "2=D-;3=E-;5=G-;6=A-;7=B-"
+  klavesy[1] = bile
+  klavesy[3] = cerne3
+  klavesy[4] = cerne1
+  klavesy[5] = cerne2
+  
+  y = y + 74
+  x = 33
+  For k = 1 To 5
+    For i = 1 To 7
+      GraphicsWindow.DrawText(x, y, klavesy[k][i])
+      x = x + 45
+    EndFor
+    x = 7
+    y = y - 19
+    GraphicsWindow.BrushColor = "LightGray"
+  EndFor
+EndSub

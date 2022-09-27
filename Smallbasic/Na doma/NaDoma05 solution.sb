@@ -1,0 +1,222 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' Úkol na doma V
+'
+' ŘEŠENÍ
+
+
+'___________________________________________________________
+' ZADÁNÍ 1 - Opět  si budeme hrát s grafikou. Naučili jsme se pracovat s textem a
+' stylovat ho, takže úkol bude namalovat pomocí čar (a případně dalších tvarů)
+' půdorys vašeho pokojíčku či bytu, ve kterém bydlíte. K jednotlivým prvkům pak
+' vykreslete nějaké popisky.
+
+GraphicsWindow.Width  = 900
+GraphicsWindow.Height = 700
+GraphicsWindow.CanResize = "False"
+GraphicsWindow.Title = "Small Basic Úkol na doma č. 5"
+GraphicsWindow.BackgroundColor = "Honeydew"
+
+'Koberec
+GraphicsWindow.BrushColor = "PowderBlue"
+GraphicsWindow.FillRectangle( 40, 150, 610, 460)
+GraphicsWindow.FillRectangle(650, 180,  30, 430)
+GraphicsWindow.FillRectangle(680, 180,  60, 400)
+
+'Obvodové zdi
+GraphicsWindow.PenWidth = 2
+GraphicsWindow.PenColor = "Black"
+GraphicsWindow.DrawLine( 40, 150, 650, 150)
+GraphicsWindow.DrawLine(650, 150, 650, 180)
+GraphicsWindow.DrawLine(650, 180, 740, 180)
+GraphicsWindow.DrawLine(740, 180, 740, 580)
+GraphicsWindow.DrawLine(740, 580, 680, 580)
+GraphicsWindow.DrawLine(680, 580, 680, 610)
+GraphicsWindow.DrawLine(680, 610,  40, 610)
+GraphicsWindow.DrawLine( 40, 610,  40, 150)
+
+'Židle
+GraphicsWindow.PenColor   = "Black"
+GraphicsWindow.BrushColor = "#303030"
+GraphicsWindow.FillEllipse  (120, 240, 80, 80)
+GraphicsWindow.DrawEllipse  (120, 240, 80, 80)
+GraphicsWindow.FillRectangle(115, 260, 15, 40)
+GraphicsWindow.DrawRectangle(115, 260, 15, 40)
+GraphicsWindow.FillRectangle(190, 260, 15, 40)
+GraphicsWindow.DrawRectangle(190, 260, 15, 40)
+GraphicsWindow.FillEllipse  (130, 310, 60, 20)
+GraphicsWindow.DrawEllipse  (130, 310, 60, 20)
+
+' Skříně a stůl
+GraphicsWindow.PenColor   = "Sienna"
+GraphicsWindow.BrushColor = "BurlyWood"
+GraphicsWindow.FillRectangle( 60, 152, 210, 110)
+GraphicsWindow.DrawRectangle( 60, 152, 210, 110)
+GraphicsWindow.FillRectangle(540, 453,  60, 155)
+GraphicsWindow.DrawRectangle(540, 453,  60, 155)
+GraphicsWindow.FillRectangle(618, 182, 120,  50)
+GraphicsWindow.FillRectangle(688, 182,  50, 120)
+GraphicsWindow.FillTriangle (618, 232, 688, 222, 688, 302)
+GraphicsWindow.Drawline(618, 232, 618, 182)
+GraphicsWindow.Drawline(618, 182, 738, 182)
+GraphicsWindow.Drawline(738, 182, 738, 302)
+GraphicsWindow.Drawline(738, 302, 688, 302)
+GraphicsWindow.Drawline(688, 302, 618, 232)
+
+'Poličky
+GraphicsWindow.BrushColor = "Peru"
+GraphicsWindow.FillRectangle(100, 152, 140, 35)
+GraphicsWindow.DrawRectangle(100, 152, 140, 35)
+GraphicsWindow.FillRectangle(550, 573, 110, 35)
+GraphicsWindow.DrawRectangle(550, 573, 110, 35)
+
+'Stůl s 3d tiskárnou
+GraphicsWindow.PenColor   = "Black"
+GraphicsWindow.BrushColor = "#303030"
+GraphicsWindow.FillRectangle(490, 152, 90, 90)
+GraphicsWindow.DrawRectangle(490, 152, 90, 90)
+GraphicsWindow.DrawRectangle(520, 162,  4, 65)
+GraphicsWindow.DrawRectangle(545, 162,  4, 65)
+GraphicsWindow.DrawRectangle(524, 162, 21,  3)
+GraphicsWindow.DrawRectangle(524, 224, 21,  3)
+GraphicsWindow.BrushColor = "#505050"
+GraphicsWindow.FillRectangle(516, 185, 37, 33)
+GraphicsWindow.DrawRectangle(516, 185, 37, 33)
+GraphicsWindow.BrushColor = "#404040"
+GraphicsWindow.FillRectangle(502, 195, 65, 6)
+GraphicsWindow.DrawRectangle(502, 195, 65, 6)
+GraphicsWindow.BrushColor = "OrangeRed"
+GraphicsWindow.FillRectangle(504, 202,  7, 6)
+GraphicsWindow.FillRectangle(558, 202,  7, 6)
+GraphicsWindow.FillRectangle(524, 228, 21, 8)
+
+'Postel
+GraphicsWindow.PenWidth   = 4
+GraphicsWindow.PenColor   = "SaddleBrown
+GraphicsWindow.BrushColor = "RoyalBlue"
+GraphicsWindow.FillRectangle(43, 437, 320, 170)
+GraphicsWindow.DrawRectangle(43, 437, 320, 170)
+
+'Dveře
+GraphicsWindow.PenWidth = 3
+GraphicsWindow.DrawLine(280, 150, 410, 150)
+GraphicsWindow.DrawLine(410, 150, 410, 280)
+GraphicsWindow.DrawLine(740, 430, 740, 560)
+GraphicsWindow.DrawLine(740, 560, 870, 560)
+
+' Okna
+GraphicsWindow.PenColor   = "PaleTurquoise"
+GraphicsWindow.BrushColor = "LightCyan"
+GraphicsWindow.FillRectangle( 30, 210,  20, 220)
+GraphicsWindow.DrawRectangle( 30, 210,  20, 220)
+GraphicsWindow.FillRectangle(280, 600, 220,  20)
+GraphicsWindow.DrawRectangle(280, 600, 220,  20)
+
+
+'Popisky
+Sub PridejPopisek
+  pocetPopisku = pocetPopisku + 1
+  popisky[pocetPopisku] = popisek
+EndSub
+
+pocetPopisku = 0
+GraphicsWindow.BrushColor = "DarkOrange"
+GraphicsWindow.FontName = "Cambria"
+GraphicsWindow.FontBold = "True"
+GraphicsWindow.FontSize = 35
+
+popisek = Shapes.AddText("Pokoj lektora Kryštofa")
+Shapes.Move(popisek, 250, 40)
+PridejPopisek()
+
+GraphicsWindow.BrushColor = "Black"
+GraphicsWindow.FontName = "Arial"
+GraphicsWindow.FontBold = "False"
+GraphicsWindow.FontSize = 18
+
+popisek = Shapes.AddText("Dveře do obýváku")
+Shapes.Rotate(popisek, 45)
+Shapes.Move(popisek, 280, 200)
+PridejPopisek()
+
+popisek = Shapes.AddText("Dveře k Matějovi")
+Shapes.Rotate(popisek, 45)
+Shapes.Move(popisek, 735, 490)
+PridejPopisek()
+
+popisek = Shapes.AddText("Okno na Jih")
+Shapes.Move(popisek, 330, 600)
+PridejPopisek()
+
+popisek = Shapes.AddText("Okno na Západ")
+Shapes.Rotate(popisek, -90)
+Shapes.Move(popisek, -22, 310)
+PridejPopisek()
+
+popisek = Shapes.AddText("Postel")
+Shapes.Move(popisek, 80, 520)
+PridejPopisek()
+
+popisek = Shapes.AddText("Pracovní stůl")
+Shapes.Move(popisek, 110, 220)
+PridejPopisek()
+
+popisek = Shapes.AddText("Polička u stolu")
+Shapes.Move(popisek, 110, 160)
+PridejPopisek()
+
+popisek = Shapes.AddText("Kancelářská židle")
+Shapes.Move(popisek, 90, 330)
+PridejPopisek()
+
+popisek = Shapes.AddText("Komoda + pult")
+Shapes.Move(popisek, 415, 490)
+PridejPopisek()
+
+popisek = Shapes.AddText("Malá Polička")
+Shapes.Move(popisek, 555, 580)
+PridejPopisek()
+
+popisek = Shapes.AddText("Stolek s 3D Tiskárnou")
+Shapes.Move(popisek, 430, 245)
+PridejPopisek()
+
+popisek = Shapes.AddText("Šatní skříň")
+Shapes.Move(popisek, 640, 200)
+PridejPopisek()
+popisek = Shapes.AddText("(rohová)")
+Shapes.Move(popisek, 660, 220)
+PridejPopisek()
+
+
+
+' Vylepšení - do programu udělejte tlačítko, které když uživatel zmáčkne, tak zmizí
+' všechny popisky, opětovným zmáčknutím se mu opět zobrazí.
+Program.Delay(500)
+GraphicsWindow.BrushColor = "DarkSlateBlue"
+GraphicsWindow.FontSize = 22
+skryvaciCudlik = Controls.AddButton("  Skryj Popisky  ", 730, 10)
+Controls.SetSize(skryvaciCudlik, 170, 36)
+skryto = "False"
+Controls.ButtonClicked = ZpracujKlikNaCudlik
+
+
+Sub ZpracujKlikNaCudlik
+  If skryto Then
+    Controls.SetButtonCaption(skryvaciCudlik, "  Skryj Popisky")
+    skryto = "False"
+    
+    For i = 1 To pocetPopisku
+      Shapes.ShowShape(popisky[i])
+      Program.Delay(1)
+    EndFor
+    
+  Else
+    Controls.SetButtonCaption(skryvaciCudlik, "  Ukaž Popisky")
+    skryto = "True"
+    
+    For i = 1 To pocetPopisku
+      Shapes.HideShape(popisky[i])
+      Program.Delay(1)
+    EndFor
+  EndIf  
+EndSub

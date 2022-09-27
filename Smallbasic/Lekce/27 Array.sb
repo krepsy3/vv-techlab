@@ -1,0 +1,30 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IX
+' 36)  Úvod - Pole
+
+' pole vytvoříme tím, že do něj dáme nejaký prvek
+pole[1] = "prvni prvek"
+pole[2] = "druhy prvek"
+pole[3] = "treti prvek"
+
+' Výpis prvku z pole
+TextWindow.WriteLine(pole[1])
+TextWindow.WriteLine("")
+
+' Výpis celého pole - pozor, častá chyba (zapomenout na hranaté závorky!)
+TextWindow.WriteLine(pole)
+TextWindow.WriteLine("")
+
+'--------------
+TextWindow.Pause()
+TextWindow.Clear()
+'--------------
+
+
+'naplnění pole násobilkou 7
+For i = 1 To 10
+  pole[i] = i*7
+EndFor
+
+TextWindow.WriteLine(pole)
+
+TextWindow.WriteLine("pole[8] = " + pole[8])

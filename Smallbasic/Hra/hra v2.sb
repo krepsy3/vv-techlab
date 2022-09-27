@@ -1,0 +1,394 @@
+'---VSTUPNÍ BOD PROGRAMU---
+Inicializuj()
+SpustHerniSmycku()
+
+
+
+
+'---INICIALIZACE---
+'Prvotní inicializace - přidání tvarů a kontrolek, nastavení parametrů hry
+Sub Inicializuj
+  
+  
+  'Základní proměnné - zde můžete přenastavit parametry hry
+  GraphicsWindow.Width = 800
+  GraphicsWindow.Height = 600
+  GraphicsWindow.CanResize = "False"
+  
+  barvaTextu = "Tomato"
+  velikostTextu = 18
+  tvarTextu = "Tahoma"
+  barvaOkna = "Ivory"
+  barvaZivot = "YellowGreen"
+  barvaPraznyZivot = "DarkGreen"
+  okrajZivot = 2
+  velikostZivot = 20
+  
+  barvaCtverec = "PaleGreen"
+  barvaOkrajCtverce = "SteelBlue"
+  okrajCtverce = 2  
+  velikostCtverce = 35
+  
+  sirkaTlacitko = 140
+  vyskaTlacitko = 38
+  
+  zakladniCas = 1500
+  snizovacCasu = 1.05
+  maximalniZivoty = 3
+  
+  mezicasMin = 500
+  mezicasMax = 4000
+  
+  zvukOk = Program.Directory + "\Dobre1.wav"
+  zvukChyba = Program.Directory + "\Chyba1.wav"
+  zvukKonec = Program.Directory + "\Prohra1a.wav"
+  'Tady končí sekce základních proměnných
+   
+  
+  'Příprava okna
+  GraphicsWindow.Left = (Desktop.Width  - GraphicsWindow.Width)  / 2   'posun na prostředek svisle
+  GraphicsWindow.Top  = (Desktop.Height - GraphicsWindow.Height) / 2   'posun na prostředek vodorovně
+  GraphicsWindow.BackgroundColor = barvaOkna
+  GraphicsWindow.Title = "Hra Chyť Čtverec"
+  
+  
+  'Herní čtverec
+  GraphicsWindow.BrushColor = barvaCtverec
+  GraphicsWindow.PenColor = barvaOkrajCtverce
+  GraphicsWindow.PenWidth = okrajCtverce
+  ctverec = Shapes.AddRectangle(velikostCtverce, velikostCtverce)
+  
+  
+  'Texty uživatelského rozhraní
+  GraphicsWindow.BrushColor = barvaTextu
+  GraphicsWindow.FontSize = velikostTextu
+  GraphicsWindow.FontName = tvarTextu
+  zivotyTXT = Shapes.AddText("Zbylé životy:")
+  Shapes.Move(zivotyTXT, 10, 6)
+  pridavanyTvarHry = zivotyTXT
+  PridejTvarHry()
+  
+  skoreTXT = Shapes.AddText("")
+  Shapes.Move(skoreTXT, 10, 16 + velikostZivot)
+  pridavanyTvarHry = skoreTXT
+  PridejTvarHry()
+  
+  GraphicsWindow.FontSize = velikostTextu * 1.5
+  nazevHryTXT = Shapes.AddText("□ CHYŤ ČTVEREC □")
+  Shapes.Move(nazevHryTXT, GraphicsWindow.Width / 2 - 130, 200)
+  pridavanyTvarMenu = nazevHryTXT
+  PridejTvarMenu()
+  
+  
+  'Kolečka ukazatele životů
+  GraphicsWindow.PenColor = barvaZivot
+  GraphicsWindow.PenWidth = okrajZivot
+  GraphicsWindow.BrushColor = barvaPraznyZivot
+  For i = 1 To maximalniZivoty
+    ukazatelPrazdnyZivot[i] = Shapes.AddEllipse(velikostZivot, velikostZivot)
+    Shapes.Move(ukazatelPrazdnyZivot[i], 110 + i * (velikostZivot + 5), 8)
+    pridavanyTvarHry = ukazatelPrazdnyZivot[i]
+    PridejTvarHry()
+  EndFor
+  
+  GraphicsWindow.BrushColor = barvaZivot
+  For i = 1 To maximalniZivoty
+    ukazatelZivot[i] = Shapes.AddEllipse(velikostZivot, velikostZivot)
+    Shapes.Move(ukazatelZivot[i], 110 + i * (velikostZivot + 5), 8)
+    pridavanyTvarHry = ukazatelZivot[i]
+    PridejTvarHry()
+  EndFor
+  
+  
+  
+  'Tlačítka uživatelského rozhraní
+  poziceYTlacitek = 250
+  
+  GraphicsWindow.FontSize = velikostTextu
+  GraphicsWindow.BrushColor = barvaTextu
+  
+  startBTN = Controls.AddButton("Nová Hra", 0, 0)
+  Controls.SetSize(startBTN, sirkaTlacitko, vyskaTlacitko)
+  Controls.Move(startBTN, GraphicsWindow.Width / 2 - sirkaTlacitko / 2, poziceYTlacitek)
+  pridavanaKontrolkaMenu = startBTN
+  PridejKontrolkuMenu()
+  poziceYTlacitek = poziceYTlacitek + vyskaTlacitko + 10
+  
+  GraphicsWindow.FontSize = velikostTextu
+  konecBTN = Controls.AddButton("Ukončit hru", 0, 0)
+  Controls.SetSize(konecBTN, sirkaTlacitko, vyskaTlacitko)
+  Controls.Move(konecBTN, GraphicsWindow.Width / 2 - sirkaTlacitko / 2, poziceYTlacitek)
+  pridavanaKontrolkaMenu = konecBTN
+  PridejKontrolkuMenu()
+  poziceYTlacitek = poziceYTlacitek + vyskaTlacitko + 10
+    
+  
+  'Vykreslení správných komponent na obrazovku
+  UkazMenu()
+  SkryjHerniRozhrani()
+  SkryjCtverec()
+  
+  
+  'Svázání událostí
+  GraphicsWindow.MouseDown = ZpracujKlik
+  Controls.ButtonClicked = ZpracujTlacitko
+  
+  
+  'Inicializace přehrávače
+  Sound.Stop(zvukOk)
+  Sound.Stop(zvukChyba)
+  Sound.Stop(zvukKonec)
+EndSub
+
+
+
+
+'Pomocná subrutina pro správu tvarů hlavního menu
+Sub PridejTvarMenu
+  pocetTvaruMenu = pocetTvaruMenu + 1
+  tvaryMenu[pocetTvaruMenu] = pridavanyTvarMenu
+EndSub
+
+'Pomocná subrutina pro správu kontrolek hlavního menu
+Sub PridejKontrolkuMenu
+  pocetKontrolekMenu = pocetKontrolekMenu + 1
+  kontrolkyMenu[pocetKontrolekMenu] = pridavanaKontrolkaMenu
+EndSub
+
+'Pomocná subrutina pro správu tvarů hry
+Sub PridejTvarHry
+  pocetTvaruHry = pocetTvaruHry + 1
+  tvaryHry[pocetTvaruHry] = pridavanyTvarHry
+EndSub
+
+
+
+
+'---MANIPULACE S ROZHRANÍ PROGRAMU---
+'Ukáže aktuální skóre a životy
+Sub AktualizujHerniUkazatele
+  Shapes.SetText(skoreTXT, "Skóre: " + skore)
+  For i = 1 To zivoty
+    Shapes.ShowShape(ukazatelZivot[i])
+  EndFor
+  For i = zivoty + 1 To maximalniZivoty
+    Shapes.HideShape(ukazatelZivot[i])
+  EndFor
+EndSub
+
+
+'Ukáže všechny herní ukazatele
+Sub UkazHerniRozhrani
+  For i = 1 To pocetTvaruHry
+    Shapes.ShowShape(tvaryHry[i])
+  EndFor
+  
+  'Ukázali jsme text se skóre a všechny životy, takže ihned zaktualizujeme
+  AktualizujHerniUkazatele()
+EndSub
+
+'Zakryje všechny herní ukazatele
+Sub SkryjHerniRozhrani
+  For i = 1 To pocetTvaruHry
+    Shapes.HideShape(tvaryHry[i])
+  EndFor  
+EndSub
+
+
+'Ukáže všechny prvky menu
+Sub UkazMenu
+  For i = 1 To pocetTvaruMenu
+    Shapes.ShowShape(tvaryMenu[i])
+  EndFor
+  
+  For i = 1 To pocetKontrolekMenu
+    Controls.ShowControl(kontrolkyMenu[i])
+  EndFor
+EndSub
+
+'Zakryje všechny prvky menu
+Sub SkryjMenu
+  For i = 1 To pocetTvaruMenu
+    Shapes.HideShape(tvaryMenu[i])
+  EndFor
+  
+  For i = 1 To pocetKontrolekMenu
+    Controls.HideControl(kontrolkyMenu[i])
+  EndFor
+EndSub
+
+
+'Ukáže herní čtverec
+Sub UkazCtverec
+  Shapes.ShowShape(ctverec)
+EndSub
+
+'Zakryje herní čtverec
+Sub SkryjCtverec
+  Shapes.HideShape(ctverec)
+EndSub
+
+
+
+
+'---UDÁLOSTI---
+'Zpracuje kliknutí myší do herního pole
+Sub ZpracujKlik
+  'Zjistí, zdali uživatel kliknul na čtverec nebo mimo něj, údaj uloží do proměnné a oznámí kliknutí uživatele
+  ctvx = Shapes.GetLeft(ctverec)
+  ctvy = Shapes.GetTop(ctverec)
+  mysx = GraphicsWindow.MouseX
+  mysy = GraphicsWindow.MouseY
+  
+  If (ctvx <= mysx) And ((ctvx + velikostCtverce) >= mysx) And (ctvy <= mysy) And ((ctvy + velikostCtverce) >= mysy) Then
+    trefilCtverec = "True"
+  Else
+    trefilCtverec = "False"
+  EndIf
+  
+  OznamKlikDoPole()
+EndSub
+
+
+'Zpracuje kliknutí na Button
+Sub ZpracujTlacitko
+  'Pro tlačítko konec zavolá ukončení programu, pro tlačítko start oznámí vytvoření nové hry
+   
+  If Controls.LastClickedButton = konecBTN Then
+    OznamKonecHry()
+  ElseIf Controls.LastClickedButton = startBTN Then
+    OznamVytvoreniHry()
+  EndIf
+EndSub
+
+
+
+
+'---HERNÍ SMYČKA---
+'Subrutiny od tohoto řádku dále manipulují s proměnnou stav, která je řídicí proměnnou pro naši herní smyčku
+
+'Subrutina, ve které běží herní smyčka
+Sub SpustHerniSmycku
+  stav = 0
+  
+  'stav:
+  '    0 - hra neběží (je zobrazeno menu hry)
+  '    1 - zahaj novou hru
+  '    2 - odpočet času k ukázání čtverečku
+  '    3 - odpočet času, po který je možné kliknout na čtvereček
+  '    4 - uživatel úspěšně klinul na čtvereček
+  '    5 - ukonči program
+  
+  While stav < 5    
+    If stav = 1 Then
+      ProvedZahajeniHry()
+    ElseIf stav = 2 Then
+      ProvedUkazaniCtverce()
+    ElseIf stav = 3 Then
+      ProvedTahCtverce()
+    ElseIf stav = 4 Then
+      ProvedOdkliknutiCtverce()
+    EndIf
+  EndWhile
+  
+  Program.End()
+EndSub
+
+
+'Pomocná subrutina pro jiné kompomenty programu, která přijme požadavek na vytvoření nové hry
+Sub OznamVytvoreniHry
+  If stav = 0 Then
+    stav = 1
+  EndIf
+EndSub
+
+'Pomocná subrutina pro jiné kompomenty programu, která přijme uživatelovo kliknutí do herního pole
+Sub OznamKlikDoPole
+  If (stav >= 2) And (stav <= 3) Then
+    stav = 4
+  EndIf
+EndSub
+
+'Pomocná subrutina pro jiné kompomenty programu, která přijme požadavek na ukončení programu
+Sub OznamKonecHry
+  stav = 5
+EndSub
+
+
+'Zahájí novou hru a přepne stav
+Sub ProvedZahajeniHry
+  skore = 0
+  zivoty = maximalniZivoty
+  cas = zakladniCas
+  chyba = "False"
+  
+  SkryjMenu()
+  SkryjCtverec()
+  UkazHerniRozhrani()
+  ZahajNovyTah()
+EndSub
+
+'Podívá se, zdali není čas ukázat čtverec - pokud ano, ukáže ho a přepne stav
+Sub ProvedUkazaniCtverce
+  If Clock.ElapsedMilliseconds - casDoOdkryti > zacatekTahu Then
+    UkazCtverec()
+    stav = 3
+  EndIf
+EndSub
+
+'Podívá se, zdali uživateli nevypršel čas na kliknutí na čtverec - pokud ano, zakryje čtverec, ubere život a přepne stav
+Sub ProvedTahCtverce
+  If Clock.ElapsedMilliseconds - casDoOdkryti - cas > zacatekTahu Then
+    chyba = "True"
+    zivoty = zivoty - 1
+    ZahajNovyTah()
+  EndIf
+EndSub
+
+'Zpracuje uživatelův klik do pole během hry  - zareaguje podle toho, jestli se trefil, a přepne stav
+Sub ProvedOdkliknutiCtverce
+  If trefilCtverec Then
+    chyba = "False"
+    skore = skore + 1
+    cas = cas / snizovacCasu
+  Else
+    chyba = "True"
+    zivoty = zivoty - 1
+  EndIf
+  ZahajNovyTah()    
+EndSub
+
+
+'Pomocná subrutina, která vytvoří jeden tah hry, pokud má hráč životy - pokud nemá, ukončí hru - a přepne stav
+Sub ZahajNovyTah
+  If zivoty >= 0 Then    
+    If chyba Then
+      Sound.Stop(zvukChyba)
+      Sound.Play(zvukChyba)
+    Else
+      Sound.Stop(zvukOk)
+      Sound.Play(zvukOk)
+    EndIf
+    
+    AktualizujHerniUkazatele()
+    
+    casDoOdkryti = Math.GetRandomNumber(mezicasMax - mezicasMin) + mezicasMin
+    poziceX = Math.GetRandomNumber(GraphicsWindow.Width  - velikostCtverce)
+    poziceY = Math.GetRandomNumber(GraphicsWindow.Height - velikostCtverce)
+    
+    SkryjCtverec()
+    Shapes.Move(ctverec, poziceX, poziceY)
+    
+    zacatekTahu = Clock.ElapsedMilliseconds
+    stav = 2
+    
+  Else
+    Sound.Stop(zvukKonec)
+    Sound.Play(zvukKonec)
+    GraphicsWindow.ShowMessage("Konec hry! Dosáhl jsi skóre " + skore + " bodů!", "Prohráls")
+    SkryjCtverec()
+    SkryjHerniRozhrani()
+    UkazMenu()
+    stav = 0
+  EndIf  
+EndSub

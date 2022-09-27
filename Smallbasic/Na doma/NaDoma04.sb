@@ -1,0 +1,33 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' Úkol na doma IV
+'
+' Tady je malý úkol, který můžete zkusit naprogramovat doma a přinést
+' na další lekci, nebo nám ho poslat emailem. Pokud to dokážete, tak to
+' znamená, že jste se na dnešní lekci naučili, co jste měli a navíc
+' od nás dostanete malou odměnu :) Tak s chutí do toho!
+'
+' Pokud si nevíte rady, podívejte se na webovou stránku krepsy3.wz.cz/techlab.html
+' (to je ta, kde jste si tohle stáhli), na popis toho, co jsme se učili, nebo do zdrojových
+' kódů, které jste si odnesli z kroužku nebo stáhli z webu od nás
+'
+' U každého ze dvou zadání jsou i možná vylepšení. Pro získání odměny stačí, když
+' naprogramujete základní zadání. Ale můžete si některý program zkusit 
+' vylepšit, klidně podle našeho zadání, klidně po svém, je to pro zábavu a abyste
+' se to fakt naučili, pokud vás to baví. Fantazii se meze nekladou :)
+
+
+
+'___________________________________________________________
+' ZADÁNÍ 1 - Jediné zadání je udělat s pomocí tvarů nějaký obrázek
+' buďto jen statický (čili nehybný) obrázek, který
+' namalujete přímo oknem a funkcemi Draw + Fill či
+' přidáte přes Shapes funkcemi Add a přesunete na místo funkcí Move
+' 
+' nebo dynamický (hýbající se, čili Animaci) - pomocí Shapes 
+' přidáte prvky pomocí funkcí Add, na počátek je přesunete funkcí Move
+' a pak některé zanimujete funkcí Animate nebo je budete přesouvat 
+' v nekonečné smyčce (While "True" ... EndWhile) po malých úsecích pomocí Move
+'
+' Nápady
+' Krajinka, baráček se zahrádkou, městečko, bublinky, lekníny na rybníce
+' nebo cokoli co vás napadne

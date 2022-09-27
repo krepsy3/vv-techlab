@@ -1,0 +1,39 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IV
+' 15) Subrutiny
+TextWindow.WriteLine("Tady normálně začne program")
+TextWindow.WriteLine("Na dalším řádku začne definice subrutiny")
+
+Sub NakresliCaru
+  For i = 1 To delkaCary
+    TextWindow.Write("_")
+  EndFor
+  TextWindow.WriteLine("")
+EndSub
+
+TextWindow.WriteLine("Teď skončila definice subrutiny")
+delkaCary = 10
+NakresliCaru()
+
+TextWindow.WriteLine("Teď jsem subrutinu zavolal. Objevila se mi čára o délce " + delkaCary +" , což jsem nastavil v proměnné, kterou si subrutina normálně přečetla")
+delkaCary = 20
+NakresliCaru()
+NakresliCaru()
+
+'Pauza mezi příklady
+TextWindow.Pause()
+TextWindow.Hide()
+
+' 16) Události
+GraphicsWindow.Show()
+GraphicsWindow.MouseDown = ZpracujKlikMysi
+GraphicsWindow.MouseMove = ZpracujPohybMysi 'tady končí hlavní kód. Veškeré další konání kódu v okně se bude dít jen ze subrutiny při zpracování události pohnutí myší.
+
+Sub ZpracujPohybMysi
+  'Při každém přesunu myši namalujeme čáru z rohu k myši
+  GraphicsWindow.DrawLine(0, 0, GraphicsWindow.MouseX, GraphicsWindow.MouseY)
+EndSub
+  
+Sub ZpracujKlikMysi
+  'Při každém kliku na tlačítko myši okno přemažeme
+  GraphicsWindow.Clear()
+EndSub

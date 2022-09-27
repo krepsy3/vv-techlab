@@ -1,0 +1,38 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IX
+' 35)  Test stylování ovládacích prvků - příklad z hodiny
+
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 800
+
+
+GraphicsWindow.FontSize = 30
+GraphicsWindow.FontItalic = "true"
+GraphicsWindow.BrushColor = "Blue"
+GraphicsWindow.FontName = "Times New Roman"
+
+tb1 = Controls.AddTextBox(20, 20)
+Controls.SetSize(tb1, 300, 60)
+Controls.SetTextBoxText(tb1, "Mám rád zemlbábu")
+
+GraphicsWindow.BrushColor = "Black"
+
+tb2 = Controls.AddTextBox(340, 20)
+Controls.SetSize(tb2, 300, 60)
+Controls.SetTextBoxText(tb2, "Mám rád zemlbábu")
+
+Controls.AddButton("Prohoď boxy", 20, 200,)
+
+Controls.ButtonClicked = stisknuto
+levaPrava = "true"
+
+Sub stisknuto
+  If levaPrava Then
+    Controls.HideControl(tb1)
+    Controls.ShowControl(tb2)
+    levaPrava = "false"
+  Else
+    Controls.HideControl(tb2)
+    Controls.ShowControl(tb1)
+    levaPrava = "true"
+  EndIf
+EndSub

@@ -1,0 +1,147 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic VI
+' 21) Kreslení tvarů oknem a přes objekt Shapes
+
+'Nastavení velikosti okna
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 1200
+
+'Nastavení barev
+GraphicsWindow.BackgroundColor = "AliceBlue"
+GraphicsWindow.PenColor = "Blue"
+GraphicsWindow.BrushColor = "Blue"
+
+
+'Nakreslení domečku
+GraphicsWindow.DrawTriangle(1000, 150, 900, 150, 950, 50)
+GraphicsWindow.DrawRectangle(900, 150, 100, 100)
+GraphicsWindow.BrushColor = "Brown"
+GraphicsWindow.FillRectangle(950, 190, 30, 60)
+
+
+'Pauzička 2 vteřiny
+Program.Delay(2000)
+
+
+'Nakreslení několika barevných čtverečků
+GraphicsWindow.BrushColor = "Red"
+GraphicsWindow.FillRectangle(100, 10, 60, 60)
+Program.Delay(500)
+
+GraphicsWindow.BrushColor = "Green"
+GraphicsWindow.FillRectangle(120, 50, 60, 60)
+Program.Delay(500)
+
+GraphicsWindow.BrushColor = "Blue"
+GraphicsWindow.FillRectangle(140, 30, 60, 60)
+Program.Delay(500)
+
+
+'Pauzička 2 vteřiny
+Program.Delay(2000)
+
+
+GraphicsWindow.BrushColor = "Black"
+
+'Hlavní a vedlejší osa elipsy - když jsou stejné, máme kružnici
+e1 = 60
+e2 = 60
+
+'Přidání elipsy do okna
+neco = Shapes.AddEllipse(e1, e2)
+
+'Velikost posunu elipsy
+posun = 100
+
+e1 = e1 + posun  'o "posun" pixelů doprava - do plusu v ose X 
+e2 = e2 + posun  'o "posun" pixelů dolů - do plusu v ose Y
+
+Program.Delay(500)
+
+'Posun elipsy animujeme - délka animace 1 vteřina
+Shapes.Animate(neco, e1, e2, 1000)
+
+
+
+'Pauzička 2 vteřiny
+Program.Delay(2000)
+
+
+'Pozice středu elipsy
+x = 200
+y = 200
+
+'Zvedáme pozice do plusu v obou osách a kreslíme elipsy - rovnou
+For i = 0 To 50
+  x = x + 4
+  y = y + 4
+  
+  GraphicsWindow.DrawEllipse(x, y, 50, 50)
+EndFor
+
+Program.Delay(500)
+
+'Zvedáme pozice do plusu v ose X a snižujeme do mínusu v ose Y a kreslíme elipsy - s pauzičkami
+For i = 0 To 50
+  x = x + 4
+  y = y - 4
+  
+  Program.Delay(10)
+  GraphicsWindow.DrawEllipse(x, y, 50, 50)
+EndFor
+
+
+'Pauzička 2 vteřiny
+Program.Delay(2000)
+
+
+GraphicsWindow.BrushColor="Aquamarine"
+ctverec = Shapes.AddRectangle(60, 60)
+Shapes.Move(ctverec, 800, 400)
+
+Program.Delay(500)
+Shapes.Rotate(ctverec, 45)
+
+Program.Delay(500)
+For i=46 To 90
+  Shapes.Rotate(ctverec, i)
+  Program.Delay(5)
+EndFor
+
+
+'Pauzička 2 vteřiny
+Program.Delay(2000)
+
+
+'Test překrývání útvarů
+'nejprve okraj, pak výplň
+GraphicsWindow.DrawRectangle(10, 500, 80, 80)
+GraphicsWindow.FillRectangle(10, 500, 80, 80)
+
+'nejprve výplň, pak okraj
+GraphicsWindow.FillRectangle(100, 500, 80, 80)
+GraphicsWindow.DrawRectangle(100, 500, 80, 80)
+
+'nejprve okraj, pak výplň, ale výplň je o dva pixely širší a vyšší (o jedna na každé straně)
+GraphicsWindow.DrawRectangle(190, 500, 80, 80)
+GraphicsWindow.FillRectangle(189, 499, 82, 82)
+
+Program.Delay(500)
+
+'Ještě jednou totéž, ale animovaně (se zpožděními)
+'nejprve okraj, pak výplň
+GraphicsWindow.DrawRectangle(320, 500, 80, 80)
+Program.Delay(750)
+GraphicsWindow.FillRectangle(320, 500, 80, 80)
+Program.Delay(1000)
+
+'nejprve výplň, pak okraj
+GraphicsWindow.FillRectangle(410, 500, 80, 80)
+Program.Delay(750)
+GraphicsWindow.DrawRectangle(410, 500, 80, 80)
+Program.Delay(1000)
+
+
+'nejprve okraj, pak výplň, ale výplň je o dva pixely širší a vyšší
+GraphicsWindow.DrawRectangle(500, 500, 80, 80)
+Program.Delay(750)
+GraphicsWindow.FillRectangle(499, 499, 82, 82)

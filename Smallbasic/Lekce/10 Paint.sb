@@ -1,0 +1,29 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IV
+' 17) Malování v Grafickém okně - verze 1
+
+'Nastavení velikost okna - tím se nám i ukáže
+GraphicsWindow.Height = 600
+GraphicsWindow.Width = 800
+
+'Počkáme 2 sekundy, než zavedeme kreslení
+Program.Delay(2000)
+
+'start malování je tam, kde má uživatel zrovna myš - vůči oknu!
+xstart = GraphicsWindow.MouseX
+ystart = GraphicsWindow.MouseY
+
+'Nastavení Subrutiny "Nakresli" jako zpracovávací kód události MouseMove
+GraphicsWindow.MouseMove = Nakresli
+
+Sub Nakresli
+  'Získáme cíl malování - místo, kam se uživatel nově pohnul
+  xcil = GraphicsWindow.MouseX
+  ycil = GraphicsWindow.MouseY
+  
+  'Namalujeme přímku do cíle 
+  GraphicsWindow.DrawLine(xstart, ystart, xcil, ycil)
+  
+  'Nynější cíl nastavíme jako start pro budoucí malování
+  xstart = xcil
+  ystart = ycil
+EndSub

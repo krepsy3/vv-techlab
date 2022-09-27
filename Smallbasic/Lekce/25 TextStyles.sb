@@ -1,0 +1,90 @@
+' MEC    Kroužek Tech lab    Lekce SmallBasic IX
+' 34)  Stylování textových položek v GraphicsWindow
+
+' inicializace grafického okna
+GraphicsWindow.Width = 600
+GraphicsWindow.Height = 400
+
+' Styl písma kontrolují tyto vlastnosti
+GraphicsWindow.BrushColor = "Crimson"  ' barva
+GraphicsWindow.FontName   = "Calibri"  ' řez písma (jméno)
+GraphicsWindow.FontSize   =  20        ' výška písmene v pixelech
+GraphicsWindow.FontBold   = "False"    ' jestli má být písmo tučné
+GraphicsWindow.FontItalic = "False"    ' jestli má být písmo kurzíva (našikmené, italika)
+
+
+' Pomocná subrutina na tvorbu zprávy
+Sub VytvorZpravu
+  zprava = "Text vypsaný písmem "
+  zprava = zprava + GraphicsWindow.FontName
+  zprava = zprava + ", o velikosti "
+  zprava = Text.Append(zprava, GraphicsWindow.FontSize)  ' přičítám číslo, musím použít append, aby se přičetlo textově
+  If GraphicsWindow.FontBold Then
+    zprava = zprava + ", tučný"
+  Else
+    zprava = zprava + ", normálně tlustý"
+  EndIf
+  If GraphicsWindow.FontItalic Then
+    zprava = zprava + " a s kurzívou"
+  Else
+    zprava = zprava + " a rovný"
+  EndIf
+EndSub
+
+' pomocné proměnné
+ano = "True"
+ne  = "False"
+
+
+
+' Vlastnosti určí styl textu pro příkazy Draw(Bound)Text(...), AddText(...), Add(MultiLine)TextBox(...) a AddButton(...)
+VytvorZpravu()
+
+GraphicsWindow.DrawText(15, 15, zprava)
+Program.Delay(1000)
+
+
+
+GraphicsWindow.FontBold = ano
+VytvorZpravu()
+
+tvarText = Shapes.AddText(zprava)
+Shapes.Move(tvarText, 15, 40)
+Program.Delay(1000)
+
+
+
+GraphicsWindow.FontItalic = ano
+GraphicsWindow.FontBold = ne
+GraphicsWindow.BrushColor = "DodgerBlue"
+GraphicsWindow.FontSize = 16
+VytvorZpravu()
+
+textBox = Controls.AddTextBox(15, 70)
+Controls.SetTextBoxText(textBox, zprava)
+Controls.SetSize(textBox, 500, GraphicsWindow.FontSize + 10)   ' Výšku textboxu dáme jako velikost písma + 10
+Program.Delay(1000)
+
+
+' Velikosti tlačítek se samy přizpůsobí podle textu - nemusíme volat SetSize!
+
+GraphicsWindow.FontItalic = ne
+GraphicsWindow.FontSize = 25
+GraphicsWindow.FontBold = ano
+GraphicsWindow.BrushColor = "OliveDrab"
+
+Controls.AddButton("ANO!", 70, 120)
+Program.Delay(1000)
+
+
+GraphicsWindow.FontBold = ne
+GraphicsWindow.BrushColor = "FireBrick"
+
+Controls.AddButton("NE", 15, 120)
+Program.Delay(1000)
+
+
+GraphicsWindow.FontBold = ne
+GraphicsWindow.BrushColor = "SteelBlue"
+
+Controls.AddButton("   Tlačítko s lepšími okraji   ", 15, 170)  ' Větších okrajů dosáhneme jednoduše přidáním mezer 
